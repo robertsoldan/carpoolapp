@@ -30,6 +30,7 @@ public class CarPoolDB {
             pst.getConnection().close();
             pst.close();
             getConnection().close();
+            System.out.println("Did it :)");
         } catch(URISyntaxException uriex) {
             System.out.println(uriex);
         } catch(SQLException sqlex) {
@@ -45,10 +46,10 @@ public class CarPoolDB {
             ResultSet rs = stmt.executeQuery(sqlQry);
             
             while(rs.next()) {
-                int id = rs.getInt("userID");
-                String grade = rs.getString("userName");
+                int userId = rs.getInt("userID");
+                String userName = rs.getString("username");
 
-                String res = id + " - " + grade;
+                String res = userId + " - " + userName;
                 result.add(res);
             }
             stmt.close();

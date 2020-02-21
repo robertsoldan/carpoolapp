@@ -1,16 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package carpoolapp;
 
 import java.util.ArrayList;
 
-/**
- *
- * @author robert
- */
 public class CarPoolGUI extends javax.swing.JFrame {
     CarPoolDB cpdb;
     private ArrayList<String> result;    
@@ -21,7 +12,7 @@ public class CarPoolGUI extends javax.swing.JFrame {
     public CarPoolGUI() {
         initComponents();
         cpdb = new CarPoolDB();
-        
+        result = new ArrayList();
     }
 
     /**
@@ -98,15 +89,144 @@ public class CarPoolGUI extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void getBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_getBtnActionPerformed
-        result = cpdb.query("SELECT * FROM users;");
+        if(!result.isEmpty()){
+            result.clear();
+        }
+        
+        result = cpdb.query("SELECT * FROM users");//, passengers WHERE users.userID = passengers.userID;");
         for(int i=0; i < result.size(); i++) {
             textAreaTA.append(result.get(i) + "\n");
         }
     }//GEN-LAST:event_getBtnActionPerformed
 
     private void doitBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_doitBtnActionPerformed
-        //cpdb.doStuff("CREATE TABLE user(userID integer PRIMARY KEY, username varchar(40) NOT NULL, email varchar(40) NOT NULL, password varchar(40) NOT NULL, registrationDate varchar(10) NOT NULL, passengerTripsCount integer, driverTripsCount integer)");
-        cpdb.doStuff("INSERT INTO users VALUES(11, 'msssv')");
+        
+        //cpdb.doStuff("DROP TABLE users, passengers, drivers, cars, trips, bookings, preferences;");
+        
+        /**
+        cpdb.doStuff("CREATE TABLE users(userID SERIAL PRIMARY KEY, "
+                + "username varchar(40) UNIQUE NOT NULL, "
+                + "email varchar(40) UNIQUE NOT NULL, "
+                + "password varchar(40) NOT NULL, "
+                + "dateOfBirth varchar(10) NOT NULL,"
+                + "gender varchar(10) NOT NULL,"
+                + "avatar varchar(255),"
+                + "bio varchar(255),"
+                + "registrationDate varchar(10) NOT NULL, "
+                + "passengerTripsCount integer NOT NULL, "
+                + "driverTripsCount integer NOT NULL)");
+        
+        
+        cpdb.doStuff("CREATE TABLE passengers(passengerID SERIAL PRIMARY KEY, "
+                + "userID integer REFERENCES users(userID) ON DELETE CASCADE)");
+                
+        cpdb.doStuff("CREATE TABLE drivers(driverID SERIAL PRIMARY KEY,"
+                + "userID integer REFERENCES users(userID) ON DELETE CASCADE,"
+                + "rating NUMERIC NOT NULL)");
+        
+        cpdb.doStuff("CREATE TABLE admins(adminID SERIAL PRIMARY KEY,"
+                + "userID integer REFERENCES users(userID) ON DELETE CASCADE"
+                + ")");
+                
+        cpdb.doStuff("CREATE TABLE cars(carID SERIAL PRIMARY KEY, "
+                + "driverID integer REFERENCES drivers(driverID) ON DELETE CASCADE,"
+                + "brand varchar(40) NOT NULL,"
+                + "model varchar(40) NOT NULL,"
+                + "year integer NOT NULL"
+                + ")");     
+        
+        cpdb.doStuff("CREATE TABLE trips("
+                + "tripID SERIAL PRIMARY KEY,"
+                + "driverID integer REFERENCES drivers(driverID),"
+                + "isComplete boolean DEFAULT FALSE,"
+                + "datePosted varchar(10) NOT NULL,"
+                + "departureAddress varchar(255) NOT NULL,"
+                + "departureDateAndTime varchar(16) NOT NULL,"
+                + "arrivalAddress varchar(255) NOT NULL,"
+                + "arrivalDateAndTime varchar(16) NOT NULL,"
+                + "distanceKM NUMERIC NOT NULL"
+                + ")");  
+        
+        cpdb.doStuff("CREATE TABLE bookings("
+                + "bookingID SERIAL PRIMARY KEY,"
+                + "passengerID integer REFERENCES passengers(passengerID),"
+                + "tripsID integer REFERENCES trips(tripID),"
+                + "status varchar(40) NOT NULL"           
+                + ")");
+                    
+        cpdb.doStuff("CREATE TABLE preferences("
+                + "preferenceID SERIAL PRIMARY KEY,"
+                + "tripsID integer REFERENCES trips(tripID),"
+                + "seatsAvailable integer NOT NULL,"
+                + "pricePerSeat NUMERIC NOT NULL,"
+                + "luggageAllowed boolean NOT NULL,"
+                + "smokingAllowed boolean NOT NULL,"
+                + "petAllowed boolean NOT NULL,"
+                + "chattyDriver boolean NOT NULL,"
+                + "musicLover boolean NOT NULL,"
+                + "description varchar(255) NOT NULL"           
+                + ")");
+        
+       **/
+        
+        
+                
+                
+                
+        //---------------------------------------------------------------------------------------
+        /**
+        cpdb.doStuff("INSERT INTO users "
+                + "VALUES ("
+                + "DEFAULT,"
+                + "'robb', "
+                + "'robb@gmail.com',"
+                + "'noooone',"
+                + "'10-10-1987',"
+                + "'male',"
+                + "'http://ccc.com/avatar.png',"
+                + "'just meee',"
+                + "'20-12-2019',"
+                + "1,"
+                + "0)");
+                
+        cpdb.doStuff("INSERT INTO users VALUES ("
+                + "2, "
+                + "'andrew', "
+                + "'andyand@gmail.com',"
+                + "'pieesss',"
+                + "'11-04-2018',"
+                + "3,"
+                + "0)");
+        
+        cpdb.doStuff("INSERT INTO users VALUES ("
+                + "3, "
+                + "'buns', "
+                + "'bunnies@gmail.com',"
+                + "'babyrabbits',"
+                + "'02-02-2018',"
+                + "6,"
+                + "9)");
+        
+        
+        cpdb.doStuff("INSERT INTO passengers VALUES(1, 2)");
+        cpdb.doStuff("INSERT INTO passengers VALUES(2, 1)");
+        cpdb.doStuff("INSERT INTO passengers VALUES(3, 3)");
+        
+        
+        
+        cpdb.doStuff("INSERT INTO users VALUES ("
+                + "4, "
+                + "'Ovidiu', "
+                + "'ovidiub@gmail.com',"
+                + "'bestborhan',"
+                + "'21-12-2018',"
+                + "2,"
+                + "0)");
+                 
+        **/
+        
+        
+        
     }//GEN-LAST:event_doitBtnActionPerformed
 
     /**
