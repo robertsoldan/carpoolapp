@@ -89,18 +89,21 @@ public class CarPoolGUI extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void getBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_getBtnActionPerformed
-        if(!result.isEmpty()){
-            result.clear();
-        }
+       main.Users u = cpdb.getUser("andy@dd.com", "nopasswd");
+       textAreaTA.append(u.getUsername() + "\n"
+               + u.getDateOfBirth() + "\n"
+               + u.getUserID());
         
-        result = cpdb.query("SELECT * FROM users");//, passengers WHERE users.userID = passengers.userID;");
-        for(int i=0; i < result.size(); i++) {
-            textAreaTA.append(result.get(i) + "\n");
-        }
+       
     }//GEN-LAST:event_getBtnActionPerformed
 
     private void doitBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_doitBtnActionPerformed
         
+        main.Users u;
+        
+        u = new main.Users("andy", "andy@dd.com", "nopasswd", "20-01-2000", "male", "ddds.cc", "tis me", "20-02-2020", 2, 1);
+        
+        cpdb.addUser(u);
         //cpdb.doStuff("DROP TABLE users, passengers, drivers, cars, trips, bookings, preferences;");
         
         /**

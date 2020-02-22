@@ -29,7 +29,7 @@ public class Trip {
         return driverID;
     }
 
-    public boolean isIsComplete() {
+    public boolean isComplete() {
         return isComplete;
     }
 

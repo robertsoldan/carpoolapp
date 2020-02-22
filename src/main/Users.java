@@ -9,16 +9,18 @@ public class Users {
     private String gender;
     private String avatar;
     private String registrationDate;
+    private String bio;
     private int passengerTripsCount;
     private int driverTripsCount;
 
-    public Users(String username, String email, String password, String dateOfBirth, String gender, String avatar, String registrationDate, int passengerTripsCount, int driverTripsCount) {
+    public Users(String username, String email, String password, String dateOfBirth, String gender, String avatar, String bio, String registrationDate, int passengerTripsCount, int driverTripsCount) {
         this.username = username;
         this.email = email;
         this.password = password;
         this.dateOfBirth = dateOfBirth;
         this.gender = gender;
         this.avatar = avatar;
+        this.bio = bio;
         this.registrationDate = registrationDate;
         this.passengerTripsCount = passengerTripsCount;
         this.driverTripsCount = driverTripsCount;
@@ -54,6 +56,10 @@ public class Users {
 
     public String getRegistrationDate() {
         return registrationDate;
+    }
+
+    public String getBio() {
+        return bio;
     }
 
     public int getPassengerTripsCount() {
@@ -94,6 +100,10 @@ public class Users {
 
     public void setRegistrationDate(String registrationDate) {
         this.registrationDate = registrationDate;
+    }
+
+    public void setBio(String bio) {
+        this.bio = bio;
     }
 
     public void setPassengerTripsCount(int passengerTripsCount) {
