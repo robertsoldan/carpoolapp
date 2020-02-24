@@ -12,7 +12,7 @@ public class CarPoolGUI extends javax.swing.JFrame {
     public CarPoolGUI() {
         initComponents();
         cpdb = new CarPoolDB();
-        result = new ArrayList();
+        result = new ArrayList<>();
     }
 
     /**
