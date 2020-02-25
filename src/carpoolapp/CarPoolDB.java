@@ -123,9 +123,8 @@ public class CarPoolDB {
         String sqlStr = "INSERT INTO bookings VALUES(DEFAULT, "
                 + passengerID + ", "
                 + tripID + ", "
-                + "'" + status + "', "
+                + "'" + status + "'"
                 + ")";
-        
         execSql(sqlStr);
     }
     
@@ -205,9 +204,6 @@ public class CarPoolDB {
                 u.setUserID(userId);
                 
             }
-            
-            
-            
         } catch(URISyntaxException uriex) {
             System.out.println(uriex);
         } catch(SQLException sqlex) {
