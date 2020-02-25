@@ -1,16 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package GUI;
 
-/**
- *
- * @author x18107800
- */
 public class LoginGUI extends javax.swing.JFrame {
-
+    private carpoolapp.CarPoolDB cpdb;
     /**
      * Creates new form LoginGUI
      */
@@ -38,7 +30,6 @@ public class LoginGUI extends javax.swing.JFrame {
         registerBtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(400, 640));
         setSize(new java.awt.Dimension(400, 640));
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
@@ -73,10 +64,20 @@ public class LoginGUI extends javax.swing.JFrame {
         loginBtn.setBackground(new java.awt.Color(0, 153, 204));
         loginBtn.setForeground(new java.awt.Color(255, 255, 255));
         loginBtn.setText("LOGIN");
+        loginBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                loginBtnActionPerformed(evt);
+            }
+        });
 
         registerBtn.setBackground(new java.awt.Color(0, 153, 204));
         registerBtn.setForeground(new java.awt.Color(255, 255, 255));
         registerBtn.setText("REGISTER");
+        registerBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                registerBtnActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -131,6 +132,65 @@ public class LoginGUI extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void registerBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registerBtnActionPerformed
+        //switch to the Login screen
+        GUI.RegisterGUI r = new GUI.RegisterGUI();
+
+        // Get the size of the active window
+        int sizeH = this.getSize().height;
+        int sizeW = this.getSize().width;
+
+        // Get the location of the active window
+        int currX = this.getLocation().x;
+        int currY = this.getLocation().y;
+
+        // Set the size of the new window
+        r.setSize(sizeW, sizeH);
+
+        // Set the location of the new window
+        r.setLocation(currX, currY);
+
+        // Hide the active window, show the new window
+        this.dispose();
+        
+        // make it visible
+        r.setVisible(true);
+    }//GEN-LAST:event_registerBtnActionPerformed
+
+    private void loginBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginBtnActionPerformed
+       cpdb = new carpoolapp.CarPoolDB();
+        String email = loginTf.getText();
+        String password = passwordTf.getText();
+        
+        main.Users u = cpdb.getUser(email, password);
+        
+   
+        if(!u.getEmail().equals("null")) {
+             //switch to the Login screen
+            GUI.UserHomeGUI uh = new GUI.UserHomeGUI(u);
+
+            // Get the size of the active window
+            int sizeH = this.getSize().height;
+            int sizeW = this.getSize().width;
+
+            // Get the location of the active window
+            int currX = this.getLocation().x;
+            int currY = this.getLocation().y;
+
+            // Set the size of the new window
+            uh.setSize(sizeW, sizeH);
+
+            // Set the location of the new window
+            uh.setLocation(currX, currY);
+
+            // Hide the active window, show the new window
+            this.dispose();
+
+            // make it visible
+            uh.setVisible(true);
+        } 
+    }//GEN-LAST:event_loginBtnActionPerformed
 
     /**
      * @param args the command line arguments

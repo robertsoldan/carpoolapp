@@ -86,6 +86,11 @@ public class RegisterGUI extends javax.swing.JFrame {
         loginBtn.setText("LOGIN");
         loginBtn.setMaximumSize(new java.awt.Dimension(69, 30));
         loginBtn.setMinimumSize(new java.awt.Dimension(69, 30));
+        loginBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                loginBtnActionPerformed(evt);
+            }
+        });
 
         registerBtn.setBackground(new java.awt.Color(0, 153, 204));
         registerBtn.setForeground(new java.awt.Color(255, 255, 255));
@@ -204,6 +209,31 @@ public class RegisterGUI extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void loginBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginBtnActionPerformed
+        //switch to the Login screen
+        GUI.LoginGUI l = new GUI.LoginGUI();
+
+        // Get the size of the active window
+        int sizeH = this.getSize().height;
+        int sizeW = this.getSize().width;
+
+        // Get the location of the active window
+        int currX = this.getLocation().x;
+        int currY = this.getLocation().y;
+
+        // Set the size of the new window
+        l.setSize(sizeW, sizeH);
+
+        // Set the location of the new window
+        l.setLocation(currX, currY);
+
+        // Hide the active window, show the new window
+        this.dispose();
+        
+        // make it visible
+        l.setVisible(true);
+    }//GEN-LAST:event_loginBtnActionPerformed
 
     /**
      * @param args the command line arguments
