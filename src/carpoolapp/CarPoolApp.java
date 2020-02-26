@@ -5,9 +5,9 @@ public class CarPoolApp {
     public static void main(String[] args) {
         
         
-        CarPoolGUI cpGUI;
-        cpGUI = new CarPoolGUI();
-        cpGUI.setVisible(true);
+        GUI.LoginGUI logGUI;
+        logGUI = new GUI.LoginGUI();
+        logGUI.setVisible(true);
     }
     
 }

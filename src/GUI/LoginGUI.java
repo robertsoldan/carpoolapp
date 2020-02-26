@@ -46,7 +46,7 @@ public class LoginGUI extends javax.swing.JFrame {
             headerPnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(headerPnlLayout.createSequentialGroup()
                 .addGap(48, 48, 48)
-                .addComponent(titleLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(titleLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         headerPnlLayout.setVerticalGroup(
@@ -57,7 +57,7 @@ public class LoginGUI extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        loginLbl.setText("LOGIN");
+        loginLbl.setText("EMAIL");
 
         passwordLbl.setText("PASSWORD");
 
