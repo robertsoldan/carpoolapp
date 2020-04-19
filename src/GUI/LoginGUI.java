@@ -19,7 +19,7 @@ public class LoginGUI extends javax.swing.JFrame {
         jSlider1 = new javax.swing.JSlider();
         jPanel1 = new javax.swing.JPanel();
         headerPnl = new javax.swing.JPanel();
-        titleLbl = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
         loginTf = new javax.swing.JTextField();
         loginLbl = new javax.swing.JLabel();
         passwordLbl = new javax.swing.JLabel();
@@ -30,31 +30,35 @@ public class LoginGUI extends javax.swing.JFrame {
         passXLbl = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setSize(new java.awt.Dimension(400, 640));
+        setMaximumSize(new java.awt.Dimension(400, 660));
+        setMinimumSize(new java.awt.Dimension(400, 660));
+        setPreferredSize(new java.awt.Dimension(400, 660));
+        setSize(new java.awt.Dimension(400, 660));
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setMaximumSize(new java.awt.Dimension(400, 640));
+        jPanel1.setMinimumSize(new java.awt.Dimension(400, 640));
+        jPanel1.setPreferredSize(new java.awt.Dimension(400, 640));
 
         headerPnl.setBackground(new java.awt.Color(179, 255, 179));
         headerPnl.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        headerPnl.setMaximumSize(new java.awt.Dimension(400, 100));
+        headerPnl.setMinimumSize(new java.awt.Dimension(400, 100));
+        headerPnl.setPreferredSize(new java.awt.Dimension(400, 100));
 
-        titleLbl.setFont(new java.awt.Font("Calibri Light", 1, 36)); // NOI18N
-        titleLbl.setText("Carpool");
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/carduill.png"))); // NOI18N
 
         javax.swing.GroupLayout headerPnlLayout = new javax.swing.GroupLayout(headerPnl);
         headerPnl.setLayout(headerPnlLayout);
         headerPnlLayout.setHorizontalGroup(
             headerPnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(headerPnlLayout.createSequentialGroup()
-                .addGap(48, 48, 48)
-                .addComponent(titleLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(147, Short.MAX_VALUE))
+                .addComponent(jLabel1)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         headerPnlLayout.setVerticalGroup(
             headerPnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, headerPnlLayout.createSequentialGroup()
-                .addContainerGap(21, Short.MAX_VALUE)
-                .addComponent(titleLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         loginLbl.setText("EMAIL");
@@ -62,7 +66,6 @@ public class LoginGUI extends javax.swing.JFrame {
         passwordLbl.setText("PASSWORD");
 
         loginBtn.setBackground(new java.awt.Color(0, 153, 204));
-        loginBtn.setForeground(new java.awt.Color(255, 255, 255));
         loginBtn.setText("LOGIN");
         loginBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -71,7 +74,6 @@ public class LoginGUI extends javax.swing.JFrame {
         });
 
         registerBtn.setBackground(new java.awt.Color(0, 153, 204));
-        registerBtn.setForeground(new java.awt.Color(255, 255, 255));
         registerBtn.setText("REGISTER");
         registerBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -97,7 +99,7 @@ public class LoginGUI extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(headerPnl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
+                .addGap(0, 48, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -119,8 +121,8 @@ public class LoginGUI extends javax.swing.JFrame {
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(headerPnl, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(156, 156, 156)
+                .addComponent(headerPnl, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(177, 177, 177)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(loginTf, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(loginLbl)
@@ -145,7 +147,7 @@ public class LoginGUI extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 655, Short.MAX_VALUE)
         );
 
         pack();
@@ -259,6 +261,7 @@ public class LoginGUI extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel emailXLbl;
     private javax.swing.JPanel headerPnl;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JSlider jSlider1;
     private javax.swing.JButton loginBtn;
@@ -268,6 +271,5 @@ public class LoginGUI extends javax.swing.JFrame {
     private javax.swing.JLabel passwordLbl;
     private javax.swing.JPasswordField passwordTf;
     private javax.swing.JButton registerBtn;
-    private javax.swing.JLabel titleLbl;
     // End of variables declaration//GEN-END:variables
 }

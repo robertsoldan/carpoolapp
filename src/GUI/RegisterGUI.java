@@ -20,7 +20,7 @@ public class RegisterGUI extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         headerPnl = new javax.swing.JPanel();
-        titleLbl = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
         nameTf = new javax.swing.JTextField();
         usernameLbl = new javax.swing.JLabel();
         emailTf = new javax.swing.JTextField();
@@ -45,39 +45,52 @@ public class RegisterGUI extends javax.swing.JFrame {
         bioTa = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setSize(new java.awt.Dimension(400, 640));
+        setBounds(new java.awt.Rectangle(0, 0, 400, 660));
+        setMaximumSize(new java.awt.Dimension(400, 660));
+        setMinimumSize(new java.awt.Dimension(400, 660));
+        setSize(new java.awt.Dimension(400, 660));
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setMaximumSize(new java.awt.Dimension(400, 660));
+        jPanel1.setMinimumSize(new java.awt.Dimension(400, 660));
+        jPanel1.setPreferredSize(new java.awt.Dimension(400, 660));
 
         headerPnl.setBackground(new java.awt.Color(179, 255, 179));
         headerPnl.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        headerPnl.setMaximumSize(new java.awt.Dimension(400, 100));
+        headerPnl.setMinimumSize(new java.awt.Dimension(400, 100));
+        headerPnl.setPreferredSize(new java.awt.Dimension(400, 100));
 
-        titleLbl.setFont(new java.awt.Font("Calibri Light", 1, 36)); // NOI18N
-        titleLbl.setText("Carpool");
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/carduill.png"))); // NOI18N
 
         javax.swing.GroupLayout headerPnlLayout = new javax.swing.GroupLayout(headerPnl);
         headerPnl.setLayout(headerPnlLayout);
         headerPnlLayout.setHorizontalGroup(
             headerPnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(headerPnlLayout.createSequentialGroup()
-                .addGap(48, 48, 48)
-                .addComponent(titleLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(150, Short.MAX_VALUE))
+                .addContainerGap()
+                .addComponent(jLabel2)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         headerPnlLayout.setVerticalGroup(
             headerPnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, headerPnlLayout.createSequentialGroup()
-                .addContainerGap(21, Short.MAX_VALUE)
-                .addComponent(titleLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(headerPnlLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 72, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
         usernameLbl.setText("NAME");
 
+        emailTf.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                emailTfActionPerformed(evt);
+            }
+        });
+
         password1Lbl.setText("PASSWORD");
 
         loginBtn.setBackground(new java.awt.Color(0, 153, 204));
-        loginBtn.setForeground(new java.awt.Color(255, 255, 255));
         loginBtn.setText("LOGIN");
         loginBtn.setMaximumSize(new java.awt.Dimension(69, 30));
         loginBtn.setMinimumSize(new java.awt.Dimension(69, 30));
@@ -88,7 +101,6 @@ public class RegisterGUI extends javax.swing.JFrame {
         });
 
         registerBtn.setBackground(new java.awt.Color(0, 153, 204));
-        registerBtn.setForeground(new java.awt.Color(255, 255, 255));
         registerBtn.setText("REGISTER");
         registerBtn.setMaximumSize(new java.awt.Dimension(90, 30));
         registerBtn.setMinimumSize(new java.awt.Dimension(90, 30));
@@ -136,7 +148,7 @@ public class RegisterGUI extends javax.swing.JFrame {
                     .addComponent(dobLbl)
                     .addComponent(jLabel1)
                     .addComponent(bioLbl))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jCheckBox1)
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -164,13 +176,13 @@ public class RegisterGUI extends javax.swing.JFrame {
                         .addComponent(loginBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(registerBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(39, Short.MAX_VALUE))
+                .addContainerGap(24, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(headerPnl, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(29, 29, 29)
                 .addComponent(jCheckBox1)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -179,13 +191,13 @@ public class RegisterGUI extends javax.swing.JFrame {
                 .addGap(23, 23, 23)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(emailTf, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(emailLbl)
-                    .addComponent(emailXLbl))
+                    .addComponent(emailXLbl)
+                    .addComponent(emailLbl))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(password1Lbl)
                     .addComponent(pass1XLbl)
-                    .addComponent(password1Tf, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(password1Tf, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(password1Lbl))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(pass2XLbl)
@@ -202,13 +214,13 @@ public class RegisterGUI extends javax.swing.JFrame {
                     .addComponent(jLabel1))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(bioLbl)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(bioLbl))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(registerBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(loginBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(32, Short.MAX_VALUE))
+                .addContainerGap(41, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -225,9 +237,62 @@ public class RegisterGUI extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void registerBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registerBtnActionPerformed
+        cpdb = new carpoolapp.CarPoolDB();
+        String pass1 = password1Tf.getText();
+        String pass2 = password2Tf.getText();
+        String email = emailTf.getText();
+        String name = nameTf.getText();
+        String dateOfBirth = dayTf.getText() + "-" + monthTf.getText() + "-" + yearTf.getText();
+        String registrationDate = new SimpleDateFormat("dd-MM-yyyy").format(Calendar.getInstance().getTime());
+        String bio = bioTa.getText();
+        String gender = genderTf.getText();
+        String avatar = "none";
+
+        boolean passPassed = false;
+        boolean emailPassed = false;
+
+        // Password verification
+        if(!pass1.equals(pass2) || pass1.length() < 6) {
+            pass1XLbl.setVisible(true);
+            pass2XLbl.setVisible(true);
+            passPassed = false;
+        } else {
+            pass1XLbl.setVisible(false);
+            pass2XLbl.setVisible(false);
+            passPassed = true;
+
+        }
+
+        if(email.indexOf("@") == -1 || email.indexOf(".") == -1) {
+            emailXLbl.setVisible(true);
+            emailPassed = false;
+        } else {
+            emailXLbl.setVisible(false);
+            emailPassed = true;
+        }
+
+        if(passPassed && emailPassed && nameTf.getText().length() > 0) {
+            main.Users u;
+            main.Passenger p;
+            u = new main.Users(name, email, pass2, dateOfBirth, gender, avatar, bio, registrationDate, 0, 0);
+            p = new main.Passenger();
+            cpdb.addUser(u);
+            u = cpdb.getUser(email, pass2);
+            p.setUserID(u.getUserID());
+            cpdb.addPassenger(p);
+            loginScreen();
+        }
+
+    }//GEN-LAST:event_registerBtnActionPerformed
+
     private void loginBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginBtnActionPerformed
         loginScreen();
     }//GEN-LAST:event_loginBtnActionPerformed
+
+    private void emailTfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_emailTfActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_emailTfActionPerformed
 
     private void loginScreen(){
         //switch to the Login screen
@@ -254,56 +319,6 @@ public class RegisterGUI extends javax.swing.JFrame {
         l.setVisible(true);
     }
     
-    private void registerBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registerBtnActionPerformed
-        cpdb = new carpoolapp.CarPoolDB();
-        String pass1 = password1Tf.getText();
-        String pass2 = password2Tf.getText();
-        String email = emailTf.getText();
-        String name = nameTf.getText();
-        String dateOfBirth = dayTf.getText() + "-" + monthTf.getText() + "-" + yearTf.getText();
-        String registrationDate = new SimpleDateFormat("dd-MM-yyyy").format(Calendar.getInstance().getTime());
-        String bio = bioTa.getText();
-        String gender = genderTf.getText();
-        String avatar = "none";
-        
-        boolean passPassed = false;
-        boolean emailPassed = false;
-        
-        // Password verification
-        if(!pass1.equals(pass2) || pass1.length() < 6) {
-            pass1XLbl.setVisible(true);
-            pass2XLbl.setVisible(true);
-            passPassed = false;
-        } else {
-            pass1XLbl.setVisible(false);
-            pass2XLbl.setVisible(false);
-            passPassed = true;
-            
-        }
-        
-        if(email.indexOf("@") == -1 || email.indexOf(".") == -1) {
-            emailXLbl.setVisible(true);
-            emailPassed = false;
-        } else {
-            emailXLbl.setVisible(false);
-            emailPassed = true;
-        }
-        
-        if(passPassed && emailPassed && nameTf.getText().length() > 0) {
-            main.Users u;
-            main.Passenger p;
-            u = new main.Users(name, email, pass2, dateOfBirth, gender, avatar, bio, registrationDate, 0, 0);
-            p = new main.Passenger();
-            cpdb.addUser(u);
-            u = cpdb.getUser(email, pass2);
-            p.setUserID(u.getUserID());
-            cpdb.addPassenger(p);
-            loginScreen();
-        }
-        
-        
-    }//GEN-LAST:event_registerBtnActionPerformed
-
     /**
      * @param args the command line arguments
      */
@@ -352,6 +367,7 @@ public class RegisterGUI extends javax.swing.JFrame {
     private javax.swing.JPanel headerPnl;
     private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton loginBtn;
@@ -363,7 +379,6 @@ public class RegisterGUI extends javax.swing.JFrame {
     private javax.swing.JPasswordField password1Tf;
     private javax.swing.JPasswordField password2Tf;
     private javax.swing.JButton registerBtn;
-    private javax.swing.JLabel titleLbl;
     private javax.swing.JLabel usernameLbl;
     private javax.swing.JTextField yearTf;
     // End of variables declaration//GEN-END:variables

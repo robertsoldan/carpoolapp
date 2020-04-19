@@ -628,20 +628,22 @@ public class CarPoolDB {
     public void testDB() {
         // TODO code application logic here
         try{
-            String sqlSt = "SELECT * FROM Grades;";
-            //String sql = "INSERT INTO Grades VALUES(12, 99);";
-            //PreparedStatement pst = getConnection().prepareStatement(sql);
+            //String sqlSt = "SELECT constraint_name FROM information_schema.constraint_column_usage WHERE TABLE_NAME = 'users';";
+            //String sql = "ALTER TABLE users  ALTER COLUMN username DROP UNIQUE;";
+            String sql = "ALTER TABLE users DROP CONSTRAINT users_username_key;";
+            PreparedStatement pst = getConnection().prepareStatement(sql);
      
-            //pst.executeUpdate();
+            pst.executeUpdate();
+            
+        /*
         Statement stmt = getConnection().createStatement();
         ResultSet rs = stmt.executeQuery(sqlSt);
        
         while(rs.next()) {
-            int id = rs.getInt("id");
-            int grade = rs.getInt("grade");
+            System.out.println(rs.getString(1));
            
-            System.out.println("Id is " + id + " and the grade is " + grade);
-        }
+            
+        } */
        
        // System.out.println(getConnection().);
         } catch(URISyntaxException uriex) {
