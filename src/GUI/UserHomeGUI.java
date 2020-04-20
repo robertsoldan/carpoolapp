@@ -45,7 +45,6 @@ public class UserHomeGUI extends javax.swing.JFrame {
         setBounds(new java.awt.Rectangle(0, 0, 420, 660));
         setMaximumSize(new java.awt.Dimension(400, 660));
         setMinimumSize(new java.awt.Dimension(400, 660));
-        setPreferredSize(new java.awt.Dimension(400, 660));
         setSize(new java.awt.Dimension(400, 660));
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
@@ -75,7 +74,7 @@ public class UserHomeGUI extends javax.swing.JFrame {
             headerPnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, headerPnlLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 72, Short.MAX_VALUE)
+                .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 74, Short.MAX_VALUE)
                 .addContainerGap())
         );
 

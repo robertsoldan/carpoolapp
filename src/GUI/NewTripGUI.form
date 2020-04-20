@@ -40,7 +40,10 @@
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="jPanel1" alignment="0" max="32767" attributes="0"/>
+          <Group type="102" alignment="0" attributes="0">
+              <Component id="jPanel1" max="32767" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+          </Group>
       </Group>
     </DimensionLayout>
   </Layout>
@@ -58,15 +61,36 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Component id="headerPnl" alignment="0" pref="420" max="32767" attributes="0"/>
+              <Component id="headerPnl" alignment="0" pref="424" max="32767" attributes="0"/>
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" pref="84" max="-2" attributes="0"/>
-                  <Component id="nameLbl" pref="118" max="32767" attributes="0"/>
+                  <Component id="nameLbl" max="32767" attributes="0"/>
                   <EmptySpace min="-2" pref="218" max="-2" attributes="0"/>
+              </Group>
+              <Group type="102" alignment="0" attributes="0">
+                  <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
+                  <Component id="jPanel2" max="32767" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+              </Group>
+              <Group type="102" attributes="0">
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="heading1Lbl" min="-2" max="-2" attributes="0"/>
+                      <Component id="preferencesLbl" alignment="0" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace max="32767" attributes="0"/>
+              </Group>
+              <Group type="102" alignment="1" attributes="0">
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="jPanel3" max="32767" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
               </Group>
               <Group type="102" alignment="1" attributes="0">
                   <EmptySpace max="32767" attributes="0"/>
-                  <Component id="logoutBtn" min="-2" pref="92" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                      <Component id="logoutBtn" max="32767" attributes="0"/>
+                      <Component id="addTrip" max="32767" attributes="0"/>
+                  </Group>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
@@ -77,7 +101,17 @@
                   <Component id="headerPnl" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="nameLbl" max="-2" attributes="0"/>
-                  <EmptySpace pref="474" max="32767" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="heading1Lbl" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
+                  <Component id="jPanel2" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
+                  <Component id="preferencesLbl" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <Component id="jPanel3" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <Component id="addTrip" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace pref="27" max="32767" attributes="0"/>
                   <Component id="logoutBtn" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
@@ -120,7 +154,7 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jLabel2" pref="72" max="32767" attributes="0"/>
+                      <Component id="jLabel2" pref="74" max="32767" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -158,6 +192,370 @@
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="logoutBtnActionPerformed"/>
+          </Events>
+        </Component>
+        <Container class="javax.swing.JPanel" name="jPanel2">
+
+          <Layout>
+            <DimensionLayout dim="0">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="1" attributes="0">
+                          <Component id="priceTf" alignment="1" min="-2" pref="49" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="departureLbl" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="arrivalLbl" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <Group type="103" groupAlignment="1" attributes="0">
+                                              <Component id="deptTimeLbl" min="-2" max="-2" attributes="0"/>
+                                              <Group type="102" attributes="0">
+                                                  <Component id="departureTf" min="-2" pref="105" max="-2" attributes="0"/>
+                                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                                  <Component id="daptDateLbl" min="-2" max="-2" attributes="0"/>
+                                              </Group>
+                                              <Group type="102" attributes="0">
+                                                  <Component id="arrivalTf" min="-2" pref="105" max="-2" attributes="0"/>
+                                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                                  <Component id="arrDateLbl" min="-2" max="-2" attributes="0"/>
+                                              </Group>
+                                              <Component id="arrTimeLbl" min="-2" max="-2" attributes="0"/>
+                                          </Group>
+                                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                                          <Group type="103" groupAlignment="0" attributes="0">
+                                              <Group type="102" attributes="0">
+                                                  <Component id="deptDateTf" min="-2" pref="25" max="-2" attributes="0"/>
+                                                  <EmptySpace max="-2" attributes="0"/>
+                                                  <Component id="deptMonthTf" min="-2" pref="25" max="-2" attributes="0"/>
+                                                  <EmptySpace max="-2" attributes="0"/>
+                                                  <Component id="deptYearTf" min="-2" pref="60" max="-2" attributes="0"/>
+                                              </Group>
+                                              <Group type="102" attributes="0">
+                                                  <Component id="deptHourTf" min="-2" pref="25" max="-2" attributes="0"/>
+                                                  <EmptySpace max="-2" attributes="0"/>
+                                                  <Component id="deptMinsTf" min="-2" pref="25" max="-2" attributes="0"/>
+                                              </Group>
+                                              <Group type="102" attributes="0">
+                                                  <Group type="103" groupAlignment="1" attributes="0">
+                                                      <Component id="arrDateTf" min="-2" pref="25" max="-2" attributes="0"/>
+                                                      <Component id="arrHourTf" min="-2" pref="25" max="-2" attributes="0"/>
+                                                  </Group>
+                                                  <EmptySpace max="-2" attributes="0"/>
+                                                  <Group type="103" groupAlignment="0" attributes="0">
+                                                      <Group type="102" attributes="0">
+                                                          <Component id="arrMonthTf" min="-2" pref="25" max="-2" attributes="0"/>
+                                                          <EmptySpace max="-2" attributes="0"/>
+                                                          <Component id="arrYearTf" min="-2" pref="60" max="-2" attributes="0"/>
+                                                      </Group>
+                                                      <Component id="arrMinsTf" min="-2" pref="25" max="-2" attributes="0"/>
+                                                  </Group>
+                                              </Group>
+                                          </Group>
+                                      </Group>
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <EmptySpace min="-2" pref="116" max="-2" attributes="0"/>
+                                          <Component id="priceLbl" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                  </Group>
+                              </Group>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                  <Component id="distanceTf" min="-2" pref="102" max="-2" attributes="0"/>
+                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                  <Component id="noOfSeatsLbl" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                  <Component id="noOfSeatsTf" max="32767" attributes="0"/>
+                              </Group>
+                          </Group>
+                      </Group>
+                      <EmptySpace pref="26" max="32767" attributes="0"/>
+                  </Group>
+              </Group>
+            </DimensionLayout>
+            <DimensionLayout dim="1">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="departureLbl" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="daptDateLbl" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="departureTf" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="deptDateTf" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="deptMonthTf" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="deptYearTf" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="deptTimeLbl" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="deptMinsTf" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="deptHourTf" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="arrYearTf" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="arrMonthTf" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="arrDateTf" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="arrDateLbl" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="arrivalTf" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="arrivalLbl" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="arrMinsTf" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="arrHourTf" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="arrTimeLbl" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="distanceTf" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="noOfSeatsLbl" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="noOfSeatsTf" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="priceLbl" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="priceTf" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="32767" attributes="0"/>
+                  </Group>
+              </Group>
+            </DimensionLayout>
+          </Layout>
+          <SubComponents>
+            <Component class="javax.swing.JLabel" name="departureLbl">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Leaving from"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="arrivalLbl">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Travelling to"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="jLabel1">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Distance (in kms)"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="daptDateLbl">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Date"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="deptTimeLbl">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Time"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="arrDateLbl">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Date"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="arrTimeLbl">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Time"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="noOfSeatsLbl">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="No. of seats available"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="priceLbl">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Price per seat"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JTextField" name="departureTf">
+            </Component>
+            <Component class="javax.swing.JTextField" name="arrivalTf">
+            </Component>
+            <Component class="javax.swing.JTextField" name="distanceTf">
+            </Component>
+            <Component class="javax.swing.JTextField" name="deptDateTf">
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="deptDateTfActionPerformed"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JTextField" name="deptMonthTf">
+            </Component>
+            <Component class="javax.swing.JTextField" name="deptYearTf">
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="deptYearTfActionPerformed"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JTextField" name="deptHourTf">
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="deptHourTfActionPerformed"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JTextField" name="deptMinsTf">
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="deptMinsTfActionPerformed"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JTextField" name="arrDateTf">
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="arrDateTfActionPerformed"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JTextField" name="arrHourTf">
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="arrHourTfActionPerformed"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JTextField" name="arrMonthTf">
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="arrMonthTfActionPerformed"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JTextField" name="arrMinsTf">
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="arrMinsTfActionPerformed"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JTextField" name="arrYearTf">
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="arrYearTfActionPerformed"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JTextField" name="noOfSeatsTf">
+            </Component>
+            <Component class="javax.swing.JTextField" name="priceTf">
+            </Component>
+          </SubComponents>
+        </Container>
+        <Component class="javax.swing.JLabel" name="heading1Lbl">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Let&apos;s set up the trip!"/>
+          </Properties>
+        </Component>
+        <Container class="javax.swing.JPanel" name="jPanel3">
+
+          <Layout>
+            <DimensionLayout dim="0">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="jScrollPane1" max="32767" attributes="0"/>
+                          <Group type="102" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="102" attributes="0">
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="luggageCB" min="-2" max="-2" attributes="0"/>
+                                          <Component id="musicLoverCB" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace min="-2" pref="105" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="chattyCB" min="-2" max="-2" attributes="0"/>
+                                          <Component id="smokingCB" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                  </Group>
+                                  <Component id="petsCB" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="descriptionLbl" alignment="0" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                          </Group>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                  </Group>
+              </Group>
+            </DimensionLayout>
+            <DimensionLayout dim="1">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="luggageCB" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="smokingCB" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="petsCB" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="chattyCB" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Component id="musicLoverCB" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="descriptionLbl" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="jScrollPane1" min="-2" pref="70" max="-2" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
+                  </Group>
+              </Group>
+            </DimensionLayout>
+          </Layout>
+          <SubComponents>
+            <Component class="javax.swing.JCheckBox" name="luggageCB">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Luggage allowed"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JCheckBox" name="smokingCB">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Smoking allowed"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JCheckBox" name="petsCB">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Pets allowed"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JCheckBox" name="chattyCB">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Chatty driver"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JCheckBox" name="musicLoverCB">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Likes music"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="descriptionLbl">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="A message for your fellow passengers"/>
+              </Properties>
+            </Component>
+            <Container class="javax.swing.JScrollPane" name="jScrollPane1">
+              <AuxValues>
+                <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+              </AuxValues>
+
+              <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+              <SubComponents>
+                <Component class="javax.swing.JTextArea" name="descriptionTA">
+                  <Properties>
+                    <Property name="columns" type="int" value="20"/>
+                    <Property name="rows" type="int" value="5"/>
+                  </Properties>
+                </Component>
+              </SubComponents>
+            </Container>
+          </SubComponents>
+        </Container>
+        <Component class="javax.swing.JLabel" name="preferencesLbl">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Additional info about the trip"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JButton" name="addTrip">
+          <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="cc" green="99" red="0" type="rgb"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="POST A TRIP"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="addTripActionPerformed"/>
           </Events>
         </Component>
       </SubComponents>
