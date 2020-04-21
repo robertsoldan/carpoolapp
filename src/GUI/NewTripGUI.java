@@ -1,6 +1,9 @@
 
 package GUI;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+
 public class NewTripGUI extends javax.swing.JFrame {
     private main.Users u;
     private carpoolapp.CarPoolDB cpdb;
@@ -74,6 +77,7 @@ public class NewTripGUI extends javax.swing.JFrame {
         descriptionTA = new javax.swing.JTextArea();
         preferencesLbl = new javax.swing.JLabel();
         addTrip = new javax.swing.JButton();
+        warningLbl = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMaximumSize(new java.awt.Dimension(400, 660));
@@ -82,7 +86,7 @@ public class NewTripGUI extends javax.swing.JFrame {
         setSize(new java.awt.Dimension(400, 660));
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel1.setMaximumSize(new java.awt.Dimension(400, 643));
+        jPanel1.setMaximumSize(new java.awt.Dimension(400, 640));
 
         headerPnl.setBackground(new java.awt.Color(179, 255, 179));
         headerPnl.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -369,6 +373,9 @@ public class NewTripGUI extends javax.swing.JFrame {
             }
         });
 
+        warningLbl.setForeground(new java.awt.Color(255, 0, 0));
+        warningLbl.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -380,7 +387,9 @@ public class NewTripGUI extends javax.swing.JFrame {
                 .addGap(218, 218, 218))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(4, 4, 4)
-                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
@@ -389,33 +398,37 @@ public class NewTripGUI extends javax.swing.JFrame {
                     .addComponent(preferencesLbl))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(logoutBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(addTrip, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(logoutBtn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(warningLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(28, 28, 28)
+                        .addComponent(addTrip)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(headerPnl, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(nameLbl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(heading1Lbl)
-                .addGap(18, 18, 18)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(36, 36, 36)
-                .addComponent(preferencesLbl)
-                .addGap(18, 18, 18)
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(addTrip)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(headerPnl, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(nameLbl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(heading1Lbl)
+                        .addGap(18, 18, 18)
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(preferencesLbl)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
+                        .addComponent(addTrip))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(warningLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(27, 27, 27)
                 .addComponent(logoutBtn)
                 .addContainerGap())
         );
@@ -500,10 +513,20 @@ public class NewTripGUI extends javax.swing.JFrame {
     private void addTripActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addTripActionPerformed
         
         cpdb = new carpoolapp.CarPoolDB();
+        
+        if (departureTf.getText().equals("") || deptDateTf.getText().equals("") || deptMonthTf.getText().equals("") || deptYearTf.getText().equals("") || 
+                deptHourTf.getText().equals("") || deptMinsTf.getText().equals("") || arrDateTf.getText().equals("") || arrMonthTf.getText().equals("") || 
+                arrYearTf.getText().equals("") || arrHourTf.getText().equals("") || arrMinsTf.getText().equals("") || distanceTf.getText().equals("") || 
+                noOfSeatsTf.getText().equals("") || priceTf.getText().equals("") || descriptionTA.getText().equals("")) {
+            warningLbl.setText("All the fields need to be filled out.");
+        }
+        
+            
+        String datePosted = new SimpleDateFormat("dd-MM-yyyy").format(Calendar.getInstance().getTime());
         String departureAddress = departureTf.getText();
         String departureDateAndTime = deptDateTf.getText() + "-" + deptMonthTf.getText() + "-" + deptYearTf.getText() + "-" + deptHourTf.getText() + deptMinsTf.getText();
         String arrivalAddress = arrivalTf.getText();
-        String arrivalDateAndTime = arrDateTf.getText() + "-" + arrMonthTf.getText() + "-" + arrYearTf.getText() + "-" + arrHourTf.getText() + arrMinsTf.getText();;
+        String arrivalDateAndTime = arrDateTf.getText() + "-" + arrMonthTf.getText() + "-" + arrYearTf.getText() + "-" + arrHourTf.getText() + arrMinsTf.getText();
         double distanceKM = Double.parseDouble(distanceTf.getText());
         int seatsAvailable = Integer.parseInt(noOfSeatsTf.getText());
         double pricePerSeat = Double.parseDouble(priceTf.getText());
@@ -514,6 +537,38 @@ public class NewTripGUI extends javax.swing.JFrame {
         boolean chattyDriver = chattyCB.isSelected();
         boolean musicLover = musicLoverCB.isSelected();
         
+        main.Trip t;
+        main.Preferences p;
+        
+        t = new main.Trip(false, datePosted, departureAddress, departureDateAndTime, arrivalAddress, arrivalDateAndTime, distanceKM);
+        p = new main.Preferences(seatsAvailable, pricePerSeat, luggageAllowed, smokingAllowed, petAllowed, chattyDriver, musicLover, description);
+        
+        cpdb.addTrip(t);
+        cpdb.addPreferences(p);
+        
+        warningLbl.setText("Good job!");
+        
+        departureTf.setText("");
+        deptDateTf.setText(""); 
+        deptMonthTf.setText(""); 
+        deptYearTf.setText(""); 
+        deptHourTf.setText("");
+        deptMinsTf.setText("");
+        arrivalTf.setText("");
+        arrDateTf.setText(""); 
+        arrMonthTf.setText("");
+        arrYearTf.setText("");
+        arrHourTf.setText(""); 
+        arrMinsTf.setText("");
+        distanceTf.setText("");
+        noOfSeatsTf.setText("");
+        priceTf.setText("");
+        descriptionTA.setText("");
+        luggageCB.setSelected(false);
+        smokingCB.setSelected(false);
+        petsCB.setSelected(false);
+        chattyCB.setSelected(false);
+        musicLoverCB.setSelected(false);
         
     }//GEN-LAST:event_addTripActionPerformed
 
@@ -598,5 +653,6 @@ public class NewTripGUI extends javax.swing.JFrame {
     private javax.swing.JLabel priceLbl;
     private javax.swing.JTextField priceTf;
     private javax.swing.JCheckBox smokingCB;
+    private javax.swing.JLabel warningLbl;
     // End of variables declaration//GEN-END:variables
 }
