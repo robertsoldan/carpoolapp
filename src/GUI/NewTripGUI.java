@@ -1,30 +1,30 @@
-
 package GUI;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 public class NewTripGUI extends javax.swing.JFrame {
+
     private main.Users u;
     private carpoolapp.CarPoolDB cpdb;
+
     /**
      * Creates new form LoginGUI
      */
-    
+
     public NewTripGUI() {
         initComponents();
-         u = new main.Users("null", "null", "null", "null", "null", "null", "null", "null", 0, 0);
-         
-         nameLbl.setText(u.getUsername());
+        u = new main.Users("null", "null", "null", "null", "null", "null", "null", "null", 0, 0);
+
+        nameLbl.setText(u.getUsername());
     }
+
     public NewTripGUI(main.Users user) {
         initComponents();
         u = user;
-        
+
         nameLbl.setText(u.getUsername());
     }
-    
-    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -469,7 +469,7 @@ public class NewTripGUI extends javax.swing.JFrame {
 
         // Hide the active window, show the new window
         this.dispose();
-        
+
         // make it visible
         l.setVisible(true);
     }//GEN-LAST:event_logoutBtnActionPerformed
@@ -511,17 +511,50 @@ public class NewTripGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_arrYearTfActionPerformed
 
     private void addTripActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addTripActionPerformed
-        
+
         cpdb = new carpoolapp.CarPoolDB();
-        
-        if (departureTf.getText().equals("") || deptDateTf.getText().equals("") || deptMonthTf.getText().equals("") || deptYearTf.getText().equals("") || 
-                deptHourTf.getText().equals("") || deptMinsTf.getText().equals("") || arrDateTf.getText().equals("") || arrMonthTf.getText().equals("") || 
-                arrYearTf.getText().equals("") || arrHourTf.getText().equals("") || arrMinsTf.getText().equals("") || distanceTf.getText().equals("") || 
-                noOfSeatsTf.getText().equals("") || priceTf.getText().equals("") || descriptionTA.getText().equals("")) {
+
+        warningLbl.setText("");
+
+        if (departureTf.getText().equals("") || deptDateTf.getText().equals("") || deptMonthTf.getText().equals("") || deptYearTf.getText().equals("")
+                || deptHourTf.getText().equals("") || deptMinsTf.getText().equals("") || arrDateTf.getText().equals("") || arrMonthTf.getText().equals("")
+                || arrYearTf.getText().equals("") || arrHourTf.getText().equals("") || arrMinsTf.getText().equals("") || distanceTf.getText().equals("")
+                || noOfSeatsTf.getText().equals("") || priceTf.getText().equals("") || descriptionTA.getText().equals("")) {
             warningLbl.setText("All the fields need to be filled out.");
         }
+
+        else if (!(deptDateTf.getText().length() == 2) || !(deptMonthTf.getText().length() == 2) || !(deptYearTf.getText().length() == 4) || 
+                !(deptHourTf.getText().length() == 2) || !(deptMinsTf.getText().length() == 2) || !(arrDateTf.getText().length() == 2) || 
+                !(arrMonthTf.getText().length() == 2) || !(arrYearTf.getText().length() == 4) || 
+                !(arrHourTf.getText().length() == 2) || !(arrMinsTf.getText().length() == 2)) {
+            warningLbl.setText("Incorrect time and date format.");
+        }
         
-            
+           
+        else if ((deptDateTf.getText().equals("29") && deptMonthTf.getText().equals("02")) || (deptDateTf.getText().equals("30") && deptMonthTf.getText().equals("02"))
+                || (deptDateTf.getText().equals("31") && deptMonthTf.getText().equals("02")) || (deptDateTf.getText().equals("31") && deptMonthTf.getText().equals("04"))
+                || (deptDateTf.getText().equals("31") && deptMonthTf.getText().equals("06")) || (deptDateTf.getText().equals("31") && deptMonthTf.getText().equals("09"))
+                || (deptDateTf.getText().equals("31") && deptMonthTf.getText().equals("11")) || (arrDateTf.getText().equals("29") && arrMonthTf.getText().equals("02"))
+                || (arrDateTf.getText().equals("30") && arrMonthTf.getText().equals("02")) || (arrDateTf.getText().equals("31") && arrMonthTf.getText().equals("02"))
+                || (arrDateTf.getText().equals("31") && arrMonthTf.getText().equals("04")) || (arrDateTf.getText().equals("31") && arrMonthTf.getText().equals("06"))
+                || (arrDateTf.getText().equals("31") && arrMonthTf.getText().equals("09")) || (arrDateTf.getText().equals("31") && arrMonthTf.getText().equals("11"))) {
+            warningLbl.setText("Incorrect date format.");
+        }
+               
+
+        else if ((deptDateTf.getText().equals("29") && deptMonthTf.getText().equals("02")) || (deptDateTf.getText().equals("30") && deptMonthTf.getText().equals("02"))
+                || (deptDateTf.getText().equals("31") && deptMonthTf.getText().equals("02")) || (deptDateTf.getText().equals("31") && deptMonthTf.getText().equals("04"))
+                || (deptDateTf.getText().equals("31") && deptMonthTf.getText().equals("06")) || (deptDateTf.getText().equals("31") && deptMonthTf.getText().equals("09"))
+                || (deptDateTf.getText().equals("31") && deptMonthTf.getText().equals("11")) || (arrDateTf.getText().equals("29") && arrMonthTf.getText().equals("02"))
+                || (arrDateTf.getText().equals("30") && arrMonthTf.getText().equals("02")) || (arrDateTf.getText().equals("31") && arrMonthTf.getText().equals("02"))
+                || (arrDateTf.getText().equals("31") && arrMonthTf.getText().equals("04")) || (arrDateTf.getText().equals("31") && arrMonthTf.getText().equals("06"))
+                || (arrDateTf.getText().equals("31") && arrMonthTf.getText().equals("09")) || (arrDateTf.getText().equals("31") && arrMonthTf.getText().equals("11"))) {
+            warningLbl.setText("Incorrect date format.");
+        }
+
+        
+        else {
+                 
         String datePosted = new SimpleDateFormat("dd-MM-yyyy").format(Calendar.getInstance().getTime());
         String departureAddress = departureTf.getText();
         String departureDateAndTime = deptDateTf.getText() + "-" + deptMonthTf.getText() + "-" + deptYearTf.getText() + "-" + deptHourTf.getText() + deptMinsTf.getText();
@@ -536,29 +569,29 @@ public class NewTripGUI extends javax.swing.JFrame {
         boolean petAllowed = petsCB.isSelected();
         boolean chattyDriver = chattyCB.isSelected();
         boolean musicLover = musicLoverCB.isSelected();
-        
+
         main.Trip t;
         main.Preferences p;
-        
+
         t = new main.Trip(false, datePosted, departureAddress, departureDateAndTime, arrivalAddress, arrivalDateAndTime, distanceKM);
         p = new main.Preferences(seatsAvailable, pricePerSeat, luggageAllowed, smokingAllowed, petAllowed, chattyDriver, musicLover, description);
-        
+
         cpdb.addTrip(t);
         cpdb.addPreferences(p);
-        
+
         warningLbl.setText("Good job!");
-        
+
         departureTf.setText("");
-        deptDateTf.setText(""); 
-        deptMonthTf.setText(""); 
-        deptYearTf.setText(""); 
+        deptDateTf.setText("");
+        deptMonthTf.setText("");
+        deptYearTf.setText("");
         deptHourTf.setText("");
         deptMinsTf.setText("");
         arrivalTf.setText("");
-        arrDateTf.setText(""); 
+        arrDateTf.setText("");
         arrMonthTf.setText("");
         arrYearTf.setText("");
-        arrHourTf.setText(""); 
+        arrHourTf.setText("");
         arrMinsTf.setText("");
         distanceTf.setText("");
         noOfSeatsTf.setText("");
@@ -569,7 +602,7 @@ public class NewTripGUI extends javax.swing.JFrame {
         petsCB.setSelected(false);
         chattyCB.setSelected(false);
         musicLoverCB.setSelected(false);
-        
+        }
     }//GEN-LAST:event_addTripActionPerformed
 
     /**

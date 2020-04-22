@@ -12,9 +12,6 @@ public class CarPoolApp {
         logGUI = new GUI.LoginGUI();
         logGUI.setVisible(true); 
     
-      
-      
-     
     }
     
 }
