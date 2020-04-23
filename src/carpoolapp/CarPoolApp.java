@@ -8,10 +8,14 @@ public class CarPoolApp {
         
         
         
-        GUI.LoginGUI logGUI;
+      /*   GUI.LoginGUI logGUI;
         logGUI = new GUI.LoginGUI();
         logGUI.setVisible(true); 
-    
+    */
+      
+      GUI.NewTripGUI ntGUI;
+      ntGUI = new GUI.NewTripGUI();
+      ntGUI.setVisible(true);
     }
     
 }
