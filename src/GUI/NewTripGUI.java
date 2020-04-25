@@ -464,13 +464,6 @@ public class NewTripGUI extends javax.swing.JFrame {
             warningLbl.setText("All the fields need to be filled out.");
         }
 
-        else if (!(deptDateTf.getText().length() == 2) || !(deptMonthTf.getText().length() == 2) || !(deptYearTf.getText().length() == 4) ||
-            !(deptHourTf.getText().length() == 2) || !(deptMinsTf.getText().length() == 2) || !(arrDateTf.getText().length() == 2) ||
-            !(arrMonthTf.getText().length() == 2) || !(arrYearTf.getText().length() == 4) ||
-            !(arrHourTf.getText().length() == 2) || !(arrMinsTf.getText().length() == 2)) {
-            warningLbl.setText("Incorrect time and date format.");
-        }
-
         else if ((deptDateTf.getText().equals("31") && deptMonthTf.getText().equals("09")) || (deptDateTf.getText().equals("31") && deptMonthTf.getText().equals("11"))
                || (arrDateTf.getText().equals("31") && arrMonthTf.getText().equals("09")) || (arrDateTf.getText().equals("31") && arrMonthTf.getText().equals("11"))) {
             warningLbl.setText("Incorrect date format.");
@@ -578,17 +571,18 @@ public class NewTripGUI extends javax.swing.JFrame {
             boolean petAllowed = petsCB.isSelected();
             boolean chattyDriver = chattyCB.isSelected();
             boolean musicLover = musicLoverCB.isSelected();
+            boolean isComplete = false;
 
             main.Trip t;
             main.Preferences p;
 
-            t = new main.Trip(false, datePosted, departureAddress, departureDateAndTime, arrivalAddress, arrivalDateAndTime, distanceKM);
+            t = new main.Trip(isComplete, datePosted, departureAddress, departureDateAndTime, arrivalAddress, arrivalDateAndTime, distanceKM);
             p = new main.Preferences(seatsAvailable, pricePerSeat, luggageAllowed, smokingAllowed, petAllowed, chattyDriver, musicLover, description);
 
             cpdb.addTrip(t);
             cpdb.addPreferences(p);
 
-            warningLbl.setText("Good job!");
+            warningLbl.setText("Your trip has been posted!");
 
             departureTf.setText("");
             deptDateTf.setText("");
