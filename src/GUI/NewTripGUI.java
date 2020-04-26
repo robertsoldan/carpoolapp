@@ -107,13 +107,13 @@ public class NewTripGUI extends javax.swing.JFrame {
             .addGroup(headerPnlLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(394, Short.MAX_VALUE))
+                .addContainerGap(392, Short.MAX_VALUE))
         );
         headerPnlLayout.setVerticalGroup(
             headerPnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(headerPnlLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 74, Short.MAX_VALUE)
+                .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 72, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -451,7 +451,7 @@ public class NewTripGUI extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 693, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 750, Short.MAX_VALUE)
         );
 
         pack();
@@ -584,7 +584,13 @@ public class NewTripGUI extends javax.swing.JFrame {
 
             t = new main.Trip(isComplete, datePosted, departureAddress, departureDateAndTime, arrivalAddress, arrivalDateAndTime, distanceKM, 
                     seatsAvailable, pricePerSeat, luggageAllowed, smokingAllowed, petAllowed, chattyDriver, musicLover, description);
+            
+            main.Driver d = new main.Driver();
+            d = cpdb.getDriverByUserID(u.getUserID());
+            int driverID = d.getDriverID();
 
+            t.setDriverID(driverID);
+            
             cpdb.addTrip(t);
 
             warningLbl.setText("Your trip has been posted!");
@@ -677,7 +683,7 @@ public class NewTripGUI extends javax.swing.JFrame {
     private void homeBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_homeBtnActionPerformed
         
         //switch to the Home screen
-        GUI.UserHomeGUI uh = new GUI.UserHomeGUI();;
+        GUI.UserHomeGUI uh = new GUI.UserHomeGUI(u);
 
         // Get the size of the active window
         int sizeH = this.getSize().height;
