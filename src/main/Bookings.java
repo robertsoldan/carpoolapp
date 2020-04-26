@@ -6,8 +6,10 @@ public class Bookings {
     private int tripsID;
     private String status;
 
-    public Bookings(String status) {
+    public Bookings(int passID, int tripID, String status) {
         this.status = status;
+        this.passengerID = passID;
+        this.tripsID = tripID;
     }
 
     public int getBookingID() {

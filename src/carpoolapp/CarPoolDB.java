@@ -284,7 +284,7 @@ public class CarPoolDB {
             ResultSet rs = stmt.executeQuery(query);
             
             while(rs.next()) {
-                main.Bookings b = new main.Bookings(null);
+                main.Bookings b = new main.Bookings(0, 0, null);
                 b.setBookingID(0);
                 b.setPassengerID(0);
                 b.setTripsID(0);
@@ -660,24 +660,11 @@ public class CarPoolDB {
     public void testDB() {
         // TODO code application logic here
         try{
-            String sqlSt = "select column_name,data_type from information_schema.columns where table_name = 'trips';";
+            String sqlSt = "SELECT * FROM BOOKINGS;";
             //String sql = "ALTER TABLE users  ALTER COLUMN username DROP UNIQUE;";
+            
             /*
-            String sql = "ALTER TABLE trips "
-                             
-                
-
-                + "ADD COLUMN seatsAvailable integer NOT NULL,"
-                + "ADD COLUMN pricePerSeat NUMERIC NOT NULL,"
-                + "ADD COLUMN luggageAllowed boolean NOT NULL,"
-                + "ADD COLUMN smokingAllowed boolean NOT NULL,"
-                + "ADD COLUMN petAllowed boolean NOT NULL,"
-                + "ADD COLUMN chattyDriver boolean NOT NULL,"
-                + "ADD COLUMN musicLover boolean NOT NULL,"
-                + "ADD COLUMN description varchar(255) NOT NULL" 
-                
-                          
-                + ";";
+            String sql = "";
             PreparedStatement pst = getConnection().prepareStatement(sql);
      
             pst.executeUpdate();
