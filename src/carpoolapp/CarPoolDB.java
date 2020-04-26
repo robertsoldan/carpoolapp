@@ -216,6 +216,12 @@ public class CarPoolDB {
         execSql(sqlStr);
         incrementSeatsAvailable(tripID);
     }
+    
+    public void cancelTrip(main.Trip t) {
+        int tripID = t.getTripID();
+        String sqlStr = "DELETE FROM trips WHERE tripsID='" + tripID + "';";
+        execSql(sqlStr);
+    }
     // -------------------------------------------------------------------------------------------------
     
     // Execute query method
