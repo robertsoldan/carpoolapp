@@ -634,6 +634,39 @@ public class CarPoolDB {
         return seats;
     }
     
+    public main.Trip getTripById(int tripId) {
+        main.Trip t = new main.Trip(true, null, null, null, null, null, 0, 0, 0, false, false, false, false, false, null);
+        
+        try {
+            String query = "SELECT * FROM trips WHERE tripID='" + tripId + "';";
+            Statement stmt = getConnection().createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+            
+            while(rs.next()) {
+                t.setIsComplete(rs.getBoolean("isComplete"));
+                t.setDatePosted(rs.getString("datePosted"));
+                t.setDepartureDateAndTime(rs.getString("departureDateAndTime"));
+                t.setArrivalAddress(rs.getString("arrivalAddress"));
+                t.setDistanceKM(rs.getDouble("distanceKM"));
+                t.setSeatsAvailable(rs.getInt("seatsAvailable"));
+                t.setPricePerSeat(rs.getDouble("pricePerSeat"));
+                t.setLuggageAllowed(rs.getBoolean("luggageAllowed"));
+                t.setSmokingAllowed(rs.getBoolean("smokingAllowed"));
+                t.setPetAllowed(rs.getBoolean("petAllowed"));
+                t.setChattyDriver(rs.getBoolean("chattyDriver"));
+                t.setMusicLover(rs.getBoolean("musicLover"));
+                t.setDescription(rs.getString("description"));
+            }
+            
+            } catch(URISyntaxException uriex) {
+                System.out.println(uriex);
+            } catch(SQLException sqlex) {
+                System.out.println(sqlex);
+            }
+        
+        return t;
+    }
+    
     
     
     // -------------------------------------------------------------------------------------------------
