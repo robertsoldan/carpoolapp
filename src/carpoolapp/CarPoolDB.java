@@ -558,15 +558,15 @@ public class CarPoolDB {
             String query;
             
             switch(argType) {
-                case "ADDRESS": query = "SELECT * FROM trips WHERE departureAddress LIKE %'" + searchTerm + "'%;";
+                case "ADDRESS": query = "SELECT * FROM trips WHERE arrivalAddress ILIKE '%" + searchTerm + "%';";
                 break;
-                case "DATE": query = "SELECT * FROM trips WHERE departUreDateAndTime LIKE %'" + searchTerm + "'%;";
+                case "DATE": query = "SELECT * FROM trips WHERE arrivalDateAndTime LIKE '%" + searchTerm + "%';";
                 break;
                 case "ADDRESS+DATE": 
                     String[] datePlusAddress = searchTerm.split("\\+");
                     date = datePlusAddress[0];
                     address = datePlusAddress[1];
-                    query = "SELECT * FROM trips WHERE departureAddress LIKE %'" + address + "'% AND departUreDateAndTime LIKE %'" + date + "'%;";
+                    query = "SELECT * FROM trips WHERE arrivalAddress ILIKE '%" + address + "%' AND departUreDateAndTime LIKE '%" + date + "%';";
                 break;
                 default: query = "SELECT * FROM trips;";
             }
@@ -660,7 +660,7 @@ public class CarPoolDB {
     public void testDB() {
         // TODO code application logic here
         try{
-            String sqlSt = "SELECT * FROM BOOKINGS;";
+            String sqlSt = "SELECT * FROM trips;";
             //String sql = "ALTER TABLE users  ALTER COLUMN username DROP UNIQUE;";
             
             /*
