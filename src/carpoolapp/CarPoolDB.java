@@ -558,7 +558,11 @@ public class CarPoolDB {
             String query;
             
             switch(argType) {
-                case "ADDRESS": query = "SELECT * FROM trips WHERE arrivalAddress ILIKE '%" + searchTerm + "%';";
+                case "ADDRESS": 
+                    String[] addresses = searchTerm.split("\\+");
+                    String departureAddress = addresses[0];
+                    String arrivalAddress = addresses[1];
+                    query = "SELECT * FROM trips WHERE departureAddress ILIKE '%" + departureAddress + "%' AND arrivalAddress ILIKE '%" + arrivalAddress + "%';";
                 break;
                 case "DATE": query = "SELECT * FROM trips WHERE arrivalDateAndTime LIKE '%" + searchTerm + "%';";
                 break;
