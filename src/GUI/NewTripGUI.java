@@ -107,13 +107,13 @@ public class NewTripGUI extends javax.swing.JFrame {
             .addGroup(headerPnlLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(392, Short.MAX_VALUE))
+                .addContainerGap(394, Short.MAX_VALUE))
         );
         headerPnlLayout.setVerticalGroup(
             headerPnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(headerPnlLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 70, Short.MAX_VALUE)
+                .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 74, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -574,13 +574,11 @@ public class NewTripGUI extends javax.swing.JFrame {
             boolean isComplete = false;
 
             main.Trip t;
-            main.Preferences p;
 
-            t = new main.Trip(isComplete, datePosted, departureAddress, departureDateAndTime, arrivalAddress, arrivalDateAndTime, distanceKM);
-            p = new main.Preferences(seatsAvailable, pricePerSeat, luggageAllowed, smokingAllowed, petAllowed, chattyDriver, musicLover, description);
+            t = new main.Trip(isComplete, datePosted, departureAddress, departureDateAndTime, arrivalAddress, arrivalDateAndTime, distanceKM, 
+                    seatsAvailable, pricePerSeat, luggageAllowed, smokingAllowed, petAllowed, chattyDriver, musicLover, description);
 
             cpdb.addTrip(t);
-            cpdb.addPreferences(p);
 
             warningLbl.setText("Your trip has been posted!");
 
