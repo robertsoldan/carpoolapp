@@ -99,6 +99,12 @@ public class CarPoolDB {
         String arrivalAddress = t.getArrivalAddress();
         String arrivalDateAndTime = t.getArrivalDateAndTime();
         double distanceKM = t.getDistanceKM();
+        int seatsAvailable = t.getSeatsAvailable();
+        double pricePerSeat = t.getPricePerSeat();
+        boolean smokingAllowed = t.isSmokingAllowed();
+        boolean chattyDriver = t.isChattyDriver();
+        boolean musicLover = t.isMusicLover();
+        String description = t.getDescription();
         
         String sqlStr = "INSERT INTO trips VALUES(DEFAULT, "
                 + driverID + ", "
@@ -108,7 +114,13 @@ public class CarPoolDB {
                 + "'" + departureDateAndTime + "', "
                 + "'" + arrivalAddress + "', "
                 + "'" + arrivalDateAndTime + "', "
-                + distanceKM
+                + "'" + distanceKM + "', "
+                + "'" + seatsAvailable + "', "
+                + "'" + pricePerSeat + "', "
+                + "'" + smokingAllowed + "', "
+                + "'" + chattyDriver + "', "
+                + "'" + musicLover + "', "
+                + description
                 + ");";
         
         execSql(sqlStr);
@@ -640,8 +652,9 @@ public class CarPoolDB {
     public void testDB() {
         // TODO code application logic here
         try{
-            //String sqlSt = "SELECT constraint_name FROM information_schema.constraint_column_usage WHERE TABLE_NAME = 'users';";
+            String sqlSt = "SELECT * FROM users WHERE username='Alex';";
             //String sql = "ALTER TABLE users  ALTER COLUMN username DROP UNIQUE;";
+            /*
             String sql = "ALTER TABLE trips "
                              
                 
@@ -660,8 +673,9 @@ public class CarPoolDB {
             PreparedStatement pst = getConnection().prepareStatement(sql);
      
             pst.executeUpdate();
+            */
             
-        /*
+        
         Statement stmt = getConnection().createStatement();
         ResultSet rs = stmt.executeQuery(sqlSt);
        
@@ -669,7 +683,7 @@ public class CarPoolDB {
             System.out.println(rs.getString(1));
            
             
-        } */
+        } 
        
        // System.out.println(getConnection().);
         } catch(URISyntaxException uriex) {
