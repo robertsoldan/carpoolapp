@@ -15,11 +15,29 @@ public class Trip {
     private boolean smokingAllowed;
     private boolean chattyDriver;
     private boolean musicLover;
+    private boolean luggageAllowed;
+    private boolean petAllowed;
+
+    public boolean isLuggageAllowed() {
+        return luggageAllowed;
+    }
+
+    public void setLuggageAllowed(boolean luggageAllowed) {
+        this.luggageAllowed = luggageAllowed;
+    }
+
+    public boolean isPetAllowed() {
+        return petAllowed;
+    }
+
+    public void setPetAllowed(boolean petAllowed) {
+        this.petAllowed = petAllowed;
+    }
     private String description;
 
     public Trip(boolean isComplete, String datePosted, String departureAddress, String departureDateAndTime, 
             String arrivalAddress, String arrivalDateAndTime, double distanceKM, int seatsAvailable,
-            double pricePerSeat, boolean smokingAllowed, boolean chattyDriver, boolean musicLover, String description) {
+            double pricePerSeat, boolean luggageAllowed, boolean smokingAllowed, boolean petAllowed, boolean chattyDriver, boolean musicLover, String description) {
         this.isComplete = isComplete;
         this.datePosted = datePosted;
         this.departureAddress = departureAddress;
@@ -29,7 +47,9 @@ public class Trip {
         this.distanceKM = distanceKM;
         this.seatsAvailable = seatsAvailable;
         this.pricePerSeat = pricePerSeat;
+        this.luggageAllowed = luggageAllowed;
         this.smokingAllowed = smokingAllowed;
+        this.petAllowed = petAllowed;
         this.chattyDriver = chattyDriver;
         this.musicLover = musicLover;
         this.description = description;

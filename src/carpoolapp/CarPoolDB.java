@@ -67,10 +67,10 @@ public class CarPoolDB {
     }
     
     public void addDriver(main.Driver d) {
-        int userID = d.getDriverID();
+        int userID = d.getUserID();
         
         String sqlStr = "INSERT INTO drivers VALUES(DEFAULT, "
-                + userID + ")";
+                + userID + "," + d.getRating() + ")";
         execSql(sqlStr);
     }
     
@@ -101,7 +101,9 @@ public class CarPoolDB {
         double distanceKM = t.getDistanceKM();
         int seatsAvailable = t.getSeatsAvailable();
         double pricePerSeat = t.getPricePerSeat();
+        boolean luggageAllowed = t.isLuggageAllowed();
         boolean smokingAllowed = t.isSmokingAllowed();
+        boolean petAllowed = t.isPetAllowed();
         boolean chattyDriver = t.isChattyDriver();
         boolean musicLover = t.isMusicLover();
         String description = t.getDescription();
@@ -114,13 +116,15 @@ public class CarPoolDB {
                 + "'" + departureDateAndTime + "', "
                 + "'" + arrivalAddress + "', "
                 + "'" + arrivalDateAndTime + "', "
-                + "'" + distanceKM + "', "
-                + "'" + seatsAvailable + "', "
-                + "'" + pricePerSeat + "', "
-                + "'" + smokingAllowed + "', "
-                + "'" + chattyDriver + "', "
-                + "'" + musicLover + "', "
-                + description
+                + distanceKM + ","
+                + seatsAvailable + ","
+                + pricePerSeat + ","
+                + luggageAllowed + ","
+                + smokingAllowed + ","
+                + petAllowed + ","
+                + chattyDriver + ","
+                + musicLover + ","
+                + "'" + description + "'"
                 + ");";
         
         execSql(sqlStr);
@@ -515,7 +519,7 @@ public class CarPoolDB {
             ResultSet rs = stmt.executeQuery(query);
             
             while(rs.next()) {
-                main.Trip t = new main.Trip(true, null, null, null, null, null, 0, 0, 0, false, false, false, null);
+                main.Trip t = new main.Trip(true, null, null, null, null, null, 0, 0, 0, false, false, false, false, false, null);
                 t.setIsComplete(rs.getBoolean("isComplete"));
                 t.setDatePosted(rs.getString("datePosted"));
                 t.setDepartureDateAndTime(rs.getString("departureDateAndTime"));
@@ -523,7 +527,9 @@ public class CarPoolDB {
                 t.setDistanceKM(rs.getDouble("distanceKM"));
                 t.setSeatsAvailable(rs.getInt("seatsAvailable"));
                 t.setPricePerSeat(rs.getDouble("pricePerSeat"));
+                t.setLuggageAllowed(rs.getBoolean("luggageAllowed"));
                 t.setSmokingAllowed(rs.getBoolean("smokingAllowed"));
+                t.setPetAllowed(rs.getBoolean("petAllowed"));
                 t.setChattyDriver(rs.getBoolean("chattyDriver"));
                 t.setMusicLover(rs.getBoolean("musicLover"));
                 t.setDescription(rs.getString("description"));
@@ -569,7 +575,7 @@ public class CarPoolDB {
             ResultSet rs = stmt.executeQuery(query);
             
             while(rs.next()) {
-                main.Trip t = new main.Trip(true, null, null, null, null, null, 0, 0, 0, false, false, false, null);
+                main.Trip t = new main.Trip(true, null, null, null, null, null, 0, 0, 0, false, false, false, false, false, null);
                 t.setIsComplete(rs.getBoolean("isComplete"));
                 t.setDatePosted(rs.getString("datePosted"));
                 t.setDepartureDateAndTime(rs.getString("departureDateAndTime"));
@@ -577,7 +583,9 @@ public class CarPoolDB {
                 t.setDistanceKM(rs.getDouble("distanceKM"));
                 t.setSeatsAvailable(rs.getInt("seatsAvailable"));
                 t.setPricePerSeat(rs.getDouble("pricePerSeat"));
+                t.setLuggageAllowed(rs.getBoolean("luggageAllowed"));
                 t.setSmokingAllowed(rs.getBoolean("smokingAllowed"));
+                t.setPetAllowed(rs.getBoolean("petAllowed"));
                 t.setChattyDriver(rs.getBoolean("chattyDriver"));
                 t.setMusicLover(rs.getBoolean("musicLover"));
                 t.setDescription(rs.getString("description"));
@@ -652,7 +660,7 @@ public class CarPoolDB {
     public void testDB() {
         // TODO code application logic here
         try{
-            String sqlSt = "SELECT * FROM users WHERE username='Alex';";
+            String sqlSt = "select column_name,data_type from information_schema.columns where table_name = 'trips';";
             //String sql = "ALTER TABLE users  ALTER COLUMN username DROP UNIQUE;";
             /*
             String sql = "ALTER TABLE trips "
