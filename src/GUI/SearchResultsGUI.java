@@ -2,6 +2,8 @@
 package GUI;
 
 import java.awt.Color;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -291,9 +293,6 @@ public class SearchResultsGUI extends javax.swing.JFrame {
 
     private void searchBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchBtnActionPerformed
         cpdb = new carpoolapp.CarPoolDB();
-        int day = Integer.parseInt(ddTf.getText());
-        int month = Integer.parseInt(mmTf.getText());
-        int year = Integer.parseInt(yyyyTf.getText());
         
         if (fromTf.getText().equals("") || toTf.getText().equals("") || ddTf.getText().equals("") || mmTf.getText().equals("") ||
                 yyyyTf.getText().equals("")) {
@@ -303,8 +302,13 @@ public class SearchResultsGUI extends javax.swing.JFrame {
             ddTf.setText("");
             mmTf.setText("");
             yyyyTf.setText("");
-        } else if (day < 1 || day > 31 || month < 1 || month > 12 || year < 2020 || year > 2021 || (month == 2 && day > 29) || 
-                (month == 4 && day > 30) || (month == 6 && day > 30) || (month == 9 && day > 30) || (month == 11 && day > 29)) {
+        } else if (Integer.parseInt(ddTf.getText()) < 1 || Integer.parseInt(ddTf.getText()) > 31 || Integer.parseInt(mmTf.getText()) < 1 || 
+                Integer.parseInt(mmTf.getText()) > 12 || Integer.parseInt(yyyyTf.getText()) < 2020 || Integer.parseInt(yyyyTf.getText()) > 2021 || 
+                (Integer.parseInt(mmTf.getText()) == 2 && Integer.parseInt(ddTf.getText()) > 29) || 
+                (Integer.parseInt(mmTf.getText()) == 4 && Integer.parseInt(ddTf.getText()) > 30) ||
+                (Integer.parseInt(mmTf.getText()) == 6 && Integer.parseInt(ddTf.getText()) > 30) ||
+                (Integer.parseInt(mmTf.getText()) == 9 && Integer.parseInt(ddTf.getText()) > 30) ||
+                (Integer.parseInt(mmTf.getText()) == 11 && Integer.parseInt(ddTf.getText()) > 29)) {
             JOptionPane.showMessageDialog(null, "Date invalid");
             ddTf.setText("");
             mmTf.setText("");
@@ -336,8 +340,19 @@ public class SearchResultsGUI extends javax.swing.JFrame {
                     resultPanel.setLayout(null); // Set resultPanel to null to allow the labels to be placed with relative positioning.
 
                     resultPanel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR)); // Set the cursor on mouse over
-                    resultPanel.setBackground(new Color(153, 0, 51)); // Search panel result background
-                
+                    resultPanel.setBackground(new Color(240, 240, 240)); // Search panel result background
+                    
+                    // Adding the mouse event listener to the generated panel
+                    resultPanel.addMouseListener(new MouseAdapter() {
+                        public void mousePressed(MouseEvent e) {
+                            int reply = JOptionPane.showConfirmDialog(mmTf, "Do you wish to book this trip?", "Confirm", JOptionPane.YES_NO_OPTION);
+                            if (reply == JOptionPane.YES_OPTION) {
+                                main.Bookings booking = new main.Bookings(u.getUserID(), trip.getTripID(), "Submitted");
+                                cpdb.addBooking(booking);
+                                JOptionPane.showMessageDialog(null, "You're in!");
+                            }
+                        }
+                    });
                 }         
             }
         }
