@@ -64,13 +64,28 @@
               <Component id="headerPnl" alignment="0" max="32767" attributes="0"/>
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" pref="84" max="-2" attributes="0"/>
-                  <Component id="nameLbl" pref="118" max="32767" attributes="0"/>
+                  <Component id="nameLbl" pref="98" max="32767" attributes="0"/>
                   <EmptySpace min="-2" pref="218" max="-2" attributes="0"/>
               </Group>
               <Group type="102" alignment="1" attributes="0">
+                  <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
+                  <Component id="cancelBBtn" min="-2" pref="85" max="-2" attributes="0"/>
                   <EmptySpace max="32767" attributes="0"/>
-                  <Component id="logoutBtn" min="-2" pref="92" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="cancelTBtn" min="-2" pref="85" max="-2" attributes="0"/>
+                      <Component id="logoutBtn" min="-2" pref="92" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
+              </Group>
+              <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
+                  <Component id="resultsPanel" max="32767" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+              </Group>
+              <Group type="102" alignment="1" attributes="0">
+                  <EmptySpace max="32767" attributes="0"/>
+                  <Component id="warningLbl" min="-2" pref="245" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="75" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -80,7 +95,16 @@
                   <Component id="headerPnl" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="nameLbl" max="-2" attributes="0"/>
-                  <EmptySpace pref="477" max="32767" attributes="0"/>
+                  <EmptySpace min="-2" pref="44" max="-2" attributes="0"/>
+                  <Component id="resultsPanel" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="cancelTBtn" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="cancelBBtn" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                  <Component id="warningLbl" min="-2" pref="23" max="-2" attributes="0"/>
+                  <EmptySpace pref="154" max="32767" attributes="0"/>
                   <Component id="logoutBtn" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
@@ -123,7 +147,7 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="1" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jLabel2" pref="70" max="32767" attributes="0"/>
+                      <Component id="jLabel2" pref="74" max="32767" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -163,6 +187,122 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="logoutBtnActionPerformed"/>
           </Events>
         </Component>
+        <Component class="javax.swing.JButton" name="cancelTBtn">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="CANCEL"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cancelTBtnActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JButton" name="cancelBBtn">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="CANCEL"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cancelBBtnActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JLabel" name="warningLbl">
+        </Component>
+        <Container class="javax.swing.JPanel" name="resultsPanel">
+
+          <Layout>
+            <DimensionLayout dim="0">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                          <Component id="preferencesTf" max="32767" attributes="0"/>
+                          <Component id="deptLbl" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="arrLbl" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="prefLbl" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="priceLbl" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="priceTf" alignment="0" min="-2" pref="46" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace min="-2" pref="42" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="seatsLbl" min="-2" max="-2" attributes="0"/>
+                                  <Component id="seatsTf" min="-2" pref="28" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                          <Component id="deptTf" alignment="0" pref="301" max="32767" attributes="0"/>
+                          <Component id="arrTf" alignment="0" max="32767" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="32767" attributes="0"/>
+                  </Group>
+              </Group>
+            </DimensionLayout>
+            <DimensionLayout dim="1">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="deptLbl" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="3" max="-2" attributes="0"/>
+                      <Component id="deptTf" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="arrLbl" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="1" max="-2" attributes="0"/>
+                      <Component id="arrTf" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="priceLbl" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="seatsLbl" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="priceTf" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="seatsTf" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="prefLbl" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="preferencesTf" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace pref="21" max="32767" attributes="0"/>
+                  </Group>
+              </Group>
+            </DimensionLayout>
+          </Layout>
+          <SubComponents>
+            <Component class="javax.swing.JLabel" name="deptLbl">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Departure"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="arrLbl">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Arrival"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="priceLbl">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Price per seat"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="prefLbl">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Allowed"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="seatsLbl">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Seats Available"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JTextField" name="deptTf">
+            </Component>
+            <Component class="javax.swing.JTextField" name="arrTf">
+            </Component>
+            <Component class="javax.swing.JTextField" name="priceTf">
+            </Component>
+            <Component class="javax.swing.JTextField" name="seatsTf">
+            </Component>
+            <Component class="javax.swing.JTextField" name="preferencesTf">
+            </Component>
+          </SubComponents>
+        </Container>
       </SubComponents>
     </Container>
   </SubComponents>

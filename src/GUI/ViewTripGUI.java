@@ -3,16 +3,25 @@ package GUI;
 
 public class ViewTripGUI extends javax.swing.JFrame {
     private main.Users u;
-   
+    private carpoolapp.CarPoolDB cpdb;
     /**
      * Creates new form LoginGUI
      */
     
+    
+    
     public ViewTripGUI() {
         initComponents();
-         u = new main.Users("null", "null", "null", "null", "null", "null", "null", "null", 0, 0);
-         
+         u = new main.Users("null", "null", "null", "null", "null", "null", "null", "null", 0, 0);         
          nameLbl.setText(u.getUsername());
+         cancelTBtn.setVisible(false);
+         cancelBBtn.setVisible(false);
+         resultsPanel.setVisible(false);
+         int tripId = 0;
+         String userType = new String();
+                 
+         
+         
     }
     public ViewTripGUI(main.Users user) {
         initComponents();
@@ -37,6 +46,20 @@ public class ViewTripGUI extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         nameLbl = new javax.swing.JLabel();
         logoutBtn = new javax.swing.JButton();
+        cancelTBtn = new javax.swing.JButton();
+        cancelBBtn = new javax.swing.JButton();
+        warningLbl = new javax.swing.JLabel();
+        resultsPanel = new javax.swing.JPanel();
+        deptLbl = new javax.swing.JLabel();
+        arrLbl = new javax.swing.JLabel();
+        priceLbl = new javax.swing.JLabel();
+        prefLbl = new javax.swing.JLabel();
+        seatsLbl = new javax.swing.JLabel();
+        deptTf = new javax.swing.JTextField();
+        arrTf = new javax.swing.JTextField();
+        priceTf = new javax.swing.JTextField();
+        seatsTf = new javax.swing.JTextField();
+        preferencesTf = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMaximumSize(new java.awt.Dimension(400, 640));
@@ -70,7 +93,7 @@ public class ViewTripGUI extends javax.swing.JFrame {
             headerPnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, headerPnlLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 70, Short.MAX_VALUE)
+                .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 74, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -85,6 +108,79 @@ public class ViewTripGUI extends javax.swing.JFrame {
             }
         });
 
+        cancelTBtn.setText("CANCEL");
+        cancelTBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cancelTBtnActionPerformed(evt);
+            }
+        });
+
+        cancelBBtn.setText("CANCEL");
+        cancelBBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cancelBBtnActionPerformed(evt);
+            }
+        });
+
+        deptLbl.setText("Departure");
+
+        arrLbl.setText("Arrival");
+
+        priceLbl.setText("Price per seat");
+
+        prefLbl.setText("Allowed");
+
+        seatsLbl.setText("Seats Available");
+
+        javax.swing.GroupLayout resultsPanelLayout = new javax.swing.GroupLayout(resultsPanel);
+        resultsPanel.setLayout(resultsPanelLayout);
+        resultsPanelLayout.setHorizontalGroup(
+            resultsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(resultsPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(resultsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(preferencesTf)
+                    .addComponent(deptLbl, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(arrLbl, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(prefLbl, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, resultsPanelLayout.createSequentialGroup()
+                        .addGroup(resultsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(priceLbl)
+                            .addComponent(priceTf, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(42, 42, 42)
+                        .addGroup(resultsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(seatsLbl)
+                            .addComponent(seatsTf, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(deptTf, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 301, Short.MAX_VALUE)
+                    .addComponent(arrTf, javax.swing.GroupLayout.Alignment.LEADING))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        resultsPanelLayout.setVerticalGroup(
+            resultsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(resultsPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(deptLbl)
+                .addGap(3, 3, 3)
+                .addComponent(deptTf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(arrLbl)
+                .addGap(1, 1, 1)
+                .addComponent(arrTf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(resultsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(priceLbl)
+                    .addComponent(seatsLbl))
+                .addGap(2, 2, 2)
+                .addGroup(resultsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(priceTf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(seatsTf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(prefLbl)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(preferencesTf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(21, Short.MAX_VALUE))
+        );
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -92,12 +188,24 @@ public class ViewTripGUI extends javax.swing.JFrame {
             .addComponent(headerPnl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(84, 84, 84)
-                .addComponent(nameLbl, javax.swing.GroupLayout.DEFAULT_SIZE, 118, Short.MAX_VALUE)
+                .addComponent(nameLbl, javax.swing.GroupLayout.DEFAULT_SIZE, 98, Short.MAX_VALUE)
                 .addGap(218, 218, 218))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(logoutBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(38, 38, 38)
+                .addComponent(cancelBBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(cancelTBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(logoutBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(39, 39, 39))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(resultsPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(warningLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(75, 75, 75))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -105,7 +213,15 @@ public class ViewTripGUI extends javax.swing.JFrame {
                 .addComponent(headerPnl, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(nameLbl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 477, Short.MAX_VALUE)
+                .addGap(44, 44, 44)
+                .addComponent(resultsPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(35, 35, 35)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cancelTBtn)
+                    .addComponent(cancelBBtn))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(warningLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 154, Short.MAX_VALUE)
                 .addComponent(logoutBtn)
                 .addContainerGap())
         );
@@ -148,6 +264,34 @@ public class ViewTripGUI extends javax.swing.JFrame {
         // make it visible
         l.setVisible(true);
     }//GEN-LAST:event_logoutBtnActionPerformed
+
+    private void cancelBBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelBBtnActionPerformed
+        
+        cpdb = new carpoolapp.CarPoolDB();
+        
+          
+            cpdb.cancelBooking(b);
+            resultsPanel.setVisible(false);
+            warningLbl.setText("Trip deleted.");
+        
+        
+        
+    }//GEN-LAST:event_cancelBBtnActionPerformed
+
+    private void cancelTBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelTBtnActionPerformed
+        
+        cpdb = new carpoolapp.CarPoolDB();
+        
+        main.Trip t = cpdb.getTripById(tripId);        
+        int tripId = t.getTripID();
+        
+        
+            cpdb.cancelTrip(t);
+            resultsPanel.setVisible(false);
+            warningLbl.setText("Trip deleted.");
+        
+        
+    }//GEN-LAST:event_cancelTBtnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -192,10 +336,24 @@ public class ViewTripGUI extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel arrLbl;
+    private javax.swing.JTextField arrTf;
+    private javax.swing.JButton cancelBBtn;
+    private javax.swing.JButton cancelTBtn;
+    private javax.swing.JLabel deptLbl;
+    private javax.swing.JTextField deptTf;
     private javax.swing.JPanel headerPnl;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JButton logoutBtn;
     private javax.swing.JLabel nameLbl;
+    private javax.swing.JLabel prefLbl;
+    private javax.swing.JTextField preferencesTf;
+    private javax.swing.JLabel priceLbl;
+    private javax.swing.JTextField priceTf;
+    private javax.swing.JPanel resultsPanel;
+    private javax.swing.JLabel seatsLbl;
+    private javax.swing.JTextField seatsTf;
+    private javax.swing.JLabel warningLbl;
     // End of variables declaration//GEN-END:variables
 }
