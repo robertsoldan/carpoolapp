@@ -569,8 +569,9 @@ public class CarPoolDB {
                 case "ADDRESS+DATE": 
                     String[] datePlusAddress = searchTerm.split("\\+");
                     date = datePlusAddress[0];
-                    address = datePlusAddress[1];
-                    query = "SELECT * FROM trips WHERE arrivalAddress ILIKE '%" + address + "%' AND departUreDateAndTime LIKE '%" + date + "%';";
+                    departureAddress = datePlusAddress[1];
+                    arrivalAddress = datePlusAddress[2];
+                    query = "SELECT * FROM trips WHERE arrivalAddress ILIKE '%" + arrivalAddress + "%' AND departureAddress ILIKE '%" + departureAddress + "%' AND departUreDateAndTime LIKE '%" + date + "%';";
                 break;
                 default: query = "SELECT * FROM trips;";
             }
