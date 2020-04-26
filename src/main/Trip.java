@@ -10,8 +10,16 @@ public class Trip {
     private String arrivalAddress;
     private String arrivalDateAndTime;
     private double distanceKM;
+    private int seatsAvailable;
+    private double pricePerSeat;
+    private boolean smokingAllowed;
+    private boolean chattyDriver;
+    private boolean musicLover;
+    private String description;
 
-    public Trip(boolean isComplete, String datePosted, String departureAddress, String departureDateAndTime, String arrivalAddress, String arrivalDateAndTime, double distanceKM) {
+    public Trip(boolean isComplete, String datePosted, String departureAddress, String departureDateAndTime, 
+            String arrivalAddress, String arrivalDateAndTime, double distanceKM, int seatsAvailable,
+            double pricePerSeat, boolean smokingAllowed, boolean chattyDriver, boolean musicLover, String description) {
         this.isComplete = isComplete;
         this.datePosted = datePosted;
         this.departureAddress = departureAddress;
@@ -19,6 +27,12 @@ public class Trip {
         this.arrivalAddress = arrivalAddress;
         this.arrivalDateAndTime = arrivalDateAndTime;
         this.distanceKM = distanceKM;
+        this.seatsAvailable = seatsAvailable;
+        this.pricePerSeat = pricePerSeat;
+        this.smokingAllowed = smokingAllowed;
+        this.chattyDriver = chattyDriver;
+        this.musicLover = musicLover;
+        this.description = description;
     }
 
     public int getTripID() {
@@ -47,6 +61,54 @@ public class Trip {
 
     public String getArrivalAddress() {
         return arrivalAddress;
+    }
+
+    public int getSeatsAvailable() {
+        return seatsAvailable;
+    }
+
+    public void setSeatsAvailable(int seatsAvailable) {
+        this.seatsAvailable = seatsAvailable;
+    }
+
+    public double getPricePerSeat() {
+        return pricePerSeat;
+    }
+
+    public void setPricePerSeat(double pricePerSeat) {
+        this.pricePerSeat = pricePerSeat;
+    }
+
+    public boolean isSmokingAllowed() {
+        return smokingAllowed;
+    }
+
+    public void setSmokingAllowed(boolean smokingAllowed) {
+        this.smokingAllowed = smokingAllowed;
+    }
+
+    public boolean isChattyDriver() {
+        return chattyDriver;
+    }
+
+    public void setChattyDriver(boolean chattyDriver) {
+        this.chattyDriver = chattyDriver;
+    }
+
+    public boolean isMusicLover() {
+        return musicLover;
+    }
+
+    public void setMusicLover(boolean musicLover) {
+        this.musicLover = musicLover;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public String getArrivalDateAndTime() {

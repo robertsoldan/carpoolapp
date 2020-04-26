@@ -163,7 +163,7 @@ public class CarPoolDB {
         int newSeats = currentSeats + 1;
         
         try {
-            String query = "UPDATE preferences SET seatsAvailable = '" + newSeats + "' WHERE tripsID ='" + tripId +"';";
+            String query = "UPDATE trips SET seatsAvailable = '" + newSeats + "' WHERE tripID ='" + tripId +"';";
             PreparedStatement pst = getConnection().prepareStatement(query);
      
             pst.executeUpdate();
@@ -180,7 +180,7 @@ public class CarPoolDB {
         int newSeats = currentSeats - 1;
         
         try {
-            String query = "UPDATE preferences SET seatsAvailable = '" + newSeats + "' WHERE tripsID ='" + tripId +"';";
+            String query = "UPDATE trips SET seatsAvailable = '" + newSeats + "' WHERE tripID ='" + tripId +"';";
             PreparedStatement pst = getConnection().prepareStatement(query);
      
             pst.executeUpdate();
@@ -503,12 +503,18 @@ public class CarPoolDB {
             ResultSet rs = stmt.executeQuery(query);
             
             while(rs.next()) {
-                main.Trip t = new main.Trip(true, null, null, null, null, null, 0);
+                main.Trip t = new main.Trip(true, null, null, null, null, null, 0, 0, 0, false, false, false, null);
                 t.setIsComplete(rs.getBoolean("isComplete"));
                 t.setDatePosted(rs.getString("datePosted"));
                 t.setDepartureDateAndTime(rs.getString("departureDateAndTime"));
                 t.setArrivalAddress(rs.getString("arrivalAddress"));
                 t.setDistanceKM(rs.getDouble("distanceKM"));
+                t.setSeatsAvailable(rs.getInt("seatsAvailable"));
+                t.setPricePerSeat(rs.getDouble("pricePerSeat"));
+                t.setSmokingAllowed(rs.getBoolean("smokingAllowed"));
+                t.setChattyDriver(rs.getBoolean("chattyDriver"));
+                t.setMusicLover(rs.getBoolean("musicLover"));
+                t.setDescription(rs.getString("description"));
                 
                 tList.add(t);
             }
@@ -551,12 +557,18 @@ public class CarPoolDB {
             ResultSet rs = stmt.executeQuery(query);
             
             while(rs.next()) {
-                main.Trip t = new main.Trip(true, null, null, null, null, null, 0);
+                main.Trip t = new main.Trip(true, null, null, null, null, null, 0, 0, 0, false, false, false, null);
                 t.setIsComplete(rs.getBoolean("isComplete"));
                 t.setDatePosted(rs.getString("datePosted"));
                 t.setDepartureDateAndTime(rs.getString("departureDateAndTime"));
                 t.setArrivalAddress(rs.getString("arrivalAddress"));
                 t.setDistanceKM(rs.getDouble("distanceKM"));
+                t.setSeatsAvailable(rs.getInt("seatsAvailable"));
+                t.setPricePerSeat(rs.getDouble("pricePerSeat"));
+                t.setSmokingAllowed(rs.getBoolean("smokingAllowed"));
+                t.setChattyDriver(rs.getBoolean("chattyDriver"));
+                t.setMusicLover(rs.getBoolean("musicLover"));
+                t.setDescription(rs.getString("description"));
                 
                 tList.add(t);
             }
@@ -575,7 +587,7 @@ public class CarPoolDB {
         int seats = 0;
         
         try {
-            String query = "SELECT * FROM preferences WHERE tripsID='" + tripId + "';";
+            String query = "SELECT * FROM trips WHERE tripID='" + tripId + "';";
             Statement stmt = getConnection().createStatement();
             ResultSet rs = stmt.executeQuery(query);
             while(rs.next()) {
@@ -630,7 +642,21 @@ public class CarPoolDB {
         try{
             //String sqlSt = "SELECT constraint_name FROM information_schema.constraint_column_usage WHERE TABLE_NAME = 'users';";
             //String sql = "ALTER TABLE users  ALTER COLUMN username DROP UNIQUE;";
-            String sql = "ALTER TABLE users DROP CONSTRAINT users_username_key;";
+            String sql = "ALTER TABLE trips "
+                             
+                
+
+                + "ADD COLUMN seatsAvailable integer NOT NULL,"
+                + "ADD COLUMN pricePerSeat NUMERIC NOT NULL,"
+                + "ADD COLUMN luggageAllowed boolean NOT NULL,"
+                + "ADD COLUMN smokingAllowed boolean NOT NULL,"
+                + "ADD COLUMN petAllowed boolean NOT NULL,"
+                + "ADD COLUMN chattyDriver boolean NOT NULL,"
+                + "ADD COLUMN musicLover boolean NOT NULL,"
+                + "ADD COLUMN description varchar(255) NOT NULL" 
+                
+                          
+                + ";";
             PreparedStatement pst = getConnection().prepareStatement(sql);
      
             pst.executeUpdate();
@@ -666,6 +692,9 @@ public class CarPoolDB {
 }
 
 }
+
+
+
 // Initial database setup
 //cpdb.doStuff("DROP TABLE users, passengers, drivers, cars, trips, bookings, preferences;");
         
