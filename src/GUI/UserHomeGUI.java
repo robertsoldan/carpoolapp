@@ -207,6 +207,13 @@ public class UserHomeGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_logoutBtnActionPerformed
 
     private void newTripBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newTripBtnActionPerformed
+        main.Driver d = new main.Driver();
+        carpoolapp.CarPoolDB cpdb = new carpoolapp.CarPoolDB();
+        d = cpdb.getDriverByUserID(u.getUserID());
+        if(d.getDriverID() == 0 && d.getUserID() == 0 && d.getRating() == 0) {
+            d.setUserID(u.getUserID());
+            cpdb.addDriver(d);
+        }
         
         //switch to the new trip screen
         GUI.NewTripGUI n = new GUI.NewTripGUI(u);
