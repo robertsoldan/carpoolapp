@@ -75,7 +75,6 @@ public class NewTripGUI extends javax.swing.JFrame {
         descriptionLbl = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         descriptionTA = new javax.swing.JTextArea();
-        jLabel3 = new javax.swing.JLabel();
         preferencesLbl = new javax.swing.JLabel();
         addTrip = new javax.swing.JButton();
         warningLbl = new javax.swing.JLabel();
@@ -322,8 +321,6 @@ public class NewTripGUI extends javax.swing.JFrame {
         descriptionTA.setRows(5);
         jScrollPane1.setViewportView(descriptionTA);
 
-        jLabel3.setText("jLabel3");
-
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -342,9 +339,7 @@ public class NewTripGUI extends javax.swing.JFrame {
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(chattyCB)
                             .addComponent(smokingCB))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel3)
-                .addGap(28, 28, 28))
+                .addContainerGap(101, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -358,15 +353,10 @@ public class NewTripGUI extends javax.swing.JFrame {
                     .addComponent(petsCB)
                     .addComponent(chattyCB))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(musicLoverCB)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(descriptionLbl)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                        .addComponent(jLabel3)
-                        .addGap(18, 18, 18)))
+                .addComponent(musicLoverCB)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(descriptionLbl)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -454,20 +444,28 @@ public class NewTripGUI extends javax.swing.JFrame {
     private void addTripActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addTripActionPerformed
 
         cpdb = new carpoolapp.CarPoolDB();
-
+        
+        
+        
         warningLbl.setText("");
-
+        
+        //checking for empty fields in order to preveent empty submissions and warn the user about the missing information
+        
         if (departureTf.getText().equals("") || deptDateTf.getText().equals("") || deptMonthTf.getText().equals("") || deptYearTf.getText().equals("")
             || deptHourTf.getText().equals("") || deptMinsTf.getText().equals("") || arrDateTf.getText().equals("") || arrMonthTf.getText().equals("")
             || arrYearTf.getText().equals("") || arrHourTf.getText().equals("") || arrMinsTf.getText().equals("") || distanceTf.getText().equals("")
             || noOfSeatsTf.getText().equals("") || priceTf.getText().equals("") || descriptionTA.getText().equals("")) {
             warningLbl.setText("All the fields need to be filled out.");
         }
-
+        
+        // setting restrictions for non-existant dates so the incorrect dates would not be accepted - prevents database errors
+        
         else if ((deptDateTf.getText().equals("31") && deptMonthTf.getText().equals("09")) || (deptDateTf.getText().equals("31") && deptMonthTf.getText().equals("11"))
                || (arrDateTf.getText().equals("31") && arrMonthTf.getText().equals("09")) || (arrDateTf.getText().equals("31") && arrMonthTf.getText().equals("11"))) {
             warningLbl.setText("Incorrect date format.");
         }
+        
+        // setting up date restrictions - accepting only bookings between 01/07/2020 and 31/12/2020 for both departures and arrivals
         
         else if (!(deptDateTf.getText().equals("01") || deptDateTf.getText().equals("02") || deptDateTf.getText().equals("03") || deptDateTf.getText().equals("04")
                 || deptDateTf.getText().equals("05") || deptDateTf.getText().equals("06") || deptDateTf.getText().equals("07") || deptDateTf.getText().equals("08")
@@ -494,17 +492,8 @@ public class NewTripGUI extends javax.swing.JFrame {
             warningLbl.setText("Incorrect date format.");
         }
 
-        else if ((deptDateTf.getText().equals("29") && deptMonthTf.getText().equals("02")) || (deptDateTf.getText().equals("30") && deptMonthTf.getText().equals("02"))
-                || (deptDateTf.getText().equals("31") && deptMonthTf.getText().equals("02")) || (deptDateTf.getText().equals("31") && deptMonthTf.getText().equals("04"))
-                || (deptDateTf.getText().equals("31") && deptMonthTf.getText().equals("06")) || (deptDateTf.getText().equals("31") && deptMonthTf.getText().equals("09"))
-                || (deptDateTf.getText().equals("31") && deptMonthTf.getText().equals("11")) || (arrDateTf.getText().equals("29") && arrMonthTf.getText().equals("02"))
-                || (arrDateTf.getText().equals("30") && arrMonthTf.getText().equals("02")) || (arrDateTf.getText().equals("31") && arrMonthTf.getText().equals("02"))
-                || (arrDateTf.getText().equals("31") && arrMonthTf.getText().equals("04")) || (arrDateTf.getText().equals("31") && arrMonthTf.getText().equals("06"))
-                || (arrDateTf.getText().equals("31") && arrMonthTf.getText().equals("09")) || (arrDateTf.getText().equals("31") && arrMonthTf.getText().equals("11"))) {
-            warningLbl.setText("Incorrect date format.");
-        }
-
-        
+        // setting restrictions for hours and minutes entered - departures
+              
         else if (!(deptHourTf.getText().equals("01") || deptHourTf.getText().equals("02") || deptHourTf.getText().equals("03") || deptHourTf.getText().equals("04") ||
                 deptHourTf.getText().equals("05") || deptHourTf.getText().equals("06") || deptHourTf.getText().equals("07") || deptHourTf.getText().equals("08") ||
                 deptHourTf.getText().equals("09") || deptHourTf.getText().equals("10") || deptHourTf.getText().equals("11") || deptHourTf.getText().equals("12") ||
@@ -529,6 +518,8 @@ public class NewTripGUI extends javax.swing.JFrame {
             warningLbl.setText("Incorrect time format.");
         }
 
+        // setting restrictions for hours and minutes entered - arrivals
+        
         else if (!(arrHourTf.getText().equals("01") || arrHourTf.getText().equals("02") || arrHourTf.getText().equals("03") || arrHourTf.getText().equals("04") ||
                 arrHourTf.getText().equals("05") || arrHourTf.getText().equals("06") || arrHourTf.getText().equals("07") || arrHourTf.getText().equals("08") ||
                 arrHourTf.getText().equals("09") || arrHourTf.getText().equals("10") || arrHourTf.getText().equals("11") || arrHourTf.getText().equals("12") ||
@@ -553,7 +544,7 @@ public class NewTripGUI extends javax.swing.JFrame {
             warningLbl.setText("Incorrect time format.");
         }
         
-        
+        // assigning values from text fields to appropriate data types + storing information + resetting GUI fields
         
         else {
 
@@ -733,7 +724,6 @@ public class NewTripGUI extends javax.swing.JFrame {
     private javax.swing.JLabel heading1Lbl;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
