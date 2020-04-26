@@ -267,20 +267,20 @@ public class ViewTripGUI extends javax.swing.JFrame {
 
     private void cancelBBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelBBtnActionPerformed
         
-        cpdb = new carpoolapp.CarPoolDB();
+    /*    cpdb = new carpoolapp.CarPoolDB();
         
           
             cpdb.cancelBooking(b);
             resultsPanel.setVisible(false);
             warningLbl.setText("Trip deleted.");
-        
+        */
         
         
     }//GEN-LAST:event_cancelBBtnActionPerformed
 
     private void cancelTBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelTBtnActionPerformed
         
-        cpdb = new carpoolapp.CarPoolDB();
+    /*    cpdb = new carpoolapp.CarPoolDB();
         
         main.Trip t = cpdb.getTripById(tripId);        
         int tripId = t.getTripID();
@@ -289,7 +289,7 @@ public class ViewTripGUI extends javax.swing.JFrame {
             cpdb.cancelTrip(t);
             resultsPanel.setVisible(false);
             warningLbl.setText("Trip deleted.");
-        
+        */
         
     }//GEN-LAST:event_cancelTBtnActionPerformed
 
