@@ -586,7 +586,7 @@ public class NewTripGUI extends javax.swing.JFrame {
                     seatsAvailable, pricePerSeat, luggageAllowed, smokingAllowed, petAllowed, chattyDriver, musicLover, description);
 
             cpdb.addTrip(t);
-
+            
             warningLbl.setText("Your trip has been posted!");
 
             departureTf.setText("");
