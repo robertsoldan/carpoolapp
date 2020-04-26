@@ -40,6 +40,7 @@ public class UserHomeGUI extends javax.swing.JFrame {
         searchBtn = new javax.swing.JButton();
         searchTf = new javax.swing.JTextField();
         logoutBtn = new javax.swing.JButton();
+        newTripBtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBounds(new java.awt.Rectangle(0, 0, 420, 660));
@@ -106,11 +107,22 @@ public class UserHomeGUI extends javax.swing.JFrame {
             }
         });
 
+        newTripBtn.setText("NEW TRIP");
+        newTripBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                newTripBtnActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(headerPnl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(logoutBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(32, 32, 32)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -123,11 +135,10 @@ public class UserHomeGUI extends javax.swing.JFrame {
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(nameLbl, javax.swing.GroupLayout.DEFAULT_SIZE, 98, Short.MAX_VALUE)
-                        .addGap(218, 218, 218))))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(logoutBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                        .addGap(218, 218, 218))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(newTripBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -141,7 +152,9 @@ public class UserHomeGUI extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(searchBtn)
                     .addComponent(searchTf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 407, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(newTripBtn)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 356, Short.MAX_VALUE)
                 .addComponent(logoutBtn)
                 .addGap(44, 44, 44))
         );
@@ -193,6 +206,39 @@ public class UserHomeGUI extends javax.swing.JFrame {
         l.setVisible(true);
     }//GEN-LAST:event_logoutBtnActionPerformed
 
+    private void newTripBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newTripBtnActionPerformed
+        main.Driver d = new main.Driver();
+        carpoolapp.CarPoolDB cpdb = new carpoolapp.CarPoolDB();
+        d = cpdb.getDriverByUserID(u.getUserID());
+        if(d.getDriverID() == 0 && d.getUserID() == 0 && d.getRating() == 0) {
+            d.setUserID(u.getUserID());
+            cpdb.addDriver(d);
+        }
+        
+        //switch to the new trip screen
+        GUI.NewTripGUI n = new GUI.NewTripGUI(u);
+
+        // Get the size of the active window
+        int sizeH = this.getSize().height;
+        int sizeW = this.getSize().width;
+
+        // Get the location of the active window
+        int currX = this.getLocation().x;
+        int currY = this.getLocation().y;
+
+        // Set the size of the new window
+        n.setSize(sizeW, sizeH);
+
+        // Set the location of the new window
+        n.setLocation(currX, currY);
+
+        // Hide the active window, show the new window
+        this.dispose();
+        
+        // make it visible
+        n.setVisible(true);
+    }//GEN-LAST:event_newTripBtnActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -236,6 +282,7 @@ public class UserHomeGUI extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JButton logoutBtn;
     private javax.swing.JLabel nameLbl;
+    private javax.swing.JButton newTripBtn;
     private javax.swing.JButton searchBtn;
     private javax.swing.JTextField searchTf;
     // End of variables declaration//GEN-END:variables
