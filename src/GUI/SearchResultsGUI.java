@@ -397,7 +397,7 @@ public class SearchResultsGUI extends javax.swing.JFrame {
                     String departureTime = departure[3].substring(0, 2) + ":" + departure[3].substring(2, 2);
                     String arrivalDate = arrival[0] + "-" + arrival[1] + "-" + arrival[2];
                     String arrivalTime = arrival[3].substring(0, 2) + ":" + arrival[3].substring(2, 2);
-                    
+
                     String resultString = "<html><h4>Result " +  String.valueOf(searchResult.indexOf(trip) + 1) + " → " +
                         (trip.isComplete() ? "You are too late... This trip is fully booked..." : String.valueOf(trip.getSeatsAvailable()) + " seats available!") + "</h4><p>" +
                         "Date posted: " + trip.getDatePosted() +
@@ -414,6 +414,7 @@ public class SearchResultsGUI extends javax.swing.JFrame {
 
                     // Adding labels to the results cards
                     JLabel tripLbl = new JLabel(resultString);
+                    tripLbl.setVerticalTextPosition(JLabel.TOP);
                     tripLbl.setForeground(Color.BLACK); //  Label font color
                     tripLbl.setFont(new Font("Tahoma", Font.PLAIN, 12));
                     tripLbl.setBounds(10, 10, 330, resultPanelHeight); // Position and width of the text within the resultPanel
