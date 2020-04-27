@@ -157,7 +157,28 @@ public class UserHomeGUI extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void searchBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchBtnActionPerformed
+        //switch to the Search screen
+        GUI.SearchResultsGUI s = new GUI.SearchResultsGUI();
+
+        // Get the size of the active window
+        int sizeH = this.getSize().height;
+        int sizeW = this.getSize().width;
+
+        // Get the location of the active window
+        int currX = this.getLocation().x;
+        int currY = this.getLocation().y;
+
+        // Set the size of the new window
+        s.setSize(sizeW, sizeH);
+
+        // Set the location of the new window
+        s.setLocation(currX, currY);
+
+        // Hide the active window, show the new window
+        this.dispose();
         
+        // make it visible
+        s.setVisible(true);
     }//GEN-LAST:event_searchBtnActionPerformed
 
     private void logoutBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutBtnActionPerformed

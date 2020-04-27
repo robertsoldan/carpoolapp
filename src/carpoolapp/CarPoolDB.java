@@ -589,8 +589,10 @@ public class CarPoolDB {
                 main.Trip t = new main.Trip(true, null, null, null, null, null, 0, 0, 0, false, false, false, false, false, null);
                 t.setIsComplete(rs.getBoolean("isComplete"));
                 t.setDatePosted(rs.getString("datePosted"));
+                t.setDepartureAddress(rs.getString("departureAddress"));
                 t.setDepartureDateAndTime(rs.getString("departureDateAndTime"));
                 t.setArrivalAddress(rs.getString("arrivalAddress"));
+                t.setArrivalDateAndTime(rs.getString("arrivalDateAndTime"));
                 t.setDistanceKM(rs.getDouble("distanceKM"));
                 t.setSeatsAvailable(rs.getInt("seatsAvailable"));
                 t.setPricePerSeat(rs.getDouble("pricePerSeat"));
