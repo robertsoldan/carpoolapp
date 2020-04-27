@@ -1,36 +1,84 @@
-
 package GUI;
 
 public class ViewTripGUI extends javax.swing.JFrame {
+
     private main.Users u;
     private carpoolapp.CarPoolDB cpdb;
+
     /**
      * Creates new form LoginGUI
      */
-    
-    
-    
+
     public ViewTripGUI() {
         initComponents();
-         u = new main.Users("null", "null", "null", "null", "null", "null", "null", "null", 0, 0);         
-         nameLbl.setText(u.getUsername());
-         cancelTBtn.setVisible(false);
-         cancelBBtn.setVisible(false);
-         resultsPanel.setVisible(false);
-         int tripId = 0;
-         String userType = new String();
-                 
-         
-         
+        u = new main.Users("null", "null", "null", "null", "null", "null", "null", "null", 0, 0);
+
+        nameLbl.setText(u.getUsername());
+        cancelTBtn.setVisible(false);
+        cancelBBtn.setVisible(false);
+        resultsPanel.setVisible(true);
+        int tripId = 18;
+        String userType = new String();
+        cpdb = new carpoolapp.CarPoolDB();
+        
+        
+        main.Trip t = cpdb.getTripById(tripId);
+        
+        deptTf.setText(t.getDepartureAddress() + ", " + t.getDepartureDateAndTime());
+        arrTf.setText(t.getArrivalAddress() + ", " + t.getArrivalDateAndTime());
+        priceTf.setText(Double.toString(t.getPricePerSeat()));
+        seatsTf.setText(Integer.toString(t.getSeatsAvailable()));
+        String luggage = new String();
+        String smoking = new String();
+        String pets = new String();
+        String chatty = new String();
+        String music = new String();
+        if (t.isLuggageAllowed()) {
+            luggage = "luggage";
+        } else {
+            luggage = "no luggage";
+        }
+        if (t.isSmokingAllowed()) {
+            smoking = "smoking";
+        } else {
+            smoking = "no smoking";
+        }
+        if (t.isPetAllowed()) {
+            pets = "pets";
+        } else {
+            pets = "no pets";
+        }
+        if (t.isChattyDriver()) {
+            chatty = "chatter";
+        } else {
+            chatty = "not much chatter";
+        }
+        if (t.isMusicLover()) {
+            music = "music";
+        } else {
+            music = "no music";
+        }
+        preferencesTf.setText(luggage + ", " + smoking + ", " + pets + ", " + chatty + ", " + music);
+        
+        userType = "Driver";
+        
+        if (userType.equals("Driver")) {
+            
+            cancelTBtn.setVisible(true);
+
+        } else {
+
+            cancelBBtn.setVisible(true);
+        }
+
     }
+
     public ViewTripGUI(main.Users user) {
         initComponents();
         u = user;
-        
+
         nameLbl.setText(u.getUsername());
     }
-    
-    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -60,6 +108,7 @@ public class ViewTripGUI extends javax.swing.JFrame {
         priceTf = new javax.swing.JTextField();
         seatsTf = new javax.swing.JTextField();
         preferencesTf = new javax.swing.JTextField();
+        homeBtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMaximumSize(new java.awt.Dimension(400, 640));
@@ -181,6 +230,14 @@ public class ViewTripGUI extends javax.swing.JFrame {
                 .addContainerGap(21, Short.MAX_VALUE))
         );
 
+        homeBtn.setBackground(new java.awt.Color(0, 153, 204));
+        homeBtn.setText("Home");
+        homeBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                homeBtnActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -188,8 +245,10 @@ public class ViewTripGUI extends javax.swing.JFrame {
             .addComponent(headerPnl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(84, 84, 84)
-                .addComponent(nameLbl, javax.swing.GroupLayout.DEFAULT_SIZE, 98, Short.MAX_VALUE)
-                .addGap(218, 218, 218))
+                .addComponent(nameLbl, javax.swing.GroupLayout.DEFAULT_SIZE, 112, Short.MAX_VALUE)
+                .addGap(135, 135, 135)
+                .addComponent(homeBtn)
+                .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(38, 38, 38)
                 .addComponent(cancelBBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -211,9 +270,14 @@ public class ViewTripGUI extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(headerPnl, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(nameLbl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(44, 44, 44)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(nameLbl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(4, 4, 4)
+                        .addComponent(homeBtn)))
+                .addGap(35, 35, 35)
                 .addComponent(resultsPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(35, 35, 35)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -260,38 +324,65 @@ public class ViewTripGUI extends javax.swing.JFrame {
 
         // Hide the active window, show the new window
         this.dispose();
-        
+
         // make it visible
         l.setVisible(true);
     }//GEN-LAST:event_logoutBtnActionPerformed
 
     private void cancelBBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelBBtnActionPerformed
-        
-    /*    cpdb = new carpoolapp.CarPoolDB();
-        
-          
-            cpdb.cancelBooking(b);
+
+       /*     
             resultsPanel.setVisible(false);
-            warningLbl.setText("Trip deleted.");
-        */
-        
-        
+            warningLbl.setText("Booking cancelled.");
+            cancelBBtn.setVisible(false);
+         */
+
     }//GEN-LAST:event_cancelBBtnActionPerformed
 
     private void cancelTBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelTBtnActionPerformed
-        
-    /*    cpdb = new carpoolapp.CarPoolDB();
-        
+
+        cpdb = new carpoolapp.CarPoolDB();
+        int tripId = 18;
         main.Trip t = cpdb.getTripById(tripId);        
-        int tripId = t.getTripID();
+        
         
         
             cpdb.cancelTrip(t);
+            cancelTBtn.setVisible(false);
             resultsPanel.setVisible(false);
             warningLbl.setText("Trip deleted.");
-        */
-        
+            
+            
+
     }//GEN-LAST:event_cancelTBtnActionPerformed
+
+    private void homeBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_homeBtnActionPerformed
+        
+         //switch to the Home screen
+        GUI.UserHomeGUI uh = new GUI.UserHomeGUI(u);
+
+        // Get the size of the active window
+        int sizeH = this.getSize().height;
+        int sizeW = this.getSize().width;
+
+        // Get the location of the active window
+        int currX = this.getLocation().x;
+        int currY = this.getLocation().y;
+
+        // Set the size of the new window
+        uh.setSize(sizeW, sizeH);
+
+        // Set the location of the new window
+        uh.setLocation(currX, currY);
+
+        // Hide the active window, show the new window
+        this.dispose();
+
+        // make it visible
+        uh.setVisible(true);
+        
+        
+    }//GEN-LAST:event_homeBtnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -343,6 +434,7 @@ public class ViewTripGUI extends javax.swing.JFrame {
     private javax.swing.JLabel deptLbl;
     private javax.swing.JTextField deptTf;
     private javax.swing.JPanel headerPnl;
+    private javax.swing.JButton homeBtn;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JButton logoutBtn;
