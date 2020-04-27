@@ -246,19 +246,17 @@ public class SearchResultsGUI extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(logoutBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addGroup(jPanel1Layout.createSequentialGroup()
-                                    .addGap(253, 253, 253)
-                                    .addComponent(nameLbl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(homeBtn))
-                                .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(resultsLbl, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addGap(10, 10, 10)))
+                    .addComponent(logoutBtn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(nameLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(homeBtn))
+                            .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(resultsLbl, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(10, 10, 10))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 381, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -266,11 +264,11 @@ public class SearchResultsGUI extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(headerPnl, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(homeBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(nameLbl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(nameLbl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(homeBtn))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel6)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -331,6 +329,7 @@ public class SearchResultsGUI extends javax.swing.JFrame {
         searchPnl.removeAll(); // Resetting the search results on every search
         searchPnl.revalidate();
         searchPnl.repaint();
+        resultsLbl.setText("");
         
         if (fromTf.getText().equals("") || toTf.getText().equals("") || ddTf.getText().equals("") || mmTf.getText().equals("") ||
                 yyyyTf.getText().equals("")) {
@@ -364,7 +363,7 @@ public class SearchResultsGUI extends javax.swing.JFrame {
             } else {
                 int yLoc = 10; // Will the Y position of each generated panel
                 int searchPanelYSize; // Will dynamically adjust the total height of the main search panel to accomodate for all the elements
-                int resultPanelHeight = 280;
+                int resultPanelHeight = 250;
                 
                 int size = searchResult.size();
                 resultsLbl.setText(size > 1 ? size + " trips match your criteria." : size + " trip match your criteria.");
@@ -394,9 +393,9 @@ public class SearchResultsGUI extends javax.swing.JFrame {
                     String[] departure = trip.getDepartureDateAndTime().split("\\-");
                     String[] arrival = trip.getArrivalDateAndTime().split("\\-");
                     String departureDate = departure[0] + "-" + departure[1] + "-" + departure[2];
-                    String departureTime = departure[3].substring(0, 2) + ":" + departure[3].substring(2, 2);
+                    String departureTime = departure[3].substring(0, 2) + ":" + departure[3].substring(2);
                     String arrivalDate = arrival[0] + "-" + arrival[1] + "-" + arrival[2];
-                    String arrivalTime = arrival[3].substring(0, 2) + ":" + arrival[3].substring(2, 2);
+                    String arrivalTime = arrival[3].substring(0, 2) + ":" + arrival[3].substring(2);
 
                     String resultString = "<html><h4>Result " +  String.valueOf(searchResult.indexOf(trip) + 1) + " → " +
                         (trip.isComplete() ? "You are too late... This trip is fully booked..." : String.valueOf(trip.getSeatsAvailable()) + " seats available!") + "</h4><p>" +
@@ -417,12 +416,12 @@ public class SearchResultsGUI extends javax.swing.JFrame {
                     tripLbl.setVerticalTextPosition(JLabel.TOP);
                     tripLbl.setForeground(Color.BLACK); //  Label font color
                     tripLbl.setFont(new Font("Tahoma", Font.PLAIN, 12));
-                    tripLbl.setBounds(10, 10, 330, resultPanelHeight); // Position and width of the text within the resultPanel
+                    tripLbl.setBounds(0, 0, 330, resultPanelHeight); // Position and width of the text within the resultPanel
                     // Add label to the result panel, add the result panel to the search panel
                     resultPanel.add(tripLbl);
                     
                     searchPnl.add(resultPanel);
-                    yLoc = yLoc + 300; 
+                    yLoc = yLoc + 260; 
 
                     searchPnl.setPreferredSize(new Dimension(300, searchPanelYSize + resultPanelHeight));
                     searchPnl.revalidate();
