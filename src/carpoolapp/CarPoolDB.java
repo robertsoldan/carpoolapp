@@ -645,8 +645,10 @@ public class CarPoolDB {
             while(rs.next()) {
                 t.setIsComplete(rs.getBoolean("isComplete"));
                 t.setDatePosted(rs.getString("datePosted"));
+                t.setDepartureAddress(rs.getString("departureAddress"));
                 t.setDepartureDateAndTime(rs.getString("departureDateAndTime"));
                 t.setArrivalAddress(rs.getString("arrivalAddress"));
+                t.setArrivalDateAndTime(rs.getString("arrivalDateAndTime"));
                 t.setDistanceKM(rs.getDouble("distanceKM"));
                 t.setSeatsAvailable(rs.getInt("seatsAvailable"));
                 t.setPricePerSeat(rs.getDouble("pricePerSeat"));
