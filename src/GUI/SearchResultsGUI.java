@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.SpringLayout;
 
 public class SearchResultsGUI extends javax.swing.JFrame {
     private main.Users u;
@@ -382,7 +383,8 @@ public class SearchResultsGUI extends javax.swing.JFrame {
                     resultPanelHeight = 220;
                     JPanel resultPanel = new JPanel();
                     resultPanel.setBounds(10, yLoc, width - 20, resultPanelHeight);
-//                    resultPanel.setLayout(null); // Set resultPanel to null to allow the labels to be placed with relative positioning.
+                    
+                    resultPanel.setLayout(new SpringLayout()); // Set resultPanel to null to allow the labels to be placed with relative positioning.
 
                     resultPanel.setBackground(new Color(255, 255, 255)); // Search panel result background
                                       
@@ -413,7 +415,7 @@ public class SearchResultsGUI extends javax.swing.JFrame {
                     JLabel tripLbl = new JLabel(resultString);
                     tripLbl.setForeground(Color.BLACK); //  Label font color
                     tripLbl.setFont(new Font("Tahoma", Font.PLAIN, 12));
-//                    tripLbl.setBounds(25, 25, width - 20, resultPanelHeight - 20); // Position and width of the text within the resultPanel
+                    //tripLbl.setBounds(25, 25, width - 20, resultPanelHeight - 20); // Position and width of the text within the resultPanel
                     // Add label to the result panel, add the result panel to the search panel
                     resultPanel.add(tripLbl);
                     
