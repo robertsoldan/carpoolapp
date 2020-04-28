@@ -409,7 +409,7 @@ public class SearchResultsGUI extends javax.swing.JFrame {
                         (trip.isPetAllowed() ? "<br>✓ Pet friendly" : "<br>✗ No pets allowed") +
                         (trip.isChattyDriver() ? "<br>✓ Chatty driver" : "<br>✗ I prefer a quiet trip") +
                         (trip.isMusicLover() ? "<br>✓ Music lover" : "<br>✗ I am not a music fan") +
-                        "<br>Comment from the driver: " + trip.getDescription() + "</p></html>";
+                        "<br>Comment from the driver:<br>" + trip.getDescription() + "</p></html>";
 
                     // Adding labels to the results cards
                     JLabel tripLbl = new JLabel(resultString);
