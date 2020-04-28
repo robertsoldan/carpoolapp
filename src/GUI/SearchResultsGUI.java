@@ -354,7 +354,7 @@ public class SearchResultsGUI extends javax.swing.JFrame {
             String date = ddTf.getText() + "-" + mmTf.getText() + "-" + yyyyTf.getText();
             String argSearch = leavingFrom + "+" + travellingTo;
             
-            ArrayList<main.Trip> searchResult = cpdb.searchTripsByArgument("ADDRESS+DATE", date + " + " + argSearch);
+            ArrayList<main.Trip> searchResult = cpdb.searchTripsByArgument("ADDRESS+DATE", date + "+" + argSearch);
             boolean dateMatch = true;
             
             // if the query with date has no result, expand results by using locations only

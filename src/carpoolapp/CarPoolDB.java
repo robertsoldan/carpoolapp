@@ -577,7 +577,8 @@ public class CarPoolDB {
                     date = datePlusAddress[0];
                     departureAddress = datePlusAddress[1];
                     arrivalAddress = datePlusAddress[2];
-                    query = "SELECT * FROM trips WHERE arrivalAddress ILIKE '%" + arrivalAddress + "%' AND departureAddress ILIKE '%" + departureAddress + "%' AND departUreDateAndTime LIKE '%" + date + "%';";
+                    System.out.println(searchTerm);
+                    query = "SELECT * FROM trips WHERE arrivalAddress ILIKE '%" + arrivalAddress + "%' AND departureAddress ILIKE '%" + departureAddress + "%' AND LEFT(departureDateAndTime, 10) LIKE '%" + date + "%';";
                 break;
                 default: query = "SELECT * FROM trips;";
             }

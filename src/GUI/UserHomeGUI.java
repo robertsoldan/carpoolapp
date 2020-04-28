@@ -137,7 +137,7 @@ public class UserHomeGUI extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(searchBtn)
                     .addComponent(newTripBtn))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 412, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 409, Short.MAX_VALUE)
                 .addComponent(logoutBtn)
                 .addGap(44, 44, 44))
         );
@@ -158,6 +158,7 @@ public class UserHomeGUI extends javax.swing.JFrame {
 
     private void searchBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchBtnActionPerformed
         //switch to the Search screen
+        
         GUI.SearchResultsGUI s = new GUI.SearchResultsGUI();
 
         // Get the size of the active window
