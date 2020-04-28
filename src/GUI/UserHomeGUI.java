@@ -1,9 +1,21 @@
 
 package GUI;
 
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Dimension;
+import java.util.ArrayList;
+import javax.swing.BoxLayout;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+
 public class UserHomeGUI extends javax.swing.JFrame {
     private main.Users u;
-   
+    ArrayList<main.Bookings> b = new ArrayList<>();
+    ArrayList<main.Trip> dt = new ArrayList<>();
+    ArrayList<main.Trip> bt = new ArrayList<>();
+    carpoolapp.CarPoolDB cpdb = new carpoolapp.CarPoolDB();   
+    main.Driver d = new main.Driver();
     /**
      * Creates new form LoginGUI
      */
@@ -12,13 +24,130 @@ public class UserHomeGUI extends javax.swing.JFrame {
         initComponents();
          u = new main.Users("null", "null", "null", "null", "null", "null", "null", "null", 0, 0);
          
-         nameLbl.setText(u.getUsername());
+         nameLbl.setText("No logged in user");
     }
     public UserHomeGUI(main.Users user) {
         initComponents();
         u = user;
-        
         nameLbl.setText(u.getUsername());
+        int yLoc = 20;
+        int panelHeight = 60;
+        
+        // Get the trips booked by the user as a passenger and store them in the bt array list
+        b = cpdb.getBookings(u.getUserID());
+        if(b.size() > 0) {
+            JLabel bookings = new  JLabel("Bookings:");
+            bookings.setBounds(5, 0, 350, 15);
+            resultPanel.add(bookings);
+            resultPanel.revalidate();
+            for (main.Bookings booking : b) {
+                main.Trip trip = new main.Trip(true, null, null, null, null, null, 0, 0, 0, false, false, false, false, false, null);
+                trip = cpdb.getTripById(booking.getTripsID());
+                //bt.add(trip);
+                
+                JLabel departureAndArrivaAddresses = new  JLabel(trip.getDepartureAddress() + " - " + trip.getArrivalAddress());
+                departureAndArrivaAddresses.setAlignmentX(Component.CENTER_ALIGNMENT);
+                departureAndArrivaAddresses.setForeground(Color.white);
+                
+                
+                JLabel departureDate = new  JLabel("Departing at: " + trip.getDepartureDateAndTime());
+                departureDate.setForeground(Color.white);
+                departureDate.setAlignmentX(Component.CENTER_ALIGNMENT);
+                
+                JLabel arrivalDate = new JLabel("Arriving at: " + trip.getArrivalDateAndTime());
+                arrivalDate.setForeground(Color.white);
+                arrivalDate.setSize(300, 15);
+                arrivalDate.setAlignmentX(Component.CENTER_ALIGNMENT);
+                
+                JPanel p = new JPanel();
+                p.setLayout(new BoxLayout(p, BoxLayout.PAGE_AXIS));
+                p.setBounds(10, yLoc, 350, 50);
+                p.setBackground(new Color(0, 153, 71)); 
+                
+                p.add(departureAndArrivaAddresses);
+                p.add(departureDate);
+                p.add(arrivalDate);
+                
+                
+        
+
+                p.revalidate();
+        
+               
+                
+                yLoc+=60;
+                panelHeight+=60;
+                
+                resultPanel.add(p);
+                resultPanel.setPreferredSize(new Dimension(200, panelHeight));
+                resultPanel.revalidate();
+                
+                
+            }
+        }
+        
+        // Get the trips created by the user as a driver, store them in the dt array list
+        d = cpdb.getDriverByUserID(u.getUserID());
+        if(d.getDriverID() != 0 && d.getUserID() != 0) {
+            
+            dt = cpdb.getTripsByDriverId(d.getDriverID());
+            JLabel departures = new JLabel("Driving:");
+            departures.setBounds(5, yLoc, 350, 15);
+            yLoc+=20;
+            panelHeight+=15;
+            
+            resultPanel.add(departures);
+            resultPanel.revalidate();
+            
+            for (main.Trip driverTrip : dt) {
+                main.Trip trip = new main.Trip(true, null, null, null, null, null, 0, 0, 0, false, false, false, false, false, null);
+                trip = cpdb.getTripById(driverTrip.getTripID());
+                System.out.println(driverTrip.getArrivalDateAndTime());
+                
+                JLabel departureAndArrivaAddresses = new  JLabel(trip.getDepartureAddress() + " - " + trip.getArrivalAddress());
+                departureAndArrivaAddresses.setAlignmentX(Component.CENTER_ALIGNMENT);
+                departureAndArrivaAddresses.setForeground(Color.white);
+                
+                
+                JLabel departureDate = new  JLabel("Departing at: " + trip.getDepartureDateAndTime());
+                departureDate.setForeground(Color.white);
+                departureDate.setAlignmentX(Component.CENTER_ALIGNMENT);
+                
+                JLabel arrivalDate = new JLabel("Arriving at: " + trip.getArrivalDateAndTime());
+                arrivalDate.setForeground(Color.white);
+                arrivalDate.setSize(300, 15);
+                arrivalDate.setAlignmentX(Component.CENTER_ALIGNMENT);
+                
+                JPanel p = new JPanel();
+                p.setLayout(new BoxLayout(p, BoxLayout.PAGE_AXIS));
+                p.setBounds(10, yLoc, 350, 50);
+                p.setBackground(new Color(0, 153, 71)); 
+                
+                p.add(departureAndArrivaAddresses);
+                p.add(departureDate);
+                p.add(arrivalDate);
+                
+                
+        
+
+                p.revalidate();
+        
+               
+                
+                yLoc = yLoc + 60;
+                panelHeight+=60;
+                resultPanel.add(p);
+                resultPanel.setPreferredSize(new Dimension(200, panelHeight));
+                resultPanel.revalidate();
+                
+                
+            }
+        }
+        
+        System.out.println(b.size());
+        
+
+        
     }
     
     
@@ -39,6 +168,8 @@ public class UserHomeGUI extends javax.swing.JFrame {
         searchBtn = new javax.swing.JButton();
         logoutBtn = new javax.swing.JButton();
         newTripBtn = new javax.swing.JButton();
+        scrollPanel = new javax.swing.JScrollPane();
+        resultPanel = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBounds(new java.awt.Rectangle(0, 0, 420, 660));
@@ -106,6 +237,26 @@ public class UserHomeGUI extends javax.swing.JFrame {
             }
         });
 
+        scrollPanel.setBackground(new java.awt.Color(254, 254, 254));
+        scrollPanel.setBorder(null);
+        scrollPanel.setForeground(new java.awt.Color(1, 1, 1));
+
+        resultPanel.setBackground(new java.awt.Color(255, 255, 255));
+        resultPanel.setForeground(new java.awt.Color(1, 1, 1));
+
+        javax.swing.GroupLayout resultPanelLayout = new javax.swing.GroupLayout(resultPanel);
+        resultPanel.setLayout(resultPanelLayout);
+        resultPanelLayout.setHorizontalGroup(
+            resultPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 374, Short.MAX_VALUE)
+        );
+        resultPanelLayout.setVerticalGroup(
+            resultPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 356, Short.MAX_VALUE)
+        );
+
+        scrollPanel.setViewportView(resultPanel);
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -114,18 +265,20 @@ public class UserHomeGUI extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(logoutBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(searchBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 115, Short.MAX_VALUE)
-                        .addComponent(newTripBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(43, 43, 43))
+                        .addComponent(nameLbl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(nameLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(logoutBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(searchBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(newTripBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(scrollPanel))
+                        .addContainerGap())))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -137,10 +290,15 @@ public class UserHomeGUI extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(searchBtn)
                     .addComponent(newTripBtn))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 409, Short.MAX_VALUE)
+                .addGap(36, 36, 36)
+                .addComponent(scrollPanel)
+                .addGap(18, 18, 18)
                 .addComponent(logoutBtn)
                 .addGap(44, 44, 44))
         );
+
+        scrollPanel.getAccessibleContext().setAccessibleName("");
+        scrollPanel.getAccessibleContext().setAccessibleDescription("");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -159,7 +317,7 @@ public class UserHomeGUI extends javax.swing.JFrame {
     private void searchBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchBtnActionPerformed
         //switch to the Search screen
         
-        GUI.SearchResultsGUI s = new GUI.SearchResultsGUI();
+        GUI.SearchResultsGUI s = new GUI.SearchResultsGUI(u);
 
         // Get the size of the active window
         int sizeH = this.getSize().height;
@@ -283,6 +441,8 @@ public class UserHomeGUI extends javax.swing.JFrame {
     private javax.swing.JButton logoutBtn;
     private javax.swing.JLabel nameLbl;
     private javax.swing.JButton newTripBtn;
+    private javax.swing.JPanel resultPanel;
+    private javax.swing.JScrollPane scrollPanel;
     private javax.swing.JButton searchBtn;
     // End of variables declaration//GEN-END:variables
 }

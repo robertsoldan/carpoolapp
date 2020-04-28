@@ -131,7 +131,7 @@ public class CarPoolDB {
     }
         
     public void addBooking(main.Bookings b) {
-        
+        System.out.println(getSeatsAvailable(b.getTripsID()) + " seats");
         if(getSeatsAvailable(b.getTripsID()) > 0) {
             
             int passengerID = b.getPassengerID();
@@ -280,12 +280,12 @@ public class CarPoolDB {
         return u;
     }
     
-    // Get bookings of user -- pass email as argument, return arraylist of bookings object
-    public ArrayList<main.Bookings> getBookings(String email) {
+    // Get bookings of user -- pass userID as argument, return arraylist of bookings object
+    public ArrayList<main.Bookings> getBookings(int userID) {
         bookings = new ArrayList<main.Bookings>();
         
         try {
-            String query = "SELECT * FROM bookings WHERE email='" + email + "';";
+            String query = "SELECT * FROM bookings WHERE passengerID='" + userID + "';";
             Statement stmt = getConnection().createStatement();
             ResultSet rs = stmt.executeQuery(query);
             
@@ -526,6 +526,8 @@ public class CarPoolDB {
             
             while(rs.next()) {
                 main.Trip t = new main.Trip(true, null, null, null, null, null, 0, 0, 0, false, false, false, false, false, null);
+                t.setTripID(rs.getInt("tripID"));
+                t.setDriverID(rs.getInt("driverId"));
                 t.setIsComplete(rs.getBoolean("isComplete"));
                 t.setDatePosted(rs.getString("datePosted"));
                 t.setDepartureDateAndTime(rs.getString("departureDateAndTime"));
@@ -588,6 +590,7 @@ public class CarPoolDB {
             
             while(rs.next()) {
                 main.Trip t = new main.Trip(true, null, null, null, null, null, 0, 0, 0, false, false, false, false, false, null);
+                t.setTripID(rs.getInt("tripID"));
                 t.setIsComplete(rs.getBoolean("isComplete"));
                 t.setDatePosted(rs.getString("datePosted"));
                 t.setDepartureAddress(rs.getString("departureAddress"));
@@ -709,7 +712,7 @@ public class CarPoolDB {
     public void testDB() {
         // TODO code application logic here
         try{
-            String sqlSt = "SELECT * FROM trips;";
+            String sqlSt = "SELECT * FROM bookings;";
             //String sql = "ALTER TABLE users  ALTER COLUMN username DROP UNIQUE;";
             
             /*
@@ -724,7 +727,7 @@ public class CarPoolDB {
         ResultSet rs = stmt.executeQuery(sqlSt);
        
         while(rs.next()) {
-            System.out.println(rs.getString(1));
+            System.out.println(rs.getInt("passengerid"));
            
             
         } 
