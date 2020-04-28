@@ -11,18 +11,22 @@ public class ViewTripGUI extends javax.swing.JFrame {
 
     public ViewTripGUI() {
         initComponents();
-        u = new main.Users("null", "null", "null", "null", "null", "null", "null", "null", 0, 0);
+    }
+    
+    public ViewTripGUI(main.Users user, main.Trip trip, String userT) {
+        initComponents();
+        u = user;
 
         nameLbl.setText(u.getUsername());
         cancelTBtn.setVisible(false);
         cancelBBtn.setVisible(false);
         resultsPanel.setVisible(true);
-        int tripId = 18;
-        String userType = new String();
-        cpdb = new carpoolapp.CarPoolDB();
+       
+        String userType = userT;
+        //cpdb = new carpoolapp.CarPoolDB();
         
+        main.Trip t = trip;
         
-        main.Trip t = cpdb.getTripById(tripId);
         
         deptTf.setText(t.getDepartureAddress() + ", " + t.getDepartureDateAndTime());
         arrTf.setText(t.getArrivalAddress() + ", " + t.getArrivalDateAndTime());
@@ -60,7 +64,7 @@ public class ViewTripGUI extends javax.swing.JFrame {
         }
         preferencesTf.setText(luggage + ", " + smoking + ", " + pets + ", " + chatty + ", " + music);
         
-        userType = "Driver";
+      
         
         if (userType.equals("Driver")) {
             
@@ -73,12 +77,7 @@ public class ViewTripGUI extends javax.swing.JFrame {
 
     }
 
-    public ViewTripGUI(main.Users user) {
-        initComponents();
-        u = user;
 
-        nameLbl.setText(u.getUsername());
-    }
 
     /**
      * This method is called from within the constructor to initialize the form.

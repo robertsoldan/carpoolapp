@@ -19,6 +19,7 @@ public class CarPoolDB {
     public CarPoolDB() {
         sqlQry = new String();
         result = new ArrayList<String>();
+        
     }
     
     // Add methods 
@@ -183,12 +184,21 @@ public class CarPoolDB {
             PreparedStatement pst = getConnection().prepareStatement(query);
      
             pst.executeUpdate();
-            
+            pst.getConnection().close();
+         
+            } catch(URISyntaxException uriex) {
+                System.out.println(uriex);
+            } catch(SQLException sqlex) {
+                System.out.println(sqlex);
+            } finally {
+            try{
+                getConnection().close();
             } catch(URISyntaxException uriex) {
                 System.out.println(uriex);
             } catch(SQLException sqlex) {
                 System.out.println(sqlex);
             }
+    }
     }
     
     public void decrementSeatsAvailable(int tripId) {
@@ -198,14 +208,23 @@ public class CarPoolDB {
         try {
             String query = "UPDATE trips SET seatsAvailable = '" + newSeats + "' WHERE tripID ='" + tripId +"';";
             PreparedStatement pst = getConnection().prepareStatement(query);
-     
-            pst.executeUpdate();
             
+            pst.executeUpdate();
+            pst.getConnection().close();
+           
+            } catch(URISyntaxException uriex) {
+                System.out.println(uriex);
+            } catch(SQLException sqlex) {
+                System.out.println(sqlex);
+            } finally {
+            try{
+                getConnection().close();
             } catch(URISyntaxException uriex) {
                 System.out.println(uriex);
             } catch(SQLException sqlex) {
                 System.out.println(sqlex);
             }
+    }
     }
     
     public void cancelBooking(main.Bookings b) {
@@ -232,13 +251,21 @@ public class CarPoolDB {
             pst.executeUpdate();
             pst.getConnection().close();
             pst.close();
-            getConnection().close();
-            System.out.println("Did it :)");
+           
         } catch(URISyntaxException uriex) {
             System.out.println(uriex);
         } catch(SQLException sqlex) {
             System.out.println(sqlex);
+        } finally {
+            try{
+                getConnection().close();
+            } catch(URISyntaxException uriex) {
+                System.out.println(uriex);
+            } catch(SQLException sqlex) {
+                System.out.println(sqlex);
+            }
         }
+    
     }
     
     // -------------------------------------------------------------------------------------------------
@@ -253,7 +280,7 @@ public class CarPoolDB {
             String query = "SELECT * FROM users WHERE email='" + email + "' AND password='" + password + "';";
             Statement stmt = getConnection().createStatement();
             ResultSet rs = stmt.executeQuery(query);
-            
+          
             while(rs.next()) {
                 int userId = rs.getInt("userID");
                 String username = rs.getString("username");
@@ -276,8 +303,17 @@ public class CarPoolDB {
             System.out.println(uriex);
         } catch(SQLException sqlex) {
             System.out.println(sqlex);
+        } finally {
+            try{
+                getConnection().close();
+            } catch(URISyntaxException uriex) {
+                System.out.println(uriex);
+            } catch(SQLException sqlex) {
+                System.out.println(sqlex);
+            }
         }
         return u;
+    
     }
     
     // Get bookings of user -- pass userID as argument, return arraylist of bookings object
@@ -288,7 +324,7 @@ public class CarPoolDB {
             String query = "SELECT * FROM bookings WHERE passengerID='" + userID + "';";
             Statement stmt = getConnection().createStatement();
             ResultSet rs = stmt.executeQuery(query);
-            
+           
             while(rs.next()) {
                 main.Bookings b = new main.Bookings(0, 0, null);
                 b.setBookingID(0);
@@ -310,9 +346,18 @@ public class CarPoolDB {
                 System.out.println(uriex);
             } catch(SQLException sqlex) {
                 System.out.println(sqlex);
+            } finally {
+            try{
+                getConnection().close();
+            } catch(URISyntaxException uriex) {
+                System.out.println(uriex);
+            } catch(SQLException sqlex) {
+                System.out.println(sqlex);
             }
+        }
         
         return bookings;
+    
     }
     
     // Get the driver by userID -- pass the userId as int, get a Driver object
@@ -326,7 +371,7 @@ public class CarPoolDB {
             String query = "SELECT * FROM drivers WHERE userID='" + user + "';";
             Statement stmt = getConnection().createStatement();
             ResultSet rs = stmt.executeQuery(query);
-            
+          
             while(rs.next()) {
                 int driverID = rs.getInt("driverID");
                 int userID = rs.getInt("userID");
@@ -341,9 +386,18 @@ public class CarPoolDB {
                 System.out.println(uriex);
             } catch(SQLException sqlex) {
                 System.out.println(sqlex);
+            } finally {
+            try{
+                getConnection().close();
+            } catch(URISyntaxException uriex) {
+                System.out.println(uriex);
+            } catch(SQLException sqlex) {
+                System.out.println(sqlex);
             }
+        }
         
         return d;
+    
     }
     
     // Get driver by driver id -- pass the driverID as a int, get a Driver object
@@ -357,7 +411,7 @@ public class CarPoolDB {
             String query = "SELECT * FROM drivers WHERE driverID='" + driver + "';";
             Statement stmt = getConnection().createStatement();
             ResultSet rs = stmt.executeQuery(query);
-            
+          
             while(rs.next()) {
                 int driverID = rs.getInt("driverID");
                 int userId = rs.getInt("userID");
@@ -372,9 +426,18 @@ public class CarPoolDB {
                 System.out.println(uriex);
             } catch(SQLException sqlex) {
                 System.out.println(sqlex);
+            } finally {
+            try{
+                getConnection().close();
+            } catch(URISyntaxException uriex) {
+                System.out.println(uriex);
+            } catch(SQLException sqlex) {
+                System.out.println(sqlex);
             }
+        }
         
         return d;
+    
     }
     
     // Get drivers with a minimum rating of -- pass rating as an int, get array list of Driver objects
@@ -387,7 +450,7 @@ public class CarPoolDB {
             String query = "SELECT * FROM drivers WHERE rating>='" + ratingValue + "';";
             Statement stmt = getConnection().createStatement();
             ResultSet rs = stmt.executeQuery(query);
-            
+           
             while(rs.next()) {
                 main.Driver d = new main.Driver();
                 d.setDriverID(0);
@@ -408,9 +471,18 @@ public class CarPoolDB {
                 System.out.println(uriex);
             } catch(SQLException sqlex) {
                 System.out.println(sqlex);
+            } finally {
+            try{
+                getConnection().close();
+            } catch(URISyntaxException uriex) {
+                System.out.println(uriex);
+            } catch(SQLException sqlex) {
+                System.out.println(sqlex);
             }
+        }
         
         return dList;
+    
     }
     
     // Get car by carID -- pass the carID as int, get Car object
@@ -421,7 +493,7 @@ public class CarPoolDB {
             String query = "SELECT * FROM cars WHERE carID='" + car + "';";
             Statement stmt = getConnection().createStatement();
             ResultSet rs = stmt.executeQuery(query);
-            
+         
             while(rs.next()) {
                 int carID = rs.getInt("carID");
                 int driverID = rs.getInt("driverID");
@@ -440,9 +512,18 @@ public class CarPoolDB {
                 System.out.println(uriex);
             } catch(SQLException sqlex) {
                 System.out.println(sqlex);
+            } finally {
+            try{
+                getConnection().close();
+            } catch(URISyntaxException uriex) {
+                System.out.println(uriex);
+            } catch(SQLException sqlex) {
+                System.out.println(sqlex);
             }
+        }
         
         return c;
+    
     }
     
     // Get car by DriverID -- pass the driverID as int, get array list of Car object
@@ -475,9 +556,18 @@ public class CarPoolDB {
                 System.out.println(uriex);
             } catch(SQLException sqlex) {
                 System.out.println(sqlex);
+            } finally {
+            try{
+                getConnection().close();
+            } catch(URISyntaxException uriex) {
+                System.out.println(uriex);
+            } catch(SQLException sqlex) {
+                System.out.println(sqlex);
             }
+        }
         
         return cList;
+    
     }
     
     // Get car by minimum year -- pass the minimum year as int, get array list of Car object
@@ -488,7 +578,7 @@ public class CarPoolDB {
             String query = "SELECT * FROM cars WHERE year>='" + minYear + "';";
             Statement stmt = getConnection().createStatement();
             ResultSet rs = stmt.executeQuery(query);
-            
+           
             while(rs.next()) {
                 main.Car c = new main.Car(null, null, 0);
                 int carID = rs.getInt("carID");
@@ -510,9 +600,18 @@ public class CarPoolDB {
                 System.out.println(uriex);
             } catch(SQLException sqlex) {
                 System.out.println(sqlex);
+            } finally {
+            try{
+                getConnection().close();
+            } catch(URISyntaxException uriex) {
+                System.out.println(uriex);
+            } catch(SQLException sqlex) {
+                System.out.println(sqlex);
             }
+        }
         
         return cList;
+    
     }
     
     // Get a list of trips by driver id ( to be displayed in a drivers profile) -- pass the driverID as int
@@ -523,7 +622,7 @@ public class CarPoolDB {
             String query = "SELECT * FROM trips WHERE driverID>='" + driverId + "';";
             Statement stmt = getConnection().createStatement();
             ResultSet rs = stmt.executeQuery(query);
-            
+         
             while(rs.next()) {
                 main.Trip t = new main.Trip(true, null, null, null, null, null, 0, 0, 0, false, false, false, false, false, null);
                 t.setTripID(rs.getInt("tripID"));
@@ -549,9 +648,18 @@ public class CarPoolDB {
                 System.out.println(uriex);
             } catch(SQLException sqlex) {
                 System.out.println(sqlex);
+            } finally {
+            try{
+                getConnection().close();
+            } catch(URISyntaxException uriex) {
+                System.out.println(uriex);
+            } catch(SQLException sqlex) {
+                System.out.println(sqlex);
             }
+        }
         
         return tList;
+    
     }
     
     // Get a list of trips using a search argument -- pass the argType as either ADDRESS, DATE or ADDRESS+DATE;
@@ -614,9 +722,18 @@ public class CarPoolDB {
                 System.out.println(uriex);
             } catch(SQLException sqlex) {
                 System.out.println(sqlex);
+            } finally {
+            try{
+                getConnection().close();
+            } catch(URISyntaxException uriex) {
+                System.out.println(uriex);
+            } catch(SQLException sqlex) {
+                System.out.println(sqlex);
             }
+        }
         
         return tList;
+    
     }
     
     // Get the available seats remaining for a trip
@@ -627,6 +744,7 @@ public class CarPoolDB {
             String query = "SELECT * FROM trips WHERE tripID='" + tripId + "';";
             Statement stmt = getConnection().createStatement();
             ResultSet rs = stmt.executeQuery(query);
+            
             while(rs.next()) {
                 seats = rs.getInt("seatsAvailable");
             }
@@ -635,9 +753,18 @@ public class CarPoolDB {
                 System.out.println(uriex);
             } catch(SQLException sqlex) {
                 System.out.println(sqlex);
+            } finally {
+            try{
+                getConnection().close();
+            } catch(URISyntaxException uriex) {
+                System.out.println(uriex);
+            } catch(SQLException sqlex) {
+                System.out.println(sqlex);
             }
+        }
         
         return seats;
+    
     }
     
     public main.Trip getTripById(int tripId) {
@@ -647,7 +774,6 @@ public class CarPoolDB {
             String query = "SELECT * FROM trips WHERE tripID='" + tripId + "';";
             Statement stmt = getConnection().createStatement();
             ResultSet rs = stmt.executeQuery(query);
-            
             while(rs.next()) {
                 t.setIsComplete(rs.getBoolean("isComplete"));
                 t.setDatePosted(rs.getString("datePosted"));
@@ -670,9 +796,18 @@ public class CarPoolDB {
                 System.out.println(uriex);
             } catch(SQLException sqlex) {
                 System.out.println(sqlex);
+            } finally {
+            try{
+                getConnection().close();
+            } catch(URISyntaxException uriex) {
+                System.out.println(uriex);
+            } catch(SQLException sqlex) {
+                System.out.println(sqlex);
+            }
             }
         
         return t;
+    
     }
     
     
@@ -694,11 +829,19 @@ public class CarPoolDB {
                 result.add(res);
             }
             stmt.close();
-            getConnection().close();
+            
         }catch(URISyntaxException uriex) {
             System.out.println(uriex);
         } catch(SQLException sqlex) {
             System.out.println(sqlex);
+        } finally {
+            try{
+                getConnection().close();
+            } catch(URISyntaxException uriex) {
+                System.out.println(uriex);
+            } catch(SQLException sqlex) {
+                System.out.println(sqlex);
+            }
         }
         
         return result;
@@ -740,6 +883,16 @@ public class CarPoolDB {
         }
        
        
+    }
+    
+    public void closeConnection() {
+        try{
+            getConnection().close();
+        } catch(URISyntaxException uriex) {
+            System.out.println(uriex);
+        } catch(SQLException sqlex) {
+            System.out.println(sqlex);
+        }
     }
    
     private static Connection getConnection() throws URISyntaxException, SQLException {

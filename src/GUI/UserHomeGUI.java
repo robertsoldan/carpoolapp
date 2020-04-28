@@ -4,6 +4,8 @@ package GUI;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import javax.swing.BoxLayout;
 import javax.swing.JLabel;
@@ -43,7 +45,8 @@ public class UserHomeGUI extends javax.swing.JFrame {
             for (main.Bookings booking : b) {
                 main.Trip trip = new main.Trip(true, null, null, null, null, null, 0, 0, 0, false, false, false, false, false, null);
                 trip = cpdb.getTripById(booking.getTripsID());
-                //bt.add(trip);
+                cpdb.closeConnection(); 
+                
                 
                 JLabel departureAndArrivaAddresses = new  JLabel(trip.getDepartureAddress() + " - " + trip.getArrivalAddress());
                 departureAndArrivaAddresses.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -67,13 +70,7 @@ public class UserHomeGUI extends javax.swing.JFrame {
                 p.add(departureAndArrivaAddresses);
                 p.add(departureDate);
                 p.add(arrivalDate);
-                
-                
-        
-
                 p.revalidate();
-        
-               
                 
                 yLoc+=60;
                 panelHeight+=60;
@@ -83,7 +80,38 @@ public class UserHomeGUI extends javax.swing.JFrame {
                 resultPanel.revalidate();
                 
                 
+                p.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR)); // Set the cursor on mouse over
+                final main.Trip tr = trip;
+                p.addMouseListener(new MouseAdapter() {
+                    
+                    public void mousePressed(MouseEvent e) {
+                        GUI.ViewTripGUI vt = new GUI.ViewTripGUI(u, tr, "Passenger");
+                        // Get the size of the active window
+                        int sizeH = getSize().height;
+                        int sizeW = getSize().width;
+
+                        // Get the location of the active window
+                        int currX = getLocation().x;
+                        int currY = getLocation().y;
+
+                        // Set the size of the new window
+                        vt.setSize(sizeW, sizeH);
+
+                        // Set the location of the new window
+                        vt.setLocation(currX, currY);
+
+                        // Hide the active window, show the new window
+                        dispose();
+
+                        // make it visible
+                        vt.setVisible(true);
+                        cpdb.closeConnection(); 
+                        }
+                    });
+                
+                
             }
+            cpdb.closeConnection();
         }
         
         // Get the trips created by the user as a driver, store them in the dt array list
@@ -102,7 +130,7 @@ public class UserHomeGUI extends javax.swing.JFrame {
             for (main.Trip driverTrip : dt) {
                 main.Trip trip = new main.Trip(true, null, null, null, null, null, 0, 0, 0, false, false, false, false, false, null);
                 trip = cpdb.getTripById(driverTrip.getTripID());
-                System.out.println(driverTrip.getArrivalDateAndTime());
+                cpdb.closeConnection(); 
                 
                 JLabel departureAndArrivaAddresses = new  JLabel(trip.getDepartureAddress() + " - " + trip.getArrivalAddress());
                 departureAndArrivaAddresses.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -126,13 +154,7 @@ public class UserHomeGUI extends javax.swing.JFrame {
                 p.add(departureAndArrivaAddresses);
                 p.add(departureDate);
                 p.add(arrivalDate);
-                
-                
-        
-
                 p.revalidate();
-        
-               
                 
                 yLoc = yLoc + 60;
                 panelHeight+=60;
@@ -141,12 +163,36 @@ public class UserHomeGUI extends javax.swing.JFrame {
                 resultPanel.revalidate();
                 
                 
+                p.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR)); // Set the cursor on mouse over
+                final main.Trip tr = trip;
+                p.addMouseListener(new MouseAdapter() {
+                    public void mousePressed(MouseEvent e) {
+                        cpdb.closeConnection(); 
+                        GUI.ViewTripGUI vt = new GUI.ViewTripGUI(u,tr, "Driver");
+                        // Get the size of the active window
+                        int sizeH = getSize().height;
+                        int sizeW = getSize().width;
+
+                        // Get the location of the active window
+                        int currX = getLocation().x;
+                        int currY = getLocation().y;
+
+                        // Set the size of the new window
+                        vt.setSize(sizeW, sizeH);
+
+                        // Set the location of the new window
+                        vt.setLocation(currX, currY);
+
+                        // Hide the active window, show the new window
+                        dispose();
+
+                        // make it visible
+                        vt.setVisible(true);
+                        }
+                    });
             }
         }
         
-        System.out.println(b.size());
-        
-
         
     }
     
@@ -265,9 +311,7 @@ public class UserHomeGUI extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(nameLbl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(nameLbl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
