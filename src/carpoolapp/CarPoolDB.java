@@ -132,7 +132,7 @@ public class CarPoolDB {
     }
         
     public void addBooking(main.Bookings b) {
-        System.out.println(getSeatsAvailable(b.getTripsID()) + " seats");
+        
         if(getSeatsAvailable(b.getTripsID()) > 0) {
             
             int passengerID = b.getPassengerID();
@@ -690,7 +690,6 @@ public class CarPoolDB {
                     date = datePlusAddress[0];
                     departureAddress = datePlusAddress[1];
                     arrivalAddress = datePlusAddress[2];
-                    System.out.println(searchTerm);
                     query = "SELECT * FROM trips WHERE seatsAvailable > 0 AND arrivalAddress ILIKE '%" + arrivalAddress + "%' AND departureAddress ILIKE '%" + departureAddress + "%' AND LEFT(departureDateAndTime, 10) LIKE '%" + date + "%';";
                 break;
                 default: query = "SELECT * FROM trips;";
