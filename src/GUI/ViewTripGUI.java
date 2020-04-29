@@ -396,7 +396,7 @@ public class ViewTripGUI extends javax.swing.JFrame {
         cpdb = new carpoolapp.CarPoolDB();
 
         cpdb.cancelBooking(b);
-        cancelTBtn.setVisible(false);
+        cancelBBtn.setVisible(false);
         resultsPanel.setVisible(false);
         warningLbl.setText("Booking deleted.");
 
