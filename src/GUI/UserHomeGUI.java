@@ -12,6 +12,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 public class UserHomeGUI extends javax.swing.JFrame {
+    // Instantiating the later used array lists and objects
     private main.Users u;
     ArrayList<main.Bookings> b = new ArrayList<>();
     ArrayList<main.Trip> dt = new ArrayList<>();
@@ -42,12 +43,13 @@ public class UserHomeGUI extends javax.swing.JFrame {
             bookings.setBounds(5, 0, 350, 15);
             resultPanel.add(bookings);
             resultPanel.revalidate();
+            
+            
             for (main.Bookings booking : b) {
                 main.Trip trip = new main.Trip(true, null, null, null, null, null, 0, 0, 0, false, false, false, false, false, null);
-                trip = cpdb.getTripById(booking.getTripsID());
-                cpdb.closeConnection(); 
+                trip = cpdb.getTripById(booking.getTripsID());    
                 
-                
+                 // Creating the labels which hold all of the info
                 JLabel departureAndArrivaAddresses = new  JLabel(trip.getDepartureAddress() + " - " + trip.getArrivalAddress());
                 departureAndArrivaAddresses.setAlignmentX(Component.CENTER_ALIGNMENT);
                 departureAndArrivaAddresses.setForeground(Color.white);
@@ -62,6 +64,7 @@ public class UserHomeGUI extends javax.swing.JFrame {
                 arrivalDate.setSize(300, 15);
                 arrivalDate.setAlignmentX(Component.CENTER_ALIGNMENT);
                 
+                // Creating the panel which will keep the info
                 JPanel p = new JPanel();
                 p.setLayout(new BoxLayout(p, BoxLayout.PAGE_AXIS));
                 p.setBounds(10, yLoc, 350, 50);
@@ -79,8 +82,10 @@ public class UserHomeGUI extends javax.swing.JFrame {
                 resultPanel.setPreferredSize(new Dimension(200, panelHeight));
                 resultPanel.revalidate();
                 
-                
+                 // Making the panel clickable and redirecting to the View Trip class
                 p.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR)); // Set the cursor on mouse over
+
+                // Declaring the final varialbles is needed here to be able to pass it tho the mouse event listener
                 final main.Trip tr = trip;
                 final main.Bookings bo = booking;
                 p.addMouseListener(new MouseAdapter() {
@@ -106,13 +111,11 @@ public class UserHomeGUI extends javax.swing.JFrame {
 
                         // make it visible
                         vt.setVisible(true);
-                        cpdb.closeConnection(); 
                         }
                     });
                 
                 
             }
-            cpdb.closeConnection();
         }
         
         // Get the trips created by the user as a driver, store them in the dt array list
@@ -120,19 +123,23 @@ public class UserHomeGUI extends javax.swing.JFrame {
         if(d.getDriverID() != 0 && d.getUserID() != 0) {
             
             dt = cpdb.getTripsByDriverId(d.getDriverID());
-            JLabel departures = new JLabel("Driving:");
-            departures.setBounds(5, yLoc, 350, 15);
+            if(dt.size() > 0) {
+                JLabel departures = new JLabel("Driving:");
+                departures.setBounds(5, yLoc, 350, 15);
+                resultPanel.add(departures);
+            }
+            
             yLoc+=20;
             panelHeight+=15;
             
-            resultPanel.add(departures);
+            
             resultPanel.revalidate();
             
             for (main.Trip driverTrip : dt) {
                 main.Trip trip = new main.Trip(true, null, null, null, null, null, 0, 0, 0, false, false, false, false, false, null);
                 trip = cpdb.getTripById(driverTrip.getTripID());
-                cpdb.closeConnection(); 
                 
+                // Creating the labels which hold all of the info
                 JLabel departureAndArrivaAddresses = new  JLabel(trip.getDepartureAddress() + " - " + trip.getArrivalAddress());
                 departureAndArrivaAddresses.setAlignmentX(Component.CENTER_ALIGNMENT);
                 departureAndArrivaAddresses.setForeground(Color.white);
@@ -147,6 +154,7 @@ public class UserHomeGUI extends javax.swing.JFrame {
                 arrivalDate.setSize(300, 15);
                 arrivalDate.setAlignmentX(Component.CENTER_ALIGNMENT);
                 
+                // Creating the panel which will keep the info
                 JPanel p = new JPanel();
                 p.setLayout(new BoxLayout(p, BoxLayout.PAGE_AXIS));
                 p.setBounds(10, yLoc, 350, 50);
@@ -163,12 +171,12 @@ public class UserHomeGUI extends javax.swing.JFrame {
                 resultPanel.setPreferredSize(new Dimension(200, panelHeight));
                 resultPanel.revalidate();
                 
-                
+                // Making the panel clickable and redirecting to the View Trip class
                 p.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR)); // Set the cursor on mouse over
+                // Declaring a final varialble is needed here to be able to pass it tho the mouse event listener
                 final main.Trip tr = trip;
                 p.addMouseListener(new MouseAdapter() {
                     public void mousePressed(MouseEvent e) {
-                        cpdb.closeConnection(); 
                         GUI.ViewTripGUI vt = new GUI.ViewTripGUI(u,tr, "Driver");
                         // Get the size of the active window
                         int sizeH = getSize().height;

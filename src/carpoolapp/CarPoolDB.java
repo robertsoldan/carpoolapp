@@ -174,7 +174,9 @@ public class CarPoolDB {
         
         execSql(sqlStr);
     }
-        
+    
+    
+    // Method to update the trip with the number of seats available when a passenger cancels a trip    
     public void incrementSeatsAvailable(int tripId) {
         int currentSeats = getSeatsAvailable(tripId);
         int newSeats = currentSeats + 1;
@@ -201,6 +203,7 @@ public class CarPoolDB {
     }
     }
     
+    // Method to update the trip with the number of seats available when a passenger books a trip   
     public void decrementSeatsAvailable(int tripId) {
         int currentSeats = getSeatsAvailable(tripId);
         int newSeats = currentSeats - 1;
@@ -227,6 +230,7 @@ public class CarPoolDB {
     }
     }
     
+    // Remove a booking 
     public void cancelBooking(main.Bookings b) {
         int bookingID = b.getBookingID();
         int tripID = b.getTripsID();
@@ -236,6 +240,7 @@ public class CarPoolDB {
         incrementSeatsAvailable(tripID);
     }
     
+    // Remove a trip
     public void cancelTrip(main.Trip t) {
         int tripID = t.getTripID();
         String sqlStr = "DELETE FROM trips WHERE tripID='" + tripID + "';";
@@ -284,8 +289,6 @@ public class CarPoolDB {
             while(rs.next()) {
                 int userId = rs.getInt("userID");
                 String username = rs.getString("username");
-                String emailAddress = rs.getString("email");
-                String passwd = rs.getString("password");
                 String dateOfBirth = rs.getString("dateOfBirth");
                 String gender = rs.getString("gender");
                 String avatar = rs.getString("avatar");
@@ -678,9 +681,9 @@ public class CarPoolDB {
                     String[] addresses = searchTerm.split("\\+");
                     String departureAddress = addresses[0];
                     String arrivalAddress = addresses[1];
-                    query = "SELECT * FROM trips WHERE departureAddress ILIKE '%" + departureAddress + "%' AND arrivalAddress ILIKE '%" + arrivalAddress + "%';";
+                    query = "SELECT * FROM trips WHERE seatsAvailable > 0 AND departureAddress ILIKE '%" + departureAddress + "%' AND arrivalAddress ILIKE '%" + arrivalAddress + "%';";
                 break;
-                case "DATE": query = "SELECT * FROM trips WHERE arrivalDateAndTime LIKE '%" + searchTerm + "%';";
+                case "DATE": query = "SELECT * FROM trips WHERE seatsAvailable > 0 AND arrivalDateAndTime LIKE '%" + searchTerm + "%';";
                 break;
                 case "ADDRESS+DATE": 
                     String[] datePlusAddress = searchTerm.split("\\+");
@@ -688,7 +691,7 @@ public class CarPoolDB {
                     departureAddress = datePlusAddress[1];
                     arrivalAddress = datePlusAddress[2];
                     System.out.println(searchTerm);
-                    query = "SELECT * FROM trips WHERE arrivalAddress ILIKE '%" + arrivalAddress + "%' AND departureAddress ILIKE '%" + departureAddress + "%' AND LEFT(departureDateAndTime, 10) LIKE '%" + date + "%';";
+                    query = "SELECT * FROM trips WHERE seatsAvailable > 0 AND arrivalAddress ILIKE '%" + arrivalAddress + "%' AND departureAddress ILIKE '%" + departureAddress + "%' AND LEFT(departureDateAndTime, 10) LIKE '%" + date + "%';";
                 break;
                 default: query = "SELECT * FROM trips;";
             }
@@ -767,6 +770,7 @@ public class CarPoolDB {
     
     }
     
+    // Trips was eventually merged with preferences
     public main.Trip getTripById(int tripId) {
         main.Trip t = new main.Trip(true, null, null, null, null, null, 0, 0, 0, false, false, false, false, false, null);
         
@@ -813,9 +817,9 @@ public class CarPoolDB {
     }
     
     
-    
     // -------------------------------------------------------------------------------------------------
     
+    // Method used for sending queries to the DB
     public ArrayList<String> query(String query) {
         sqlQry = query;
         
@@ -849,195 +853,16 @@ public class CarPoolDB {
         return result;
     }
     
-    
-    
-    
-    
-    
-    public void testDB() {
-        // TODO code application logic here
-        try{
-            String sqlSt = "SELECT * FROM bookings;";
-            //String sql = "ALTER TABLE users  ALTER COLUMN username DROP UNIQUE;";
-            
-            /*
-            String sql = "";
-            PreparedStatement pst = getConnection().prepareStatement(sql);
-     
-            pst.executeUpdate();
-            */
-            
-        
-        Statement stmt = getConnection().createStatement();
-        ResultSet rs = stmt.executeQuery(sqlSt);
-       
-        while(rs.next()) {
-            System.out.println(rs.getInt("passengerid"));
-           
-            
-        } 
-       
-       // System.out.println(getConnection().);
-        } catch(URISyntaxException uriex) {
-            System.out.println(uriex);
-        } catch(SQLException sqlex) {
-            System.out.println(sqlex);
-        }
-       
-       
-    }
-    
-    public void closeConnection() {
-        try{
-            getConnection().close();
-        } catch(URISyntaxException uriex) {
-            System.out.println(uriex);
-        } catch(SQLException sqlex) {
-            System.out.println(sqlex);
-        }
-    }
    
+   // Method used to connect to the DB ; This code is from the PostgreSQL official documentation
     private static Connection getConnection() throws URISyntaxException, SQLException {
-    URI dbUri = new URI("postgres://fxbrdsvibsvzxl:16dd1dc1d1ae937d25a9d70dfcc93125947dfbe2ea55a961420ced0cb9809504@ec2-54-247-188-107.eu-west-1.compute.amazonaws.com:5432/d7355rirsdn4vp");
- 
-    String username = dbUri.getUserInfo().split(":")[0];
-    String password = dbUri.getUserInfo().split(":")[1];
-    String dbUrl = "jdbc:postgresql://" + dbUri.getHost() + ':' + dbUri.getPort() + dbUri.getPath();
- 
-    return DriverManager.getConnection(dbUrl, username, password);
-}
+        URI dbUri = new URI("postgres://fxbrdsvibsvzxl:16dd1dc1d1ae937d25a9d70dfcc93125947dfbe2ea55a961420ced0cb9809504@ec2-54-247-188-107.eu-west-1.compute.amazonaws.com:5432/d7355rirsdn4vp");
+
+        String username = dbUri.getUserInfo().split(":")[0];
+        String password = dbUri.getUserInfo().split(":")[1];
+        String dbUrl = "jdbc:postgresql://" + dbUri.getHost() + ':' + dbUri.getPort() + dbUri.getPath();
+
+        return DriverManager.getConnection(dbUrl, username, password);
+    }
 
 }
-
-
-
-// Initial database setup
-//cpdb.doStuff("DROP TABLE users, passengers, drivers, cars, trips, bookings, preferences;");
-        
-        /**
-        -- USERS SETTER AND GETTER DONE
-        cpdb.doStuff("CREATE TABLE users(userID SERIAL PRIMARY KEY, "
-                + "username varchar(40) UNIQUE NOT NULL, "
-                + "email varchar(40) UNIQUE NOT NULL, "
-                + "password varchar(40) NOT NULL, "
-                + "dateOfBirth varchar(10) NOT NULL,"
-                + "gender varchar(10) NOT NULL,"
-                + "avatar varchar(255),"
-                + "bio varchar(255),"
-                + "registrationDate varchar(10) NOT NULL, "
-                + "passengerTripsCount integer NOT NULL, "
-                + "driverTripsCount integer NOT NULL)");
-        
-        -- PASSENGERS SETTER DONE -- NO GETTER
-        cpdb.doStuff("CREATE TABLE passengers(passengerID SERIAL PRIMARY KEY, "
-                + "userID integer REFERENCES users(userID) ON DELETE CASCADE)");
-        
-        -- DRIVERS SETTER AND GETTERS DONE
-        cpdb.doStuff("CREATE TABLE drivers(driverID SERIAL PRIMARY KEY,"
-                + "userID integer REFERENCES users(userID) ON DELETE CASCADE,"
-                + "rating NUMERIC NOT NULL)");
-        
-        -- ADMINS SETTER DONE
-        cpdb.doStuff("CREATE TABLE admins(adminID SERIAL PRIMARY KEY,"
-                + "userID integer REFERENCES users(userID) ON DELETE CASCADE"
-                + ")");
-               
-          
-        -- CARS SETTER AND GETTER DONE
-        cpdb.doStuff("CREATE TABLE cars(carID SERIAL PRIMARY KEY, "
-                + "driverID integer REFERENCES drivers(driverID) ON DELETE CASCADE,"
-                + "brand varchar(40) NOT NULL,"
-                + "model varchar(40) NOT NULL,"
-                + "year integer NOT NULL"
-                + ")");     
-        
-        cpdb.doStuff("CREATE TABLE trips("
-                + "tripID SERIAL PRIMARY KEY,"
-                + "driverID integer REFERENCES drivers(driverID),"
-                + "isComplete boolean DEFAULT FALSE,"
-                + "datePosted varchar(10) NOT NULL,"
-                + "departureAddress varchar(255) NOT NULL,"
-                + "departureDateAndTime varchar(16) NOT NULL,"
-                + "arrivalAddress varchar(255) NOT NULL,"
-                + "arrivalDateAndTime varchar(16) NOT NULL,"
-                + "distanceKM NUMERIC NOT NULL"
-                + ")");  
-        
-        -- BOOKINGS SETTER AND GETTER DONE
-        cpdb.doStuff("CREATE TABLE bookings("
-                + "bookingID SERIAL PRIMARY KEY,"
-                + "passengerID integer REFERENCES passengers(passengerID),"
-                + "tripsID integer REFERENCES trips(tripID),"
-                + "status varchar(40) NOT NULL"          
-                + ")");
-                    
-        cpdb.doStuff("CREATE TABLE preferences("
-                + "preferenceID SERIAL PRIMARY KEY,"
-                + "tripsID integer REFERENCES trips(tripID),"
-                + "seatsAvailable integer NOT NULL,"
-                + "pricePerSeat NUMERIC NOT NULL,"
-                + "luggageAllowed boolean NOT NULL,"
-                + "smokingAllowed boolean NOT NULL,"
-                + "petAllowed boolean NOT NULL,"
-                + "chattyDriver boolean NOT NULL,"
-                + "musicLover boolean NOT NULL,"
-                + "description varchar(255) NOT NULL"           
-                + ")");
-        
-       **/
-        
-        
-                
-                
-                
-        //---------------------------------------------------------------------------------------
-        /**
-        cpdb.doStuff("INSERT INTO users "
-                + "VALUES ("
-                + "DEFAULT,"
-                + "'robb', "
-                + "'robb@gmail.com',"
-                + "'noooone',"
-                + "'10-10-1987',"
-                + "'male',"
-                + "'http://ccc.com/avatar.png',"
-                + "'just meee',"
-                + "'20-12-2019',"
-                + "1,"
-                + "0)");
-                
-        cpdb.doStuff("INSERT INTO users VALUES ("
-                + "2, "
-                + "'andrew', "
-                + "'andyand@gmail.com',"
-                + "'pieesss',"
-                + "'11-04-2018',"
-                + "3,"
-                + "0)");
-        
-        cpdb.doStuff("INSERT INTO users VALUES ("
-                + "3, "
-                + "'buns', "
-                + "'bunnies@gmail.com',"
-                + "'babyrabbits',"
-                + "'02-02-2018',"
-                + "6,"
-                + "9)");
-        
-        
-        cpdb.doStuff("INSERT INTO passengers VALUES(1, 2)");
-        cpdb.doStuff("INSERT INTO passengers VALUES(2, 1)");
-        cpdb.doStuff("INSERT INTO passengers VALUES(3, 3)");
-        
-        
-        
-        cpdb.doStuff("INSERT INTO users VALUES ("
-                + "4, "
-                + "'Ovidiu', "
-                + "'ovidiub@gmail.com',"
-                + "'bestborhan',"
-                + "'21-12-2018',"
-                + "2,"
-                + "0)");
-                 
-        **/
