@@ -324,20 +324,24 @@ public class SearchResultsGUI extends javax.swing.JFrame {
     private void searchBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchBtnActionPerformed
         cpdb = new carpoolapp.CarPoolDB();
         
-        searchPnl.removeAll(); // Resetting the search results on every search
+        // reset search results on every search
+        searchPnl.removeAll(); 
         searchPnl.revalidate();
         searchPnl.repaint();
         resultsLbl.setText("");
         
         // validate and get input
+        // test fields are not empty
         if (fromTf.getText().equals("") || toTf.getText().equals("") || ddTf.getText().equals("") || mmTf.getText().equals("") ||
                 yyyyTf.getText().equals("")) {
             JOptionPane.showMessageDialog(null, "All fields must be filled");
-        } else if (ddTf.getText().length() != 2 || mmTf.getText().length() != 2 || ddTf.getText().length() != 2) {
+        // test date length (2-2-4)
+        } else if (ddTf.getText().length() != 2 || mmTf.getText().length() != 2 || yyyyTf.getText().length() != 4) {
             JOptionPane.showMessageDialog(null, "Date format invalid (DD MM YYYY)");
             ddTf.setText("");
             mmTf.setText("");
             yyyyTf.setText("");
+        // test date (2020/2021 + days in month)
         } else if (Integer.parseInt(ddTf.getText()) < 1 || Integer.parseInt(ddTf.getText()) > 31 || Integer.parseInt(mmTf.getText()) < 1 || 
                 Integer.parseInt(mmTf.getText()) > 12 || Integer.parseInt(yyyyTf.getText()) < 2020 || Integer.parseInt(yyyyTf.getText()) > 2021 || 
                 (Integer.parseInt(mmTf.getText()) == 2 && Integer.parseInt(ddTf.getText()) > 29) || 
@@ -349,52 +353,55 @@ public class SearchResultsGUI extends javax.swing.JFrame {
             ddTf.setText("");
             mmTf.setText("");
             yyyyTf.setText("");
+        // if all valid --> send to db to query
         } else {       
             String leavingFrom = fromTf.getText();
             String travellingTo = toTf.getText();
+            // change date format for query
             String date = ddTf.getText() + "-" + mmTf.getText() + "-" + yyyyTf.getText();
             String argSearch = leavingFrom + "+" + travellingTo;
-            
+            // create array from query on date+location (set flag to match)
             ArrayList<main.Trip> searchResult = cpdb.searchTripsByArgument("ADDRESS+DATE", date + "+" + argSearch);
             boolean dateMatch = true;
-            
-            // if the query with date has no result, expand results by using locations only
+            // if the query with date has no result, expand results by using locations only + set flag to no match
             if (searchResult.isEmpty()) {
                 searchResult = cpdb.searchTripsByArgument("ADDRESS", argSearch);
                 dateMatch = false;
             }
-            
+            // empty array = no result found
             if (searchResult.isEmpty()) {
                 JOptionPane.showMessageDialog(null, "No trip matching your criteria has been posted yet, come back later!");
             } else {
                 int yLoc = 10; // Will the Y position of each generated panel
                 int resultPanelHeight; // Will dynamically adjust the total height of the main search panel to accomodate for all the elements
-//                int resultPanelHeight = 220;
                 int width = 350;
                 int size = searchResult.size();
+                // change label based on date match flag
                 if (dateMatch) {
                     resultsLbl.setText(size > 1 ? size + " trips match your criteria." : size + " trip match your criteria.");
                 } else {
                     resultsLbl.setText("We couldn't find a match for your date :(");
                 }
                 
+                // loop through all results in the array to create one panel for each
                 for (main.Trip trip : searchResult) {
-                    // Setup the result panel
+                    // setup result panel
                     resultPanelHeight = 220;
                     JPanel resultPanel = new JPanel();
                     resultPanel.setBounds(10, yLoc, width - 20, resultPanelHeight);
                     
-                    resultPanel.setLayout(new SpringLayout()); // Set resultPanel to null to allow the labels to be placed with relative positioning.
-
-                    resultPanel.setBackground(new Color(255, 255, 255)); // Search panel result background
-                                      
+                    resultPanel.setLayout(new SpringLayout()); // set resultPanel to null to allow labels to be placed with relative positioning
+                    resultPanel.setBackground(new Color(255, 255, 255));
+                    
+                    // format input date and time
                     String[] departure = trip.getDepartureDateAndTime().split("\\-");
                     String[] arrival = trip.getArrivalDateAndTime().split("\\-");
                     String departureDate = departure[0] + "-" + departure[1] + "-" + departure[2];
                     String departureTime = departure[3].substring(0, 2) + ":" + departure[3].substring(2);
                     String arrivalDate = arrival[0] + "-" + arrival[1] + "-" + arrival[2];
                     String arrivalTime = arrival[3].substring(0, 2) + ":" + arrival[3].substring(2);
-
+                    
+                    // create string to add to label - HTML allows for line breaks
                     String resultString = "<html><h4>Result " +  String.valueOf(searchResult.indexOf(trip) + 1) + " → " +
                         (trip.isComplete() ? "You are too late... This trip is fully booked..." : (trip.getSeatsAvailable() < (int)seatSpin.getValue() ?
                             "Only " + String.valueOf(trip.getSeatsAvailable()) + " seats available..." : 
@@ -411,16 +418,15 @@ public class SearchResultsGUI extends javax.swing.JFrame {
                         (trip.isMusicLover() ? "<br>✓ Music lover" : "<br>✗ I am not a music fan") +
                         "<br>Comment from the driver:<br>" + trip.getDescription() + "</p></html>";
 
-                    // Adding labels to the results cards
+                    // create and format label
                     JLabel tripLbl = new JLabel(resultString);
-                    tripLbl.setForeground(Color.BLACK); //  Label font color
+                    tripLbl.setForeground(Color.BLACK); // font color
                     tripLbl.setFont(new Font("Tahoma", Font.PLAIN, 12));
-                    //tripLbl.setBounds(25, 25, width - 20, resultPanelHeight - 20); // Position and width of the text within the resultPanel
-                    // Add label to the result panel, add the result panel to the search panel
+                    // add label to result panel
                     resultPanel.add(tripLbl);
                     
-                    // Adding the mouse event listener to the generated panel
-                    tripLbl.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR)); // Set the cursor on mouse over
+                    // add mouse event listener to label
+                    tripLbl.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR)); // set cursor on mouse over
                     tripLbl.addMouseListener(new MouseAdapter() {
                         public void mousePressed(MouseEvent e) {
                             int reply = JOptionPane.showConfirmDialog(mmTf, "Do you wish to book this trip?", "Confirm", JOptionPane.YES_NO_OPTION);
@@ -432,9 +438,11 @@ public class SearchResultsGUI extends javax.swing.JFrame {
                         }
                     });
                     
+                    // add result panel to search panel, update y position for next panel if any
                     searchPnl.add(resultPanel);
                     yLoc = yLoc + resultPanelHeight + 20; 
-
+                    
+                    // update search panel overall size
                     searchPnl.setPreferredSize(new Dimension(width, size * (resultPanelHeight + 20)));
                     searchPnl.revalidate();
 
