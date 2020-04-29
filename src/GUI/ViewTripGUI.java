@@ -1,7 +1,8 @@
 package GUI;
 
 public class ViewTripGUI extends javax.swing.JFrame {
-
+    private main.Trip t;
+    private main.Bookings b;
     private main.Users u;
     private carpoolapp.CarPoolDB cpdb;
 
@@ -25,7 +26,73 @@ public class ViewTripGUI extends javax.swing.JFrame {
         String userType = userT;
         //cpdb = new carpoolapp.CarPoolDB();
         
-        main.Trip t = trip;
+        t = trip;
+        
+        
+        deptTf.setText(t.getDepartureAddress() + ", " + t.getDepartureDateAndTime());
+        arrTf.setText(t.getArrivalAddress() + ", " + t.getArrivalDateAndTime());
+        priceTf.setText(Double.toString(t.getPricePerSeat()));
+        seatsTf.setText(Integer.toString(t.getSeatsAvailable()));
+        String luggage = new String();
+        String smoking = new String();
+        String pets = new String();
+        String chatty = new String();
+        String music = new String();
+        if (t.isLuggageAllowed()) {
+            luggage = "luggage";
+        } else {
+            luggage = "no luggage";
+        }
+        if (t.isSmokingAllowed()) {
+            smoking = "smoking";
+        } else {
+            smoking = "no smoking";
+        }
+        if (t.isPetAllowed()) {
+            pets = "pets";
+        } else {
+            pets = "no pets";
+        }
+        if (t.isChattyDriver()) {
+            chatty = "chatter";
+        } else {
+            chatty = "not much chatter";
+        }
+        if (t.isMusicLover()) {
+            music = "music";
+        } else {
+            music = "no music";
+        }
+        preferencesTf.setText(luggage + ", " + smoking + ", " + pets + ", " + chatty + ", " + music);
+        
+      
+        
+        if (userType.equals("Driver")) {
+            
+            cancelTBtn.setVisible(true);
+
+        } else {
+
+            cancelBBtn.setVisible(true);
+        }
+
+    }
+    
+    public ViewTripGUI(main.Users user, main.Trip trip, main.Bookings booking, String userT) {
+        initComponents();
+        u = user;
+        
+        t = trip;
+
+        nameLbl.setText(u.getUsername());
+        cancelTBtn.setVisible(false);
+        cancelBBtn.setVisible(false);
+        resultsPanel.setVisible(true);
+       
+        String userType = userT;
+        //cpdb = new carpoolapp.CarPoolDB();
+        
+        b = booking;
         
         
         deptTf.setText(t.getDepartureAddress() + ", " + t.getDepartureDateAndTime());
@@ -329,7 +396,16 @@ public class ViewTripGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_logoutBtnActionPerformed
 
     private void cancelBBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelBBtnActionPerformed
-
+        cpdb = new carpoolapp.CarPoolDB();
+        
+               
+        
+        
+        
+            cpdb.cancelBooking(b);
+            cancelTBtn.setVisible(false);
+            resultsPanel.setVisible(false);
+            warningLbl.setText("Booking deleted.");
        /*     
             resultsPanel.setVisible(false);
             warningLbl.setText("Booking cancelled.");
@@ -341,8 +417,8 @@ public class ViewTripGUI extends javax.swing.JFrame {
     private void cancelTBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelTBtnActionPerformed
 
         cpdb = new carpoolapp.CarPoolDB();
-        int tripId = 18;
-        main.Trip t = cpdb.getTripById(tripId);        
+        
+               
         
         
         

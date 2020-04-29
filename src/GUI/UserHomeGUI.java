@@ -82,10 +82,11 @@ public class UserHomeGUI extends javax.swing.JFrame {
                 
                 p.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR)); // Set the cursor on mouse over
                 final main.Trip tr = trip;
+                final main.Bookings bo = booking;
                 p.addMouseListener(new MouseAdapter() {
                     
                     public void mousePressed(MouseEvent e) {
-                        GUI.ViewTripGUI vt = new GUI.ViewTripGUI(u, tr, "Passenger");
+                        GUI.ViewTripGUI vt = new GUI.ViewTripGUI(u, tr, bo, "Passenger");
                         // Get the size of the active window
                         int sizeH = getSize().height;
                         int sizeW = getSize().width;

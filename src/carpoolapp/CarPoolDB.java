@@ -238,7 +238,7 @@ public class CarPoolDB {
     
     public void cancelTrip(main.Trip t) {
         int tripID = t.getTripID();
-        String sqlStr = "DELETE FROM trips WHERE tripsID='" + tripID + "';";
+        String sqlStr = "DELETE FROM trips WHERE tripID='" + tripID + "';";
         execSql(sqlStr);
     }
     // -------------------------------------------------------------------------------------------------
@@ -775,6 +775,8 @@ public class CarPoolDB {
             Statement stmt = getConnection().createStatement();
             ResultSet rs = stmt.executeQuery(query);
             while(rs.next()) {
+                t.setTripID(rs.getInt("tripID"));
+                t.setDriverID(rs.getInt("driverID"));
                 t.setIsComplete(rs.getBoolean("isComplete"));
                 t.setDatePosted(rs.getString("datePosted"));
                 t.setDepartureAddress(rs.getString("departureAddress"));
