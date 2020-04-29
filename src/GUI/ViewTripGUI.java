@@ -1,6 +1,7 @@
 package GUI;
 
 public class ViewTripGUI extends javax.swing.JFrame {
+
     private main.Trip t;
     private main.Bookings b;
     private main.Users u;
@@ -9,11 +10,11 @@ public class ViewTripGUI extends javax.swing.JFrame {
     /**
      * Creates new form LoginGUI
      */
-
     public ViewTripGUI() {
         initComponents();
     }
-    
+
+    // setting initial GUI view and passing of the information from Home screen for trip
     public ViewTripGUI(main.Users user, main.Trip trip, String userT) {
         initComponents();
         u = user;
@@ -22,13 +23,12 @@ public class ViewTripGUI extends javax.swing.JFrame {
         cancelTBtn.setVisible(false);
         cancelBBtn.setVisible(false);
         resultsPanel.setVisible(true);
-       
+
         String userType = userT;
-        //cpdb = new carpoolapp.CarPoolDB();
-        
+
         t = trip;
-        
-        
+
+        // setting up display of the trip selected in the main panel
         deptTf.setText(t.getDepartureAddress() + ", " + t.getDepartureDateAndTime());
         arrTf.setText(t.getArrivalAddress() + ", " + t.getArrivalDateAndTime());
         priceTf.setText(Double.toString(t.getPricePerSeat()));
@@ -64,11 +64,10 @@ public class ViewTripGUI extends javax.swing.JFrame {
             music = "no music";
         }
         preferencesTf.setText(luggage + ", " + smoking + ", " + pets + ", " + chatty + ", " + music);
-        
-      
-        
+
+        // sets up the posisiton of the cancel button, which is different for trip vs booking
         if (userType.equals("Driver")) {
-            
+
             cancelTBtn.setVisible(true);
 
         } else {
@@ -77,24 +76,23 @@ public class ViewTripGUI extends javax.swing.JFrame {
         }
 
     }
-    
+
+    // setting initial GUI view and passing of the information from Home screen for booking
     public ViewTripGUI(main.Users user, main.Trip trip, main.Bookings booking, String userT) {
         initComponents();
         u = user;
-        
+
         t = trip;
 
         nameLbl.setText(u.getUsername());
         cancelTBtn.setVisible(false);
         cancelBBtn.setVisible(false);
         resultsPanel.setVisible(true);
-       
+
         String userType = userT;
-        //cpdb = new carpoolapp.CarPoolDB();
-        
+
         b = booking;
-        
-        
+
         deptTf.setText(t.getDepartureAddress() + ", " + t.getDepartureDateAndTime());
         arrTf.setText(t.getArrivalAddress() + ", " + t.getArrivalDateAndTime());
         priceTf.setText(Double.toString(t.getPricePerSeat()));
@@ -130,11 +128,10 @@ public class ViewTripGUI extends javax.swing.JFrame {
             music = "no music";
         }
         preferencesTf.setText(luggage + ", " + smoking + ", " + pets + ", " + chatty + ", " + music);
-        
-      
-        
+
+        // sets up the posisiton of the cancel button, which is different for trip vs booking
         if (userType.equals("Driver")) {
-            
+
             cancelTBtn.setVisible(true);
 
         } else {
@@ -143,8 +140,6 @@ public class ViewTripGUI extends javax.swing.JFrame {
         }
 
     }
-
-
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -396,44 +391,34 @@ public class ViewTripGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_logoutBtnActionPerformed
 
     private void cancelBBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelBBtnActionPerformed
+
+        // cancelling the booking for passengers
         cpdb = new carpoolapp.CarPoolDB();
-        
-               
-        
-        
-        
-            cpdb.cancelBooking(b);
-            cancelTBtn.setVisible(false);
-            resultsPanel.setVisible(false);
-            warningLbl.setText("Booking deleted.");
-       /*     
-            resultsPanel.setVisible(false);
-            warningLbl.setText("Booking cancelled.");
-            cancelBBtn.setVisible(false);
-         */
+
+        cpdb.cancelBooking(b);
+        cancelTBtn.setVisible(false);
+        resultsPanel.setVisible(false);
+        warningLbl.setText("Booking deleted.");
+
 
     }//GEN-LAST:event_cancelBBtnActionPerformed
 
     private void cancelTBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelTBtnActionPerformed
 
+        // cancelling the whole trip for the driver
         cpdb = new carpoolapp.CarPoolDB();
-        
-               
-        
-        
-        
-            cpdb.cancelTrip(t);
-            cancelTBtn.setVisible(false);
-            resultsPanel.setVisible(false);
-            warningLbl.setText("Trip deleted.");
-            
-            
+
+        cpdb.cancelTrip(t);
+        cancelTBtn.setVisible(false);
+        resultsPanel.setVisible(false);
+        warningLbl.setText("Trip deleted.");
+
 
     }//GEN-LAST:event_cancelTBtnActionPerformed
 
     private void homeBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_homeBtnActionPerformed
-        
-         //switch to the Home screen
+
+        //switch to the Home screen
         GUI.UserHomeGUI uh = new GUI.UserHomeGUI(u);
 
         // Get the size of the active window
@@ -455,8 +440,8 @@ public class ViewTripGUI extends javax.swing.JFrame {
 
         // make it visible
         uh.setVisible(true);
-        
-        
+
+
     }//GEN-LAST:event_homeBtnActionPerformed
 
     /**

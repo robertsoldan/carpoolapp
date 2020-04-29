@@ -11,7 +11,6 @@ public class NewTripGUI extends javax.swing.JFrame {
     /**
      * Creates new form LoginGUI
      */
-
     public NewTripGUI() {
         initComponents();
         u = new main.Users("null", "null", "null", "null", "null", "null", "null", "null", 0, 0);
@@ -107,13 +106,13 @@ public class NewTripGUI extends javax.swing.JFrame {
             .addGroup(headerPnlLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(392, Short.MAX_VALUE))
+                .addContainerGap(394, Short.MAX_VALUE))
         );
         headerPnlLayout.setVerticalGroup(
             headerPnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(headerPnlLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 72, Short.MAX_VALUE)
+                .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 74, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -460,27 +459,27 @@ public class NewTripGUI extends javax.swing.JFrame {
     private void addTripActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addTripActionPerformed
 
         cpdb = new carpoolapp.CarPoolDB();
-        
-        
-        
+
+        // setting warning label to empty in case of adding a new trip
         warningLbl.setText("");
-        
+
         //checking for empty fields in order to preveent empty submissions and warn the user about the missing information
         
         if (departureTf.getText().equals("") || deptDateTf.getText().equals("") || deptMonthTf.getText().equals("") || deptYearTf.getText().equals("")
-            || deptHourTf.getText().equals("") || deptMinsTf.getText().equals("") || arrDateTf.getText().equals("") || arrMonthTf.getText().equals("")
-            || arrYearTf.getText().equals("") || arrHourTf.getText().equals("") || arrMinsTf.getText().equals("") || distanceTf.getText().equals("")
-            || noOfSeatsTf.getText().equals("") || priceTf.getText().equals("") || descriptionTA.getText().equals("")) {
+                || deptHourTf.getText().equals("") || deptMinsTf.getText().equals("") || arrDateTf.getText().equals("") || arrMonthTf.getText().equals("")
+                || arrYearTf.getText().equals("") || arrHourTf.getText().equals("") || arrMinsTf.getText().equals("") || distanceTf.getText().equals("")
+                || noOfSeatsTf.getText().equals("") || priceTf.getText().equals("") || descriptionTA.getText().equals("")) {
             warningLbl.setText("All the fields need to be filled out.");
-        }
+         
+        } 
         
-        // setting restrictions for non-existant dates so the incorrect dates would not be accepted - prevents database errors
+// setting restrictions for non-existant dates so the incorrect dates would not be accepted - prevents database errors
         
         else if ((deptDateTf.getText().equals("31") && deptMonthTf.getText().equals("09")) || (deptDateTf.getText().equals("31") && deptMonthTf.getText().equals("11"))
-               || (arrDateTf.getText().equals("31") && arrMonthTf.getText().equals("09")) || (arrDateTf.getText().equals("31") && arrMonthTf.getText().equals("11"))) {
+                || (arrDateTf.getText().equals("31") && arrMonthTf.getText().equals("09")) || (arrDateTf.getText().equals("31") && arrMonthTf.getText().equals("11"))) {
             warningLbl.setText("Incorrect date format.");
-        }
-        
+        } 
+
         // setting up date restrictions - accepting only bookings between 01/07/2020 and 31/12/2020 for both departures and arrivals
         
         else if (!(deptDateTf.getText().equals("01") || deptDateTf.getText().equals("02") || deptDateTf.getText().equals("03") || deptDateTf.getText().equals("04")
@@ -490,10 +489,10 @@ public class NewTripGUI extends javax.swing.JFrame {
                 || deptDateTf.getText().equals("17") || deptDateTf.getText().equals("18") || deptDateTf.getText().equals("19") || deptDateTf.getText().equals("20")
                 || deptDateTf.getText().equals("21") || deptDateTf.getText().equals("22") || deptDateTf.getText().equals("23") || deptDateTf.getText().equals("24")
                 || deptDateTf.getText().equals("25") || deptDateTf.getText().equals("26") || deptDateTf.getText().equals("27") || deptDateTf.getText().equals("28")
-                || deptDateTf.getText().equals("29") || deptDateTf.getText().equals("30") || deptDateTf.getText().equals("31")) 
+                || deptDateTf.getText().equals("29") || deptDateTf.getText().equals("30") || deptDateTf.getText().equals("31"))
                 || !(deptMonthTf.getText().equals("07") || deptMonthTf.getText().equals("08") || deptMonthTf.getText().equals("09") || deptMonthTf.getText().equals("10")
                 || deptMonthTf.getText().equals("11") || deptMonthTf.getText().equals("12"))
-                || !(arrDateTf.getText().equals("01")|| arrDateTf.getText().equals("02") || arrDateTf.getText().equals("03")
+                || !(arrDateTf.getText().equals("01") || arrDateTf.getText().equals("02") || arrDateTf.getText().equals("03")
                 || arrDateTf.getText().equals("04") || arrDateTf.getText().equals("05")
                 || arrDateTf.getText().equals("06") || arrDateTf.getText().equals("07") || arrDateTf.getText().equals("08") || arrDateTf.getText().equals("09")
                 || arrDateTf.getText().equals("10") || arrDateTf.getText().equals("11") || arrDateTf.getText().equals("12") || arrDateTf.getText().equals("13")
@@ -501,64 +500,63 @@ public class NewTripGUI extends javax.swing.JFrame {
                 || arrDateTf.getText().equals("18") || arrDateTf.getText().equals("19") || arrDateTf.getText().equals("20") || arrDateTf.getText().equals("21")
                 || arrDateTf.getText().equals("22") || arrDateTf.getText().equals("23") || arrDateTf.getText().equals("24") || arrDateTf.getText().equals("25")
                 || arrDateTf.getText().equals("26") || arrDateTf.getText().equals("27") || arrDateTf.getText().equals("28") || arrDateTf.getText().equals("29")
-                || arrDateTf.getText().equals("30") || arrDateTf.getText().equals("31")) || 
-                 !(arrMonthTf.getText().equals("07") || arrMonthTf.getText().equals("08") || arrMonthTf.getText().equals("09") || arrMonthTf.getText().equals("10")
+                || arrDateTf.getText().equals("30") || arrDateTf.getText().equals("31"))
+                || !(arrMonthTf.getText().equals("07") || arrMonthTf.getText().equals("08") || arrMonthTf.getText().equals("09") || arrMonthTf.getText().equals("10")
                 || arrMonthTf.getText().equals("11") || arrMonthTf.getText().equals("12")) || !(deptYearTf.getText().equals("2020"))
                 || !(arrYearTf.getText().equals("2020"))) {
             warningLbl.setText("Incorrect date format.");
-        }
+        } 
 
         // setting restrictions for hours and minutes entered - departures
-              
-        else if (!(deptHourTf.getText().equals("01") || deptHourTf.getText().equals("02") || deptHourTf.getText().equals("03") || deptHourTf.getText().equals("04") ||
-                deptHourTf.getText().equals("05") || deptHourTf.getText().equals("06") || deptHourTf.getText().equals("07") || deptHourTf.getText().equals("08") ||
-                deptHourTf.getText().equals("09") || deptHourTf.getText().equals("10") || deptHourTf.getText().equals("11") || deptHourTf.getText().equals("12") ||
-                deptHourTf.getText().equals("13") || deptHourTf.getText().equals("14") || deptHourTf.getText().equals("15") || deptHourTf.getText().equals("16") ||
-                deptHourTf.getText().equals("17") || deptHourTf.getText().equals("18") || deptHourTf.getText().equals("19") || deptHourTf.getText().equals("20") ||
-                deptHourTf.getText().equals("21") || deptHourTf.getText().equals("22") || deptHourTf.getText().equals("23") || deptHourTf.getText().equals("00")) ||
-                !(deptMinsTf.getText().equals("00") || deptMinsTf.getText().equals("01") || deptMinsTf.getText().equals("02") || deptMinsTf.getText().equals("03") ||
-                deptMinsTf.getText().equals("04") || deptMinsTf.getText().equals("05") || deptMinsTf.getText().equals("06") || deptMinsTf.getText().equals("07") ||
-                deptMinsTf.getText().equals("08") || deptMinsTf.getText().equals("09") || deptMinsTf.getText().equals("10") || deptMinsTf.getText().equals("11") ||
-                deptMinsTf.getText().equals("12") || deptMinsTf.getText().equals("13") || deptMinsTf.getText().equals("14") || deptMinsTf.getText().equals("15") ||
-                deptMinsTf.getText().equals("16") || deptMinsTf.getText().equals("17") || deptMinsTf.getText().equals("18") || deptMinsTf.getText().equals("19") ||
-                deptMinsTf.getText().equals("20") || deptMinsTf.getText().equals("21") || deptMinsTf.getText().equals("22") || deptMinsTf.getText().equals("23") ||
-                deptMinsTf.getText().equals("24") || deptMinsTf.getText().equals("25") || deptMinsTf.getText().equals("26") || deptMinsTf.getText().equals("27") ||
-                deptMinsTf.getText().equals("28") || deptMinsTf.getText().equals("29") || deptMinsTf.getText().equals("30") || deptMinsTf.getText().equals("31") || 
-                deptMinsTf.getText().equals("32") || deptMinsTf.getText().equals("33") || deptMinsTf.getText().equals("34") || deptMinsTf.getText().equals("35") ||
-                deptMinsTf.getText().equals("36") || deptMinsTf.getText().equals("37") || deptMinsTf.getText().equals("38") || deptMinsTf.getText().equals("39") ||
-                deptMinsTf.getText().equals("40") || deptMinsTf.getText().equals("41") || deptMinsTf.getText().equals("42") || deptMinsTf.getText().equals("43") ||
-                deptMinsTf.getText().equals("44") || deptMinsTf.getText().equals("45") || deptMinsTf.getText().equals("46") || deptMinsTf.getText().equals("47") ||
-                deptMinsTf.getText().equals("48") || deptMinsTf.getText().equals("49") || deptMinsTf.getText().equals("50") || deptMinsTf.getText().equals("51") ||
-                deptMinsTf.getText().equals("52") || deptMinsTf.getText().equals("53") || deptMinsTf.getText().equals("54") || deptMinsTf.getText().equals("55") ||
-                deptMinsTf.getText().equals("56") || deptMinsTf.getText().equals("57") || deptMinsTf.getText().equals("58") || deptMinsTf.getText().equals("59"))) {
+        
+        else if (!(deptHourTf.getText().equals("01") || deptHourTf.getText().equals("02") || deptHourTf.getText().equals("03") || deptHourTf.getText().equals("04")
+                || deptHourTf.getText().equals("05") || deptHourTf.getText().equals("06") || deptHourTf.getText().equals("07") || deptHourTf.getText().equals("08")
+                || deptHourTf.getText().equals("09") || deptHourTf.getText().equals("10") || deptHourTf.getText().equals("11") || deptHourTf.getText().equals("12")
+                || deptHourTf.getText().equals("13") || deptHourTf.getText().equals("14") || deptHourTf.getText().equals("15") || deptHourTf.getText().equals("16")
+                || deptHourTf.getText().equals("17") || deptHourTf.getText().equals("18") || deptHourTf.getText().equals("19") || deptHourTf.getText().equals("20")
+                || deptHourTf.getText().equals("21") || deptHourTf.getText().equals("22") || deptHourTf.getText().equals("23") || deptHourTf.getText().equals("00"))
+                || !(deptMinsTf.getText().equals("00") || deptMinsTf.getText().equals("01") || deptMinsTf.getText().equals("02") || deptMinsTf.getText().equals("03")
+                || deptMinsTf.getText().equals("04") || deptMinsTf.getText().equals("05") || deptMinsTf.getText().equals("06") || deptMinsTf.getText().equals("07")
+                || deptMinsTf.getText().equals("08") || deptMinsTf.getText().equals("09") || deptMinsTf.getText().equals("10") || deptMinsTf.getText().equals("11")
+                || deptMinsTf.getText().equals("12") || deptMinsTf.getText().equals("13") || deptMinsTf.getText().equals("14") || deptMinsTf.getText().equals("15")
+                || deptMinsTf.getText().equals("16") || deptMinsTf.getText().equals("17") || deptMinsTf.getText().equals("18") || deptMinsTf.getText().equals("19")
+                || deptMinsTf.getText().equals("20") || deptMinsTf.getText().equals("21") || deptMinsTf.getText().equals("22") || deptMinsTf.getText().equals("23")
+                || deptMinsTf.getText().equals("24") || deptMinsTf.getText().equals("25") || deptMinsTf.getText().equals("26") || deptMinsTf.getText().equals("27")
+                || deptMinsTf.getText().equals("28") || deptMinsTf.getText().equals("29") || deptMinsTf.getText().equals("30") || deptMinsTf.getText().equals("31")
+                || deptMinsTf.getText().equals("32") || deptMinsTf.getText().equals("33") || deptMinsTf.getText().equals("34") || deptMinsTf.getText().equals("35")
+                || deptMinsTf.getText().equals("36") || deptMinsTf.getText().equals("37") || deptMinsTf.getText().equals("38") || deptMinsTf.getText().equals("39")
+                || deptMinsTf.getText().equals("40") || deptMinsTf.getText().equals("41") || deptMinsTf.getText().equals("42") || deptMinsTf.getText().equals("43")
+                || deptMinsTf.getText().equals("44") || deptMinsTf.getText().equals("45") || deptMinsTf.getText().equals("46") || deptMinsTf.getText().equals("47")
+                || deptMinsTf.getText().equals("48") || deptMinsTf.getText().equals("49") || deptMinsTf.getText().equals("50") || deptMinsTf.getText().equals("51")
+                || deptMinsTf.getText().equals("52") || deptMinsTf.getText().equals("53") || deptMinsTf.getText().equals("54") || deptMinsTf.getText().equals("55")
+                || deptMinsTf.getText().equals("56") || deptMinsTf.getText().equals("57") || deptMinsTf.getText().equals("58") || deptMinsTf.getText().equals("59"))) {
             warningLbl.setText("Incorrect time format.");
-        }
-
+        } 
         // setting restrictions for hours and minutes entered - arrivals
         
-        else if (!(arrHourTf.getText().equals("01") || arrHourTf.getText().equals("02") || arrHourTf.getText().equals("03") || arrHourTf.getText().equals("04") ||
-                arrHourTf.getText().equals("05") || arrHourTf.getText().equals("06") || arrHourTf.getText().equals("07") || arrHourTf.getText().equals("08") ||
-                arrHourTf.getText().equals("09") || arrHourTf.getText().equals("10") || arrHourTf.getText().equals("11") || arrHourTf.getText().equals("12") ||
-                arrHourTf.getText().equals("13") || arrHourTf.getText().equals("14") || arrHourTf.getText().equals("15") || arrHourTf.getText().equals("16") ||
-                arrHourTf.getText().equals("17") || arrHourTf.getText().equals("18") || arrHourTf.getText().equals("19") || arrHourTf.getText().equals("20") ||
-                arrHourTf.getText().equals("21") || arrHourTf.getText().equals("22") || arrHourTf.getText().equals("23") || arrHourTf.getText().equals("00")) ||
-                !(arrMinsTf.getText().equals("00") || arrMinsTf.getText().equals("01") || arrMinsTf.getText().equals("02") || arrMinsTf.getText().equals("03") ||
-                arrMinsTf.getText().equals("04") || arrMinsTf.getText().equals("05") || arrMinsTf.getText().equals("06") || arrMinsTf.getText().equals("07") ||
-                arrMinsTf.getText().equals("08") || arrMinsTf.getText().equals("09") || arrMinsTf.getText().equals("10") || arrMinsTf.getText().equals("11") ||
-                arrMinsTf.getText().equals("12") || arrMinsTf.getText().equals("13") || arrMinsTf.getText().equals("14") || arrMinsTf.getText().equals("15") ||
-                arrMinsTf.getText().equals("16") || arrMinsTf.getText().equals("17") || arrMinsTf.getText().equals("18") || arrMinsTf.getText().equals("19") ||
-                arrMinsTf.getText().equals("20") || arrMinsTf.getText().equals("21") || arrMinsTf.getText().equals("22") || arrMinsTf.getText().equals("23") ||
-                arrMinsTf.getText().equals("24") || arrMinsTf.getText().equals("25") || arrMinsTf.getText().equals("26") || arrMinsTf.getText().equals("27") ||
-                arrMinsTf.getText().equals("28") || arrMinsTf.getText().equals("29") || arrMinsTf.getText().equals("30") || arrMinsTf.getText().equals("31") || 
-                arrMinsTf.getText().equals("32") || arrMinsTf.getText().equals("33") || arrMinsTf.getText().equals("34") || arrMinsTf.getText().equals("35") ||
-                arrMinsTf.getText().equals("36") || arrMinsTf.getText().equals("37") || arrMinsTf.getText().equals("38") || arrMinsTf.getText().equals("39") ||
-                arrMinsTf.getText().equals("40") || arrMinsTf.getText().equals("41") || arrMinsTf.getText().equals("42") || arrMinsTf.getText().equals("43") ||
-                arrMinsTf.getText().equals("44") || arrMinsTf.getText().equals("45") || arrMinsTf.getText().equals("46") || arrMinsTf.getText().equals("47") ||
-                arrMinsTf.getText().equals("48") || arrMinsTf.getText().equals("49") || arrMinsTf.getText().equals("50") || arrMinsTf.getText().equals("51") ||
-                arrMinsTf.getText().equals("52") || arrMinsTf.getText().equals("53") || arrMinsTf.getText().equals("54") || arrMinsTf.getText().equals("55") ||
-                arrMinsTf.getText().equals("56") || arrMinsTf.getText().equals("57") || arrMinsTf.getText().equals("58") || arrMinsTf.getText().equals("59"))) {
+        else if (!(arrHourTf.getText().equals("01") || arrHourTf.getText().equals("02") || arrHourTf.getText().equals("03") || arrHourTf.getText().equals("04")
+                || arrHourTf.getText().equals("05") || arrHourTf.getText().equals("06") || arrHourTf.getText().equals("07") || arrHourTf.getText().equals("08")
+                || arrHourTf.getText().equals("09") || arrHourTf.getText().equals("10") || arrHourTf.getText().equals("11") || arrHourTf.getText().equals("12")
+                || arrHourTf.getText().equals("13") || arrHourTf.getText().equals("14") || arrHourTf.getText().equals("15") || arrHourTf.getText().equals("16")
+                || arrHourTf.getText().equals("17") || arrHourTf.getText().equals("18") || arrHourTf.getText().equals("19") || arrHourTf.getText().equals("20")
+                || arrHourTf.getText().equals("21") || arrHourTf.getText().equals("22") || arrHourTf.getText().equals("23") || arrHourTf.getText().equals("00"))
+                || !(arrMinsTf.getText().equals("00") || arrMinsTf.getText().equals("01") || arrMinsTf.getText().equals("02") || arrMinsTf.getText().equals("03")
+                || arrMinsTf.getText().equals("04") || arrMinsTf.getText().equals("05") || arrMinsTf.getText().equals("06") || arrMinsTf.getText().equals("07")
+                || arrMinsTf.getText().equals("08") || arrMinsTf.getText().equals("09") || arrMinsTf.getText().equals("10") || arrMinsTf.getText().equals("11")
+                || arrMinsTf.getText().equals("12") || arrMinsTf.getText().equals("13") || arrMinsTf.getText().equals("14") || arrMinsTf.getText().equals("15")
+                || arrMinsTf.getText().equals("16") || arrMinsTf.getText().equals("17") || arrMinsTf.getText().equals("18") || arrMinsTf.getText().equals("19")
+                || arrMinsTf.getText().equals("20") || arrMinsTf.getText().equals("21") || arrMinsTf.getText().equals("22") || arrMinsTf.getText().equals("23")
+                || arrMinsTf.getText().equals("24") || arrMinsTf.getText().equals("25") || arrMinsTf.getText().equals("26") || arrMinsTf.getText().equals("27")
+                || arrMinsTf.getText().equals("28") || arrMinsTf.getText().equals("29") || arrMinsTf.getText().equals("30") || arrMinsTf.getText().equals("31")
+                || arrMinsTf.getText().equals("32") || arrMinsTf.getText().equals("33") || arrMinsTf.getText().equals("34") || arrMinsTf.getText().equals("35")
+                || arrMinsTf.getText().equals("36") || arrMinsTf.getText().equals("37") || arrMinsTf.getText().equals("38") || arrMinsTf.getText().equals("39")
+                || arrMinsTf.getText().equals("40") || arrMinsTf.getText().equals("41") || arrMinsTf.getText().equals("42") || arrMinsTf.getText().equals("43")
+                || arrMinsTf.getText().equals("44") || arrMinsTf.getText().equals("45") || arrMinsTf.getText().equals("46") || arrMinsTf.getText().equals("47")
+                || arrMinsTf.getText().equals("48") || arrMinsTf.getText().equals("49") || arrMinsTf.getText().equals("50") || arrMinsTf.getText().equals("51")
+                || arrMinsTf.getText().equals("52") || arrMinsTf.getText().equals("53") || arrMinsTf.getText().equals("54") || arrMinsTf.getText().equals("55")
+                || arrMinsTf.getText().equals("56") || arrMinsTf.getText().equals("57") || arrMinsTf.getText().equals("58") || arrMinsTf.getText().equals("59"))) {
             warningLbl.setText("Incorrect time format.");
-        }
+        } 
         
         // assigning values from text fields to appropriate data types + storing information + resetting GUI fields
         
@@ -582,17 +580,17 @@ public class NewTripGUI extends javax.swing.JFrame {
 
             main.Trip t;
 
-            t = new main.Trip(isComplete, datePosted, departureAddress, departureDateAndTime, arrivalAddress, arrivalDateAndTime, distanceKM, 
+            t = new main.Trip(isComplete, datePosted, departureAddress, departureDateAndTime, arrivalAddress, arrivalDateAndTime, distanceKM,
                     seatsAvailable, pricePerSeat, luggageAllowed, smokingAllowed, petAllowed, chattyDriver, musicLover, description);
-            
+
             main.Driver d = new main.Driver();
             d = cpdb.getDriverByUserID(u.getUserID());
             int driverID = d.getDriverID();
 
             t.setDriverID(driverID);
-            
+
             cpdb.addTrip(t);
-            
+
             warningLbl.setText("Your trip has been posted!");
 
             departureTf.setText("");
@@ -681,7 +679,7 @@ public class NewTripGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_logoutBtnActionPerformed
 
     private void homeBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_homeBtnActionPerformed
-        
+
         //switch to the Home screen
         GUI.UserHomeGUI uh = new GUI.UserHomeGUI(u);
 
@@ -704,9 +702,8 @@ public class NewTripGUI extends javax.swing.JFrame {
 
         // make it visible
         uh.setVisible(true);
-        
-        
-        
+
+
     }//GEN-LAST:event_homeBtnActionPerformed
 
     /**
